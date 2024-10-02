@@ -1,6 +1,6 @@
-import { useState } from 'react'
 import './App.css'
 import { Card } from './components/Card/Card'
+import { Table } from './components/Table/Table'
 import { Header } from './components/Header/Header'
 import { Footer } from './components/Footer/Footer'
 import { words } from './words'
@@ -24,6 +24,9 @@ function App() {
               boolean={word.boolean}
             />
           }
+        </div>
+        <div className="container">
+          <Table />
         </div>
       </main>
       <Footer />

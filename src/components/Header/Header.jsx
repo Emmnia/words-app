@@ -9,7 +9,7 @@ export const Header = () => {
             <img className="header-logo__image" src="assets/images/owl.png" alt="owl" />
             <span>Мирная сова</span>
           </a>
-          <button className="button">Вход и регистрация</button>
+          <button className="sign-in">Вход и регистрация</button>
         </div>
       </div>
     </header>
