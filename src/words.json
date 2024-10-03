@@ -1,4 +1,4 @@
-let wordsJson = `[
+[
   {
     "id": "16334",
     "english": "cat",
@@ -185,6 +185,4 @@ let wordsJson = `[
     "tags": "время",
     "tags_json": "[general]"
   }
-]`;
-
-export const words = JSON.parse(wordsJson);
+]

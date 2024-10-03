@@ -3,7 +3,7 @@ import { Card } from './components/Card/Card'
 import { Table } from './components/Table/Table'
 import { Header } from './components/Header/Header'
 import { Footer } from './components/Footer/Footer'
-import { words } from './words'
+import words from './words.json'
 
 function App() {
   const word = words.sort(() => Math.random() - Math.random())

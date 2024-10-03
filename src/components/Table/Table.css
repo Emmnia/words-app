@@ -1,5 +1,4 @@
 .table {
-    padding: 1rem;
     width: 100%;
     text-align: center;
 }
@@ -12,16 +11,27 @@ td {
 }
 
 .table__header th {
-    padding: 1rem;
+    padding: 10px;
 }
 
 .word-number {
-    width: 2rem;
+    width: 40px;
+}
+
+.actions {
+    width: 100px;
+}
+
+.table__content {
+    width: 300px;
 }
 
 .table__input {
-    width: 90%;
+    margin: 0;
+    padding: 0;
     font-family: "Wix Madefor Display", sans-serif;
+    font-size: 16px;
+    text-align: center;
     border-style: none none solid;
     border-width: 1px;
     border-color: black;
