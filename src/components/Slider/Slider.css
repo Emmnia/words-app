@@ -1,0 +1,40 @@
+.slider-container {
+    margin: 0 auto;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.slider__button {
+    margin: auto;
+    padding: 10px 12px;
+    text-align: center;
+    color: white;
+    background-image: linear-gradient(to right, #E55D87 0%, #5FC3E4 51%, #E55D87 100%);
+    background-size: 200% auto;
+    border-radius: 50%;
+    border: none;
+    display: block;
+    cursor: pointer;
+}
+
+.slider__button:hover {
+    box-shadow: 0 0 20px #eee;
+}
+
+.slider__button:active {
+    transform: scale(0.9);
+}
+
+.slider__content {
+    transition: transform 0.5s ease-in-out;
+}
+
+.next {
+    transform: translateX(-10px);
+}
+
+.previous {
+    transform: translateX(10px);
+}

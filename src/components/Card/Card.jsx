@@ -1,13 +1,17 @@
 import "./Card.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export const Card = ({ id, english, transcription, russian, tags, boolean }) => {
+export const Card = ({ id, english, transcription, russian, tags, boolean, visible }) => {
 
   const [isClicked, setClicked] = useState(false);
 
   const handleButtonClick = () => {
     setClicked(true);
   };
+
+  useEffect(() => {
+    setClicked(false);
+  }, [visible]);
 
   let translationContent;
 
@@ -16,6 +20,8 @@ export const Card = ({ id, english, transcription, russian, tags, boolean }) => 
   } else {
     translationContent = <button className="translation__button" type="button" onClick={handleButtonClick}>Показать перевод</button>;
   }
+
+  if (!visible) return null;
 
   return (
     <>
