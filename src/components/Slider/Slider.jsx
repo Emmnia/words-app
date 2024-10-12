@@ -6,14 +6,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
-export const Slider = ({ initialSlideIndex = 0 }) => {
+export const Slider = ({ initialSlideIndex = 0, wordsBackUp }) => {
     const [slideIndex, setSlideIndex] = useState(initialSlideIndex);
     const [animation, setAnimation] = useState(" ");
 
     const handlePrevClick = () => {
         setAnimation("previous");
         setTimeout(() => {
-            setSlideIndex((slideIndex - 1 + words.length) % words.length);
+            setSlideIndex((slideIndex - 1 + (words.length || wordsBackUp.length)) % (words.length || wordsBackUp.length));
             setAnimation(" ");
         }, 500);
     };
@@ -21,7 +21,7 @@ export const Slider = ({ initialSlideIndex = 0 }) => {
     const handleNextClick = () => {
         setAnimation("next");
         setTimeout(() => {
-            setSlideIndex((slideIndex + 1) % words.length);
+            setSlideIndex((slideIndex + 1) % (words.length || wordsBackUp.length));
             setAnimation(" ");
         }, 500);
     };
@@ -50,7 +50,50 @@ export const Slider = ({ initialSlideIndex = 0 }) => {
 }
 
 Slider.defaultProps = {
-    words: [
-        //когда основные данные будут из апи, здесь будет на всякий случай json
+    wordsBackUp: [{
+        id: "16334",
+        english: "cat",
+        transcription: "[cat]",
+        russian: "кошка",
+        tags: "animal",
+        tags_json: "[animal]",
+        boolean: "false"
+    },
+    {
+        id: "16335",
+        english: "dad",
+        transcription: "[dæd]",
+        russian: "папа",
+        tags: "general",
+        tags_json: "[general]",
+        boolean: "false"
+    },
+    {
+        id: "16365",
+        english: "flower",
+        transcription: "[ˈflaʊər]",
+        russian: "цветок",
+        tags: "nature",
+        tags_json: "[nature]",
+        boolean: "false"
+    },
+    {
+        id: "16367",
+        english: "lamb",
+        transcription: "[læm]",
+        russian: "ягненок",
+        tags: "animal",
+        tags_json: "[animal]",
+        boolean: "false"
+    },
+    {
+        id: "16372",
+        english: "education",
+        transcription: "|edʒʊˈkeɪʃ(ə)n|",
+        russian: "образование",
+        tags: "education",
+        tags_json: "[education]",
+        boolean: "false"
+    }
     ]
 };
