@@ -32,3 +32,7 @@
 .translation__button:active {
     transform: scale(0.9);
 }
+
+.translation__text {
+    cursor: pointer;
+}

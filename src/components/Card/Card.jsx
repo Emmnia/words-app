@@ -9,6 +9,10 @@ export const Card = ({ id, english, transcription, russian, tags, boolean, visib
     setClicked(true);
   };
 
+  const handleTranslationClick = () => {
+    setClicked(false);
+  }
+
   useEffect(() => {
     setClicked(false);
   }, [visible]);
@@ -16,7 +20,7 @@ export const Card = ({ id, english, transcription, russian, tags, boolean, visib
   let translationContent;
 
   if (isClicked) {
-    translationContent = <p className="translation__text">{russian}</p>;
+    translationContent = <p className="translation__text" onClick={handleTranslationClick}>{russian}</p>;
   } else {
     translationContent = <button className="translation__button" type="button" onClick={handleButtonClick}>Показать перевод</button>;
   }
