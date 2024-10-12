@@ -50,5 +50,7 @@ export const Slider = ({ initialSlideIndex = 0 }) => {
 }
 
 Slider.defaultProps = {
-    words: []
+    words: [
+        //когда основные данные будут из апи, здесь будет на всякий случай json
+    ]
 };
