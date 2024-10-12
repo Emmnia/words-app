@@ -10,10 +10,12 @@ export const Slider = ({ initialSlideIndex = 0, wordsBackUp }) => {
     const [slideIndex, setSlideIndex] = useState(initialSlideIndex);
     const [animation, setAnimation] = useState(" ");
 
+    const wordsData = words || wordsBackUp
+
     const handlePrevClick = () => {
         setAnimation("previous");
         setTimeout(() => {
-            setSlideIndex((slideIndex - 1 + (words.length || wordsBackUp.length)) % (words.length || wordsBackUp.length));
+            setSlideIndex((slideIndex - 1 + wordsData.length) % wordsData.length);
             setAnimation(" ");
         }, 500);
     };
@@ -21,7 +23,7 @@ export const Slider = ({ initialSlideIndex = 0, wordsBackUp }) => {
     const handleNextClick = () => {
         setAnimation("next");
         setTimeout(() => {
-            setSlideIndex((slideIndex + 1) % (words.length || wordsBackUp.length));
+            setSlideIndex((slideIndex + 1) % wordsData.length);
             setAnimation(" ");
         }, 500);
     };
@@ -30,7 +32,7 @@ export const Slider = ({ initialSlideIndex = 0, wordsBackUp }) => {
         <div className="slider-container">
             <button className="slider__button" onClick={handlePrevClick}> <FontAwesomeIcon icon={faArrowLeft} /> </button>
             <div className={"slider__content " + animation}>
-                {words.map((word, index) => (
+                {wordsData.map((word, index) => (
                     <Card
                         key={word.id}
                         id={word.id}
