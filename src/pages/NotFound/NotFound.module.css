@@ -1,0 +1,35 @@
+.notfound {
+    padding: 40px;
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+}
+
+.maincontent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+}
+
+.heading {
+    font-family: "Overpass", serif;
+    font-weight: 900;
+    font-size: 50px;
+    color: #9BC650;
+}
+
+.text {
+    margin-top: 50px;
+    text-align: center;
+    font-family: "Overpass", serif;
+    font-size: 20px;
+}
+
+.link {
+    color: rgb(115, 114, 114)
+}
+
+.link:hover {
+    color: black;
+}
