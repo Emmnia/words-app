@@ -57,7 +57,7 @@ export const Slider = ({ initialSlideIndex = 0, wordsData = wordsBackUp }) => {
     const [slideIndex, setSlideIndex] = useState(initialSlideIndex);
     const [animation, setAnimation] = useState(" ");
 
-    wordsData = words
+    wordsData = words || wordsBackUp
 
     const handlePrevClick = () => {
         setAnimation("previous");
