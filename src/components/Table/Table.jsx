@@ -39,7 +39,7 @@ export const Table = () => {
         setEditing(null);
         setData(wordsCopy);
         localStorage.setItem('words', JSON.stringify(wordsCopy));
-        toast('Изменения сохранены')
+        toast.success('Изменения сохранены')
     };
 
     const handleCancelClick = () => {

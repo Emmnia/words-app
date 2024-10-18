@@ -5,7 +5,6 @@ import { App } from './App.jsx'
 import { HomePage } from './pages/HomePage.jsx'
 import { GamePage } from './pages/GamePage.jsx'
 import { NotFound } from './pages/NotFound/NotFound.jsx'
-import './index.css'
 
 const router = createBrowserRouter([
   {
