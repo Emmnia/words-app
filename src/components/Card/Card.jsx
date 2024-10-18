@@ -1,5 +1,5 @@
-import "./Card.css";
 import { useState, useEffect } from "react";
+import { CardBody, CardWord, CardTranscription, CardTranslationContent, CardTranslation, CardButton } from "./Card.styled";
 
 export const Card = ({ id, english, transcription, russian, tags, boolean, visible }) => {
 
@@ -20,22 +20,22 @@ export const Card = ({ id, english, transcription, russian, tags, boolean, visib
   let translationContent;
 
   if (isClicked) {
-    translationContent = <p className="translation__text" onClick={handleTranslationClick}>{russian}</p>;
+    translationContent = <CardTranslation onClick={handleTranslationClick}>{russian}</CardTranslation>;
   } else {
-    translationContent = <button className="translation__button" type="button" onClick={handleButtonClick}>Показать перевод</button>;
+    translationContent = <CardButton type="button" onClick={handleButtonClick}>Показать перевод</CardButton>;
   }
 
   if (!visible) return null;
 
   return (
     <>
-      <div className="card-body" id={id} data-tags={tags} data-boolean={boolean}>
-        <h2>{english}</h2>
-        <p>{transcription}</p>
-        <div className="translation">
+      <CardBody id={id} data-tags={tags} data-boolean={boolean}>
+        <CardWord>{english}</CardWord>
+        <CardTranscription>{transcription}</CardTranscription>
+        <CardTranslationContent>
           {translationContent}
-        </div>
-      </div>
+        </CardTranslationContent>
+      </CardBody>
     </>
   );
 };

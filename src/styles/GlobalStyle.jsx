@@ -7,7 +7,7 @@ export const GlobalStyle = createGlobalStyle`
     :root {
         --toastify-color-light: rgba(255, 255, 255, 0.12);
         --toastify-text-color-light: black;
-        --toastify-color-success: #44A1D9;
+        --toastify-color-success: #EA72AC;
         --toastify-color-progress-success: linear-gradient(
         to right,
         #4cd964,

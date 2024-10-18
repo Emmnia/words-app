@@ -1,13 +1,24 @@
-.card-body {
+import styled from "styled-components";
+
+export const CardBody = styled.div`
     margin: 0 auto;
     padding: 20px;
     width: 250px;
     text-align: center;
     background-color: #ffffff;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.19);
-}
+`
 
-.translation__button {
+export const CardWord = styled.h2``
+
+export const CardTranscription = styled.p``
+
+export const CardTranslationContent = styled.div``
+
+export const CardTranslation = styled.p`
+    cursor: pointer;
+`
+export const CardButton = styled.button`
     margin: auto;
     padding: 10px 15px;
     text-align: center;
@@ -21,18 +32,14 @@
     border: none;
     display: block;
     cursor: pointer;
-}
 
-.translation__button:hover {
-    background-position: right center;
-    color: #fff;
-    text-decoration: none;
-}
+    &:hover {
+        background-position: right center;
+        color: #fff;
+        text-decoration: none;
+    }
 
-.translation__button:active {
-    transform: scale(0.9);
-}
-
-.translation__text {
-    cursor: pointer;
-}
+    &:active {
+        transform: scale(0.9);
+    }
+`
