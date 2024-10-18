@@ -5,6 +5,7 @@ import { FaTrashAlt } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa";
 import { FaUndoAlt } from "react-icons/fa";
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 export const Table = () => {
 
@@ -38,6 +39,7 @@ export const Table = () => {
         setEditing(null);
         setData(wordsCopy);
         localStorage.setItem('words', JSON.stringify(wordsCopy));
+        toast('Изменения сохранены')
     };
 
     const handleCancelClick = () => {
