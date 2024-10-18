@@ -44,19 +44,19 @@ export const GlobalStyle = createGlobalStyle`
         width: min(100%, 1170px);
     }
 
-.button {
-  padding: 10px;
-  border: none;
-  background-color: transparent;
-  font-size: 16px;
-  cursor: pointer;
-}
+    .button {
+        padding: 10px;
+        border: none;
+        background-color: transparent;
+        font-size: 16px;
+        cursor: pointer;
+    }
 
-.button:hover {
-  transform: scale(1.2);
-}
+    .button:hover {
+        transform: scale(1.2);
+    }
 
-.button:active {
-  transform: scale(0.9);
-}
+    .button:active {
+        transform: scale(0.9);
+    }
 `
