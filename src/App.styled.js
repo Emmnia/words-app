@@ -13,12 +13,9 @@ export const AppMain = styled.main`
 
 export const StyledContainer = styled(ToastContainer).attrs({
     position: "bottom-right",
-    autoClose: 5000,
-    hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
     draggable: true,
-    progress: undefined,
     theme: "light",
 })`
 &&&.Toastify__toast-container {
