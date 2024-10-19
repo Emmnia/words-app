@@ -79,13 +79,13 @@ export const Table = () => {
                                     <>
                                         <td><input className="table__input" type="text" defaultValue={word.english} /></td>
                                         <td><input className="table__input" type="text" defaultValue={word.transcription} /></td>
+                                        <td><input className="table__input" type="text" defaultValue={word.russian} /></td>
                                     </>) : (
                                     <>
                                         <td><p><input className="table__input" type="text" defaultValue={word.english} /></p>
                                             <p><input className="table__input" type="text" defaultValue={word.transcription} /></p></td>
+                                        <td><textarea className="table__input" defaultValue={word.russian} /></td>
                                     </>)}
-
-                                <td><textarea className="table__input" defaultValue={word.russian} /></td>
                                 <td>
                                     <button className="button" type="button" onClick={() => handleSaveClick()}><FaCheck /></button>
                                     <button className="button" type="button" onClick={() => handleCancelClick(index)}><FaUndoAlt /></button>

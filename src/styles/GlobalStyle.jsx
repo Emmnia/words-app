@@ -40,7 +40,7 @@ export const GlobalStyle = createGlobalStyle`
 
     .container {
         margin: 0 auto;
-        padding: 1rem;
+        padding: 5px;
         width: min(100%, 1170px);
     }
 
