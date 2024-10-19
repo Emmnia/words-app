@@ -52,3 +52,9 @@
 .active {
     color: black;
 }
+
+@media (max-width: 900px) {
+    .header-box {
+        justify-content: space-around;
+    }
+}

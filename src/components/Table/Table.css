@@ -15,7 +15,7 @@ td {
 }
 
 .word-number {
-    width: 40px;
+    width: 30px;
 }
 
 .actions {
@@ -29,6 +29,7 @@ td {
 .table__input {
     margin: 0;
     padding: 0;
+    max-width: 120px;
     font-family: "Wix Madefor Display", sans-serif;
     font-size: 16px;
     text-align: center;
@@ -37,4 +38,10 @@ td {
     border-color: black;
     outline: none;
     background-color: transparent;
+}
+
+@media (max-width: 768px) {
+    .actions {
+        width: 50px;
+    }
 }

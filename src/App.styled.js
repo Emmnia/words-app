@@ -9,6 +9,10 @@ export const AppContent = styled.div`
 
 export const AppMain = styled.main`
     flex-grow: 1;
+
+    @media (max-width: 768px) {
+        padding-right: calc(100vw - 97%);
+    }
 `
 
 export const StyledContainer = styled(ToastContainer).attrs({
