@@ -6,6 +6,7 @@ import { FaCheck } from "react-icons/fa";
 import { FaUndoAlt } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 export const Table = () => {
 
@@ -46,25 +47,44 @@ export const Table = () => {
         setEditing(null);
     };
 
+    const matches = useMediaQuery('(min-width:768px)')
+
     return (
         <table className="table">
             <thead>
                 <tr className="table__header">
                     <th className="word-number"></th>
-                    <th className="table__content">English</th>
-                    <th className="table__content">Transcription</th>
-                    <th className="table__content">Russian</th>
+                    {matches ? (
+                        <>
+                            <th className="table__content">English</th>
+                            <th className="table__content">Transcription</th>
+                            <th className="table__content">Russian</th>
+                        </>
+                    ) : (
+                        <>
+                            <th className="table__content">English</th>
+                            <th className="table__content">Russian</th>
+                        </>
+                    )}
                     <th className="actions"></th>
                 </tr>
             </thead>
             <tbody>
                 {data.map((word, index) => (
                     <tr className="table__row" key={word.id}>
+                        <td>{index + 1}</td>
                         {editing === index ? (
                             <>
-                                <td>{index + 1}</td>
-                                <td><input className="table__input" type="text" defaultValue={word.english} /></td>
-                                <td><input className="table__input" type="text" defaultValue={word.transcription} /></td>
+                                {matches ? (
+                                    <>
+                                        <td><input className="table__input" type="text" defaultValue={word.english} /></td>
+                                        <td><input className="table__input" type="text" defaultValue={word.transcription} /></td>
+                                    </>) : (
+                                    <>
+                                        <td><p><input className="table__input" type="text" defaultValue={word.english} /></p>
+                                            <p><input className="table__input" type="text" defaultValue={word.transcription} /></p></td>
+                                    </>)}
+
                                 <td><input className="table__input" type="text" defaultValue={word.russian} /></td>
                                 <td>
                                     <button className="button" type="button" onClick={() => handleSaveClick()}><FaCheck /></button>
@@ -73,9 +93,14 @@ export const Table = () => {
                             </>
                         ) : (
                             <>
-                                <td>{index + 1}</td>
-                                <td>{word.english}</td>
-                                <td>{word.transcription}</td>
+                                {matches ? (
+                                    <>
+                                        <td>{word.english}</td>
+                                        <td>{word.transcription}</td>
+                                    </>) : (<>
+                                        <td><p>{word.english}</p>
+                                            <p>{word.transcription}</p></td>
+                                    </>)}
                                 <td>{word.russian}</td>
                                 <td>
                                     <button className="button" type="button" onClick={() => handleEditClick(index)}>
