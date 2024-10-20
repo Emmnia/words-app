@@ -71,7 +71,7 @@ export const Table = () => {
             </thead>
             <tbody>
                 {data.map((word, index) => (
-                    <tr className="table__row" key={word.id}>
+                    <tr className="table__row" key={word.id} style={{ '--idx': index + 1 }}>
                         <td>{index + 1}</td>
                         {editing === index ? (
                             <>
