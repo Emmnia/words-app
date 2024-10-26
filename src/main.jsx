@@ -13,11 +13,11 @@ const router = createBrowserRouter([
     errorElement: <NotFound />,
     children: [
       {
-        path: '/',
+        path: '',
         element: <HomePage />
       },
       {
-        path: '/game',
+        path: 'game',
         element: <GamePage />
       }
     ]
