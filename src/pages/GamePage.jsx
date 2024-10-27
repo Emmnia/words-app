@@ -1,9 +1,11 @@
-import { Slider } from "../components/Slider/Slider"
+import { Gallery } from "../components/Gallery/Gallery"
+// import { Slider } from "../components/Slider/Slider"
 
 export const GamePage = () => {
     return (
         <div className='container'>
-            <Slider />
+            {/* <Slider /> */}
+            <Gallery />
         </div>
     )
 }

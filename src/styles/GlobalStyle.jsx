@@ -20,14 +20,12 @@ export const GlobalStyle = createGlobalStyle`
 
     * {
         box-sizing: border-box;
+        scrollbar-gutter: stable;
+        scrollbar-width: thin;
     }
 
     body {
-        margin-top: 0;
-        margin-bottom: 0;
-        margin-left: 0;
-        overflow-x: hidden;
-        margin-right: calc(-1 * (100vw - 100%));
+        margin: 0;
         font-family: "Wix Madefor Display", sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
@@ -36,6 +34,11 @@ export const GlobalStyle = createGlobalStyle`
         background-blend-mode: screen;
         background-repeat: no-repeat;
         background-size: cover;
+        scrollbar-gutter: stable;
+    }
+
+    body:has(dialog[open]) {
+        overflow: hidden;
     }
 
     .container {
