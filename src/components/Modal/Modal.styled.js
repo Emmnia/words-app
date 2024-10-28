@@ -1,10 +1,10 @@
 import styled from "styled-components"
 
 export const ModalWrapper = styled.dialog`
-padding: 30px;
-text-align: center;
-border: none;
-scrollbar-gutter: auto;
+    padding: 30px;
+    text-align: center;
+    border: none;
+    scrollbar-gutter: auto;
 `
 export const ModalFooter = styled.footer`
     margin-top: 50px;
@@ -16,13 +16,15 @@ export const ModalFooter = styled.footer`
 export const ModalButton = styled.button.attrs({
     type: 'button'
 })`
-font-family: "Wix Madefor Display"
-`
-export const ModalInput = styled.input.attrs({
-    type: "checkbox",
-    id: "modal-checkbox"
-})``
+    padding: 10px 15px;
+    text-align: center;    
+    font-family: "Wix Madefor Display";
+    border-radius: 50px;
+    border: 1px solid #E55D87;
+    background-color: transparent;
+    cursor: pointer;
 
-export const ModalInputLabel = styled.label.attrs({
-    htmlFor: "modal-checkbox"
-})``
+    &:active {
+        transform: scale(0.9);
+    }
+`

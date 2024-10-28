@@ -3,7 +3,8 @@ import styled from "styled-components";
 export const CardBody = styled.div`
     margin: 0 auto;
     padding: 20px;
-    width: 300px;
+    width: 350px;
+    height: 250px;
     text-align: center;
     background-color: #ffffff;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.19);
@@ -17,6 +18,10 @@ export const CardTranslationContent = styled.div``
 
 export const CardTranslation = styled.p`
     cursor: pointer;
+
+    &:hover {
+        transform: scale(1.1);
+    }
 `
 export const CardButton = styled.button`
     margin: auto;
@@ -30,7 +35,6 @@ export const CardButton = styled.button`
     box-shadow: 0 0 20px #eee;
     border-radius: 50px;
     border: none;
-    outline: none;
     display: block;
     cursor: pointer;
 
@@ -42,5 +46,9 @@ export const CardButton = styled.button`
 
     &:active {
         transform: scale(0.9);
+    }
+
+    &:focus {
+        border: 1px solid #E55D87;
     }
 `
