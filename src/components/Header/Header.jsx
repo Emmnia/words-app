@@ -1,8 +1,6 @@
-import { NavLink } from "react-router-dom"
-import "./Header.css"
-import { StyledHeader, HeaderBox, HeaderLogo } from './Header.styled'
+import { StyledHeader, HeaderBox, HeaderLogo, HeaderLogoImage, HeaderLogoText, HeaderButton, HeaderNav, HeaderNavList, HeaderNavItem, HeaderNavLink } from './Header.styled'
 
-export const Header = ({ isActive, showModal }) => {
+export const Header = ({ showModal }) => {
 
   return (
     <>
@@ -10,16 +8,16 @@ export const Header = ({ isActive, showModal }) => {
         <div className="container">
           <HeaderBox>
             <HeaderLogo to='/'>
-              <img className="header-logo__image" src="assets/images/owl.png" />
-              <span>Мирная сова</span>
+              <HeaderLogoImage src="assets/images/owl.png" />
+              <HeaderLogoText>Мирная сова</HeaderLogoText>
             </HeaderLogo>
-            <button type="button" onClick={showModal}>Слово дня</button>
-            <nav>
-              <ul className="header__nav">
-                <li><NavLink to="/" className={"header__link " + (isActive ? "active" : "")}>Список слов</NavLink></li>
-                <li><NavLink to="game" className={"header__link " + (isActive ? "active" : "")}>Тренажер</NavLink></li>
-              </ul>
-            </nav>
+            <HeaderButton type="button" onClick={showModal}>Слово дня</HeaderButton>
+            <HeaderNav>
+              <HeaderNavList>
+                <HeaderNavItem><HeaderNavLink to="/">Список слов</HeaderNavLink></HeaderNavItem>
+                <HeaderNavItem><HeaderNavLink to="game">Тренажер</HeaderNavLink></HeaderNavItem>
+              </HeaderNavList>
+            </HeaderNav>
           </HeaderBox>
         </div>
       </StyledHeader>

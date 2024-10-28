@@ -35,19 +35,18 @@ export const App = () => {
     }
 
     const now = new Date();
+    const currentDate = now.toISOString().split('T')[0];
     const lastShownDate = localStorage.getItem('lastShownDate');
     const lastWordId = localStorage.getItem('lastWordId');
 
-    if (!lastShownDate || new Date(lastShownDate) < new Date(now - 24 * 60 * 60 * 1000)) {
-
+    if (!lastShownDate || lastShownDate !== currentDate) {
       const newWord = words.sort(() => Math.random() - Math.random()).find(() => true);
       setWord(newWord);
       console.log("New word selected:", newWord);
 
       localStorage.setItem('lastWordId', newWord.id);
-      localStorage.setItem('lastShownDate', now.toISOString());
+      localStorage.setItem('lastShownDate', currentDate);
     } else {
-
       const previousWord = words.find(word => word.id === lastWordId);
       setWord(previousWord);
       console.log("Previous word selected:", previousWord);

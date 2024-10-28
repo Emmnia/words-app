@@ -30,6 +30,7 @@ export const CardButton = styled.button`
     box-shadow: 0 0 20px #eee;
     border-radius: 50px;
     border: none;
+    outline: none;
     display: block;
     cursor: pointer;
 
