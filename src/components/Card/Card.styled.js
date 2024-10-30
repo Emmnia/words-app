@@ -10,6 +10,8 @@ export const CardBody = styled.div`
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.19);
 `
 
+export const CardHeader = styled.header``
+
 export const CardWord = styled.h2``
 
 export const CardTranscription = styled.p``

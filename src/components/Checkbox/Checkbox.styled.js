@@ -1,8 +1,7 @@
 import styled from "styled-components"
 
 export const CheckboxInput = styled.input.attrs({
-    type: "checkbox",
-    id: "checkbox"
+    type: "checkbox"
 })`
     border: 0;
     clip: rect(0 0 0 0);
@@ -19,9 +18,7 @@ export const CheckboxInput = styled.input.attrs({
     }
 `
 
-export const CheckboxLabel = styled.label.attrs({
-    htmlFor: "checkbox"
-})`
+export const CheckboxLabel = styled.label`
     display: flex;
     align-items: center;
     justify-content: flex-start;

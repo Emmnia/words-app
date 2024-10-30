@@ -1,8 +1,11 @@
 import { useState, useEffect, useRef } from "react";
-import { CardBody, CardWord, CardTranscription, CardTranslationContent, CardTranslation, CardButton } from "./Card.styled";
+import { Checkbox } from "../Checkbox/Checkbox";
+import { CardBody, CardHeader, CardWord, CardTranscription, CardTranslationContent, CardTranslation, CardButton } from "./Card.styled";
+import { v4 as uuidv4 } from 'uuid';
 
-export const Card = ({ id, english, transcription, russian, tags, boolean, visible }) => {
+export const Card = ({ id, english, transcription, russian, tags, boolean, visible, show }) => {
 
+  const checkboxId = uuidv4();
   const buttonRef = useRef(null);
   const [isClicked, setClicked] = useState(false);
 
@@ -35,6 +38,13 @@ export const Card = ({ id, english, transcription, russian, tags, boolean, visib
   return (
     <>
       <CardBody id={id} data-tags={tags} data-boolean={boolean} style={{ display: visible ? 'block' : 'none' }}>
+        <CardHeader>
+          <Checkbox
+            label={'Выучено'}
+            show={show}
+            id={checkboxId}
+          />
+        </CardHeader>
         <CardWord>{english}</CardWord>
         <CardTranscription>{transcription}</CardTranscription>
         <CardTranslationContent>
@@ -44,6 +54,3 @@ export const Card = ({ id, english, transcription, russian, tags, boolean, visib
     </>
   );
 };
-
-
-// в компоненте карточки слова автоматически устанавливать фокус на кнопке «посмотреть перевод» как только новая карточка отрендерилась на странице.Подумай, в каком методе жизненного цикла это сделать ?

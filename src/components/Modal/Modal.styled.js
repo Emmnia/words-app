@@ -9,6 +9,7 @@ export const ModalWrapper = styled.dialog`
 export const ModalFooter = styled.footer`
     margin-top: 50px;
     display: flex;
+    gap: 30px;
     justify-content: space-between;
     align-items: center;
 `

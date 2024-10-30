@@ -8,6 +8,7 @@ import { GlobalStyle } from "./styles/GlobalStyle"
 import { Card } from './components/Card/Card'
 import { Modal } from './components/Modal/Modal'
 import { useEffect, useState, useCallback, useRef } from 'react'
+import { useLocalStorage } from "@uidotdev/usehooks";
 import words from './words.json'
 
 export const App = () => {
@@ -25,33 +26,28 @@ export const App = () => {
     }
   }
 
+  const [showModalToday, setShowModalToday] = useLocalStorage('showModalToday', null);
   const [word, setWord] = useState(null);
-  const [showModalToday, setShowModalToday] = useState(true);
+  const [wordId, setWordId] = useLocalStorage('lastWordId', null);
+  const [lastShownDate, setLastShownDate] = useLocalStorage('lastShownDate', null);
 
   useEffect(() => {
-    const hideModalToday = localStorage.getItem('hideModalToday');
-    if (hideModalToday) {
-      setShowModalToday(hideModalToday === 'true');
-    }
 
     const now = new Date();
     const currentDate = now.toISOString().split('T')[0];
-    const lastShownDate = localStorage.getItem('lastShownDate');
-    const lastWordId = localStorage.getItem('lastWordId');
 
     if (!lastShownDate || lastShownDate !== currentDate) {
       const newWord = words.sort(() => Math.random() - Math.random()).find(() => true);
       setWord(newWord);
       console.log("New word selected:", newWord);
-
-      localStorage.setItem('lastWordId', newWord.id);
-      localStorage.setItem('lastShownDate', currentDate);
+      setWordId(newWord.id);
+      setLastShownDate(currentDate);
     } else {
-      const previousWord = words.find(word => word.id === lastWordId);
+      const previousWord = words.find(word => word.id === wordId);
       setWord(previousWord);
       console.log("Previous word selected:", previousWord);
     }
-  }, []);
+  }, [lastShownDate, setLastShownDate, setWordId, wordId]);
 
   useEffect(() => {
     if (word && showModalToday) {
@@ -59,10 +55,10 @@ export const App = () => {
     }
   }, [word, showModalToday, showModal]);
 
-  const handleCheck = (event) => {
+  const handleModalCheck = (event) => {
     const isChecked = event.target.checked;
+    console.log("Checkbox clicked:", isChecked);
     setShowModalToday(!isChecked);
-    localStorage.setItem('hideModalToday', !isChecked);
   };
 
   return (
@@ -80,8 +76,8 @@ export const App = () => {
         <Modal
           ref={modalRef}
           onClose={closeModal}
-          onCheck={handleCheck}
-          showModalToday={showModalToday}
+          onChange={handleModalCheck}
+          checked={!showModalToday}
         >
           {word && (
             <Card
@@ -93,6 +89,7 @@ export const App = () => {
               tags={word.tags}
               boolean={word.boolean}
               visible={true}
+              show={false}
             />
           )}
         </Modal>
@@ -106,8 +103,6 @@ export const App = () => {
   );
 }
 
-
-
-// для модального окна: стилизовать его, кнопки открытия и закрытия; анимация ? затемнение посильнее ?
+// для модального окна: анимация ? затемнение посильнее ?
 
 //   для галереи: разобраться с анимацией колоды карт, сделать на карточках чекбокс "выучено", в галерее добавить вариант "не показывать выученные"
