@@ -22,3 +22,6 @@ export const Modal = forwardRef(function Modal({ onClose, onChange, checked, chi
         </ModalWrapper>
     )
 })
+
+
+// анимация ? затемнение посильнее ?

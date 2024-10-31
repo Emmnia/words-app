@@ -42,12 +42,13 @@ export const App = () => {
       console.log("New word selected:", newWord);
       setWordId(newWord.id);
       setLastShownDate(currentDate);
+      setShowModalToday(true);
     } else {
       const previousWord = words.find(word => word.id === wordId);
       setWord(previousWord);
       console.log("Previous word selected:", previousWord);
     }
-  }, [lastShownDate, setLastShownDate, setWordId, wordId]);
+  }, [lastShownDate, setLastShownDate, setShowModalToday, setWordId, wordId]);
 
   useEffect(() => {
     if (word && showModalToday) {
@@ -102,7 +103,3 @@ export const App = () => {
     </HelmetProvider>
   );
 }
-
-// для модального окна: анимация ? затемнение посильнее ?
-
-//   для галереи: разобраться с анимацией колоды карт, сделать на карточках чекбокс "выучено", в галерее добавить вариант "не показывать выученные"

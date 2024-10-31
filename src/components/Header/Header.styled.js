@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom"
 export const StyledHeader = styled.header`
     position: sticky;
     top: 0;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     padding: 2rem 0;
     background: rgba(255, 255, 255, 0.12);
     border-radius: 0 0 16px 16px;

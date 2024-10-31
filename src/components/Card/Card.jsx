@@ -3,7 +3,7 @@ import { Checkbox } from "../Checkbox/Checkbox";
 import { CardBody, CardHeader, CardWord, CardTranscription, CardTranslationContent, CardTranslation, CardButton } from "./Card.styled";
 import { v4 as uuidv4 } from 'uuid';
 
-export const Card = ({ id, english, transcription, russian, tags, boolean, visible, show }) => {
+export const Card = ({ id, english, transcription, russian, tags, boolean, visible, show, onClick }) => {
 
   const checkboxId = uuidv4();
   const buttonRef = useRef(null);
@@ -32,7 +32,14 @@ export const Card = ({ id, english, transcription, russian, tags, boolean, visib
   if (isClicked) {
     translationContent = <CardTranslation onClick={handleTranslationClick}>{russian}</CardTranslation>;
   } else {
-    translationContent = <CardButton type="button" onClick={handleButtonClick} ref={buttonRef}>Показать перевод</CardButton>;
+    translationContent = <CardButton
+      type="button"
+      onClick={() => {
+        handleButtonClick();
+        onClick()
+      }}
+      ref={buttonRef}
+    >Показать перевод</CardButton>;
   }
 
   return (
