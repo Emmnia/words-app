@@ -11,8 +11,7 @@
     padding: 10px 12px;
     text-align: center;
     color: white;
-    background-image: linear-gradient(to right, #E55D87 0%, #5FC3E4 51%, #E55D87 100%);
-    background-size: 200% auto;
+    background: linear-gradient(90deg, #e075af 0%, #bb80b9 21%, #9e88c1 48%, #7494cc 81%, #3fa3da 100%);
     border-radius: 50%;
     border: none;
     display: block;

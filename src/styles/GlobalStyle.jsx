@@ -30,7 +30,7 @@ export const GlobalStyle = createGlobalStyle`
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         background-color: rgba(255, 255, 255, 0.3);
-        background-image: linear-gradient(90deg, rgba(224, 117, 175, 1) 0%, rgba(187, 128, 185, 1) 21%, rgba(158, 136, 193, 1) 48%, rgba(116, 148, 204, 1) 81%, rgba(63, 163, 218, 1) 100%);
+        background-image: linear-gradient(54deg, #e8a2c8 0%, #cfa9ce 28%, #bdb0d3 48%, #a2b6da 68%, #7dbfe2 100%);
         background-blend-mode: screen;
         background-repeat: no-repeat;
         background-size: cover;

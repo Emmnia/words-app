@@ -32,7 +32,7 @@ export const CardButton = styled.button`
     font-family: "Wix Madefor Display", sans-serif;
     color: white;
     transition: 0.5s;
-    background-image: linear-gradient(to right, #E55D87 0%, #5FC3E4 51%, #E55D87 100%);
+    background: linear-gradient(90deg, rgba(224, 117, 175, 1) 0%, rgba(187, 128, 185, 1) 21%, rgba(158, 136, 193, 1) 48%, rgba(116, 148, 204, 1) 81%, rgba(63, 163, 218, 1) 100%);
     background-size: 200% auto;
     box-shadow: 0 0 20px #eee;
     border-radius: 50px;
