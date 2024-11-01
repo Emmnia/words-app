@@ -1,6 +1,7 @@
-import { ModalWrapper, ModalFooter, ModalButton, } from './Modal.styled'
+import { ModalWrapper, ModalHeader, ModalFooter, ModalButton, ModalButtonIcon } from './Modal.styled'
 import { Checkbox } from '../Checkbox/Checkbox';
 import { forwardRef } from 'react';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { v4 as uuidv4 } from 'uuid';
 
 export const Modal = forwardRef(function Modal({ onClose, onChange, checked, children }, ref) {
@@ -8,9 +9,11 @@ export const Modal = forwardRef(function Modal({ onClose, onChange, checked, chi
 
     return (
         <ModalWrapper ref={ref}>
+            <ModalHeader>
+                <ModalButton onClick={onClose}><ModalButtonIcon icon={faXmark} /></ModalButton>
+            </ModalHeader>
             {children}
             <ModalFooter>
-                <ModalButton onClick={onClose}>Закрыть</ModalButton>
                 <Checkbox
                     label={'Больше не показывать сегодня'}
                     show={true}
@@ -22,6 +25,3 @@ export const Modal = forwardRef(function Modal({ onClose, onChange, checked, chi
         </ModalWrapper>
     )
 })
-
-
-// анимация ? затемнение посильнее ?

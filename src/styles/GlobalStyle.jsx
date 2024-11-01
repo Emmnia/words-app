@@ -47,11 +47,7 @@ export const GlobalStyle = createGlobalStyle`
         width: min(100%, 1170px);
     }
 
-    .button {
-        padding: 10px;
-        border: none;
-        background-color: transparent;
-        font-size: 16px;
+    button {
         cursor: pointer;
     }
 
@@ -59,7 +55,7 @@ export const GlobalStyle = createGlobalStyle`
         transform: scale(1.2);
     }
 
-    .button:active {
+    button:active {
         transform: scale(0.9);
     }
 `

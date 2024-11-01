@@ -4,7 +4,7 @@ export const ControlsWrapper = styled.div`
     margin-top: 50px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
 `
 
 export const ControlsButton = styled.button.attrs({
