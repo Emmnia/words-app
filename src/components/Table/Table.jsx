@@ -1,24 +1,19 @@
 import "./Table.css";
+import { TableWrapper } from "./Table.styled";
 import words from '/src/words.json'
 import { FaPencilAlt } from "react-icons/fa";
 import { FaTrashAlt } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa";
 import { FaUndoAlt } from "react-icons/fa";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { useLocalStorage } from "@uidotdev/usehooks";
 
 export const Table = () => {
 
     const [editing, setEditing] = useState(null);
-    const [data, setData] = useState(words);
-
-    useEffect(() => {
-        const storedWords = localStorage.getItem('words');
-        if (storedWords) {
-            setData(JSON.parse(storedWords));
-        }
-    }, []);
+    const [data, setData] = useLocalStorage('words', words);
 
     const clone = (data) => {
         return JSON.parse(JSON.stringify(data));
@@ -39,7 +34,6 @@ export const Table = () => {
         wordsCopy[editing] = updatedWord;
         setEditing(null);
         setData(wordsCopy);
-        localStorage.setItem('words', JSON.stringify(wordsCopy));
         toast.success('Изменения сохранены')
     };
 
@@ -52,72 +46,74 @@ export const Table = () => {
     return (
         <>
             <h1>Список слов</h1>
-            <table className="table">
-                <thead>
-                    <tr className="table__header">
-                        <th className="word-number"></th>
-                        {matches ? (
-                            <>
-                                <th className="table__content">English</th>
-                                <th className="table__content">Transcription</th>
-                                <th className="table__content">Russian</th>
-                            </>
-                        ) : (
-                            <>
-                                <th className="table__content">English</th>
-                                <th className="table__content">Russian</th>
-                            </>
-                        )}
-                        <th className="actions"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {data.map((word, index) => (
-                        <tr className="table__row" key={word.id} style={{ '--idx': index + 1 }}>
-                            <td>{index + 1}</td>
-                            {editing === index ? (
+            <TableWrapper>
+                <table className="table">
+                    <thead>
+                        <tr className="table__header">
+                            <th className="word-number"></th>
+                            {matches ? (
                                 <>
-                                    {matches ? (
-                                        <>
-                                            <td><input className="table__input" type="text" defaultValue={word.english} /></td>
-                                            <td><input className="table__input" type="text" defaultValue={word.transcription} /></td>
-                                            <td><input className="table__input" type="text" defaultValue={word.russian} /></td>
-                                        </>) : (
-                                        <>
-                                            <td><p><input className="table__input" type="text" defaultValue={word.english} /></p>
-                                                <p><input className="table__input" type="text" defaultValue={word.transcription} /></p></td>
-                                            <td><textarea className="table__input" defaultValue={word.russian} /></td>
-                                        </>)}
-                                    <td>
-                                        <button className="button" type="button" onClick={() => handleSaveClick()}><FaCheck /></button>
-                                        <button className="button" type="button" onClick={() => handleCancelClick(index)}><FaUndoAlt /></button>
-                                    </td>
+                                    <th className="table__content">English</th>
+                                    <th className="table__content">Transcription</th>
+                                    <th className="table__content">Russian</th>
                                 </>
                             ) : (
                                 <>
-                                    {matches ? (
-                                        <>
-                                            <td>{word.english}</td>
-                                            <td>{word.transcription}</td>
-                                        </>) : (<>
-                                            <td><p>{word.english}</p>
-                                                <p>{word.transcription}</p></td>
-                                        </>)}
-                                    <td>{word.russian}</td>
-                                    <td>
-                                        <button className="button" type="button" onClick={() => handleEditClick(index)}>
-                                            <FaPencilAlt />
-                                        </button>
-                                        <button className="button" type="button">
-                                            <FaTrashAlt />
-                                        </button>
-                                    </td>
+                                    <th className="table__content">English</th>
+                                    <th className="table__content">Russian</th>
                                 </>
                             )}
+                            <th className="actions"></th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {data.map((word, index) => (
+                            <tr className="table__row" key={word.id} style={{ '--idx': index + 1 }}>
+                                <td>{index + 1}</td>
+                                {editing === index ? (
+                                    <>
+                                        {matches ? (
+                                            <>
+                                                <td><input className="table__input" type="text" defaultValue={word.english} /></td>
+                                                <td><input className="table__input" type="text" defaultValue={word.transcription} /></td>
+                                                <td><input className="table__input" type="text" defaultValue={word.russian} /></td>
+                                            </>) : (
+                                            <>
+                                                <td><p><input className="table__input" type="text" defaultValue={word.english} /></p>
+                                                    <p><input className="table__input" type="text" defaultValue={word.transcription} /></p></td>
+                                                <td><textarea className="table__input" defaultValue={word.russian} /></td>
+                                            </>)}
+                                        <td>
+                                            <button className="button" type="button" onClick={() => handleSaveClick()}><FaCheck /></button>
+                                            <button className="button" type="button" onClick={() => handleCancelClick(index)}><FaUndoAlt /></button>
+                                        </td>
+                                    </>
+                                ) : (
+                                    <>
+                                        {matches ? (
+                                            <>
+                                                <td>{word.english}</td>
+                                                <td>{word.transcription}</td>
+                                            </>) : (<>
+                                                <td><p>{word.english}</p>
+                                                    <p>{word.transcription}</p></td>
+                                            </>)}
+                                        <td>{word.russian}</td>
+                                        <td>
+                                            <button className="button" type="button" onClick={() => handleEditClick(index)}>
+                                                <FaPencilAlt />
+                                            </button>
+                                            <button className="button" type="button">
+                                                <FaTrashAlt />
+                                            </button>
+                                        </td>
+                                    </>
+                                )}
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </TableWrapper>
         </>
     );
 };
