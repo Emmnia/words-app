@@ -7,15 +7,10 @@ export const GlobalStyle = createGlobalStyle`
     :root {
         --toastify-color-light: rgba(255, 255, 255, 0.12);
         --toastify-text-color-light: black;
-        --toastify-color-success: #EA72AC;
-        --toastify-color-progress-success: linear-gradient(
-        to right,
-        #4cd964,
-        #5ac8fa,
-        #007aff,
-        #34aadc,
-        #5856d6,
-        #ff2d55);    
+        --toastify-color-success: #3fa3da;
+        --toastify-color-progress-success: #3fa3da;
+        --toastify-color-error: #E55D87;
+        --toastify-color-progress-error: #E55D87;    
     }
 
     * {

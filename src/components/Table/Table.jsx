@@ -31,10 +31,19 @@ export const Table = () => {
             transcription: inputs[1].value,
             russian: inputs[2].value,
         };
-        wordsCopy[editing] = updatedWord;
-        setEditing(null);
-        setData(wordsCopy);
-        toast.success('Изменения сохранены')
+        for (let input of inputs) {
+            if (input.value === '') {
+                input.style.borderColor = '#E55D87'
+            }
+        }
+        if (inputs[0].value === '' || inputs[1].value === '' || inputs[2].value === '') {
+            toast.error('Изменения не сохранены. Заполните все поля')
+        } else {
+            wordsCopy[editing] = updatedWord;
+            setEditing(null);
+            setData(wordsCopy);
+            toast.success('Изменения сохранены')
+        }
     };
 
     const handleCancelClick = () => {

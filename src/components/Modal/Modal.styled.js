@@ -7,9 +7,18 @@ export const ModalWrapper = styled.dialog`
     border: none;
     scrollbar-gutter: auto;
 
+    &[open] {
+        animation: open 1s forwards;
+    }
+
+    @keyframes open {
+        from { opacity: 0 }
+        to   { opacity: 1 }
+    }
+
     &::backdrop {
         background: rgba(0, 0, 0, 0.5);
-        transition: 5s ease-in;
+        transition: 3s ease-in;
     }
 `
 export const ModalHeader = styled.header`
