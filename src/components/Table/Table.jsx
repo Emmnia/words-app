@@ -31,13 +31,17 @@ export const Table = () => {
             transcription: inputs[1].value,
             russian: inputs[2].value,
         };
-        for (let input of inputs) {
+
+        const hasEmptyFields = Array.from(inputs).some(input => {
             if (input.value === '') {
-                input.style.borderColor = '#E55D87'
+                input.style.borderColor = '#E55D87';
+                return true;
             }
-        }
-        if (inputs[0].value === '' || inputs[1].value === '' || inputs[2].value === '') {
-            toast.error('Изменения не сохранены. Заполните все поля')
+            return false;
+        });
+
+        if (hasEmptyFields) {
+            toast.error('Изменения не сохранены. Заполните все поля');
         } else {
             wordsCopy[editing] = updatedWord;
             setEditing(null);
