@@ -46,7 +46,8 @@ export const Table = () => {
             wordsCopy[editing] = updatedWord;
             setEditing(null);
             setData(wordsCopy);
-            toast.success('Изменения сохранены')
+            toast.success('Изменения сохранены');
+            console.log(updatedWord)
         }
     };
 

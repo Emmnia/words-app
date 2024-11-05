@@ -58,7 +58,6 @@ export const App = () => {
 
   const handleModalCheck = (event) => {
     const isChecked = event.target.checked;
-    console.log("Checkbox clicked:", isChecked);
     setShowModalToday(!isChecked);
   };
 
