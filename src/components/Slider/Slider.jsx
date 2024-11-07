@@ -64,18 +64,16 @@ export const Slider = ({ initialSlideIndex = 0, wordsData = wordsBackUp }) => {
 
     const handlePrevClick = () => {
         setAnimation("previous");
-        setTimeout(() => {
-            setSlideIndex((slideIndex - 1 + wordsData.length) % wordsData.length);
-            setAnimation(" ");
-        }, 500);
+        setSlideIndex((slideIndex - 1 + wordsData.length) % wordsData.length);
     };
 
     const handleNextClick = () => {
         setAnimation("next");
-        setTimeout(() => {
-            setSlideIndex((slideIndex + 1) % wordsData.length);
-            setAnimation(" ");
-        }, 500);
+        setSlideIndex((slideIndex + 1) % wordsData.length);
+    };
+
+    const handleAnimationEnd = () => {
+        setAnimation("");
     };
 
     const startTraining = () => {
@@ -108,7 +106,8 @@ export const Slider = ({ initialSlideIndex = 0, wordsData = wordsBackUp }) => {
         <>
             <div className="slider-container" >
                 <button className="slider__button" onClick={handlePrevClick}> <FontAwesomeIcon icon={faArrowLeft} /> </button>
-                <div className={"slider__content " + animation}>
+                <div className={`slider__content ${animation}`}
+                    onAnimationEnd={handleAnimationEnd}>
                     {wordsData.map((word, index) => (
                         <Card
                             key={word.id}

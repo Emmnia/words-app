@@ -28,12 +28,41 @@
 
 .slider__content {
     transition: transform 0.5s ease-in-out;
+    will-change: transform;
 }
 
 .next {
-    transform: translateX(-10px);
+    animation: moveRight 1s forwards;
 }
 
 .previous {
-    transform: translateX(10px);
+    animation: moveLeft 1s forwards;
+}
+
+@keyframes moveRight {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(-10px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes moveLeft {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(10px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
 }
