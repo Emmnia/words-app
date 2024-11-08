@@ -32,8 +32,10 @@ export const Table = () => {
             russian: inputs[2].value,
         };
 
+        inputs.forEach(input => input.style.borderColor = '');
+
         const hasEmptyFields = Array.from(inputs).some(input => {
-            if (input.value === '') {
+            if (input.value.trim() === '') {
                 input.style.borderColor = '#E55D87';
                 return true;
             }
@@ -43,11 +45,16 @@ export const Table = () => {
         if (hasEmptyFields) {
             toast.error('Изменения не сохранены. Заполните все поля');
         } else {
-            wordsCopy[editing] = updatedWord;
-            setEditing(null);
-            setData(wordsCopy);
-            toast.success('Изменения сохранены');
-            console.log(updatedWord)
+            try {
+                wordsCopy[editing] = updatedWord;
+                setEditing(null);
+                setData(wordsCopy);
+                toast.success('Изменения сохранены');
+                console.log(updatedWord);
+            } catch (error) {
+                toast.error('Ошибка при сохранении. Попробуйте еще раз.');
+                console.error(error);
+            }
         }
     };
 
