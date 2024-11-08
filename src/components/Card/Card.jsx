@@ -39,7 +39,7 @@ export const Card = ({ id, english, transcription, russian, tags, boolean, visib
         <CardTranscription>{transcription}</CardTranscription>
         <CardButton type="button" onClick={() => { toggleTranslation(); onClick() }} ref={buttonRef}>
           <CardButtonImage src={isClicked ? owlOpenIcon : owlClosedIcon} alt="" />
-          <CardButtonText>{isClicked ? russian : 'Показать перевод'}</CardButtonText>
+          <CardButtonText>{isClicked ? russian : 'показать перевод'}</CardButtonText>
         </CardButton>
       </CardBody>
     </>

@@ -29,6 +29,9 @@ export const ModalHeader = styled.header`
 export const ModalButton = styled.button.attrs({
     type: 'button'
 })`
+    display: flex;
+    justify-content: center;
+    align-items: center;    
     margin-left: auto;
     border: 1px solid #E55D87;
     border-radius: 0.1em;

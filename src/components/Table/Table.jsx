@@ -12,8 +12,11 @@ import { useLocalStorage } from "@uidotdev/usehooks";
 
 export const Table = () => {
 
+    const [visibleCount, setVisibleCount] = useState(10);
     const [editing, setEditing] = useState(null);
     const [data, setData] = useLocalStorage('words', words);
+
+    const matches = useMediaQuery('(min-width:900px)');
 
     const clone = (data) => {
         return JSON.parse(JSON.stringify(data));
@@ -62,7 +65,9 @@ export const Table = () => {
         setEditing(null);
     };
 
-    const matches = useMediaQuery('(min-width:900px)')
+    const loadMore = () => {
+        setVisibleCount(prevCount => prevCount + 10);
+    };
 
     return (
         <>
@@ -88,7 +93,7 @@ export const Table = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map((word, index) => (
+                        {data.slice(0, visibleCount).map((word, index) => (
                             <tr className="table__row" key={word.id} style={{ '--idx': index + 1 }}>
                                 <td>{index + 1}</td>
                                 {editing === index ? (
@@ -134,6 +139,11 @@ export const Table = () => {
                         ))}
                     </tbody>
                 </table>
+                {visibleCount < data.length && (
+                    <button className="load-more-button" type="button" onClick={loadMore}>
+                        Загрузить еще
+                    </button>
+                )}
             </TableWrapper>
         </>
     );

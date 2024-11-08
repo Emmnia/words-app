@@ -3,8 +3,8 @@ import { Card } from '../Card/Card'
 import words from '../../words.json'
 import { useState } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { TrainingControls } from "../TrainingControls/TrainingControls";
 
 const wordsBackUp = [{
@@ -105,7 +105,7 @@ export const Slider = ({ initialSlideIndex = 0, wordsData = wordsBackUp }) => {
     return (
         <>
             <div className="slider-container" >
-                <button className="slider__button" onClick={handlePrevClick}> <FontAwesomeIcon icon={faArrowLeft} /> </button>
+                <button className="slider__button" onClick={handlePrevClick}> <FontAwesomeIcon icon={faChevronLeft} /> </button>
                 <div className={`slider__content ${animation}`}
                     onAnimationEnd={handleAnimationEnd}>
                     {wordsData.map((word, index) => (
@@ -124,7 +124,7 @@ export const Slider = ({ initialSlideIndex = 0, wordsData = wordsBackUp }) => {
                         />
                     ))}
                 </div>
-                <button className="slider__button" onClick={handleNextClick}> <FontAwesomeIcon icon={faArrowRight} /> </button>
+                <button className="slider__button" onClick={handleNextClick}> <FontAwesomeIcon icon={faChevronRight} /> </button>
             </div>
             <TrainingControls
                 onClick={startTraining}

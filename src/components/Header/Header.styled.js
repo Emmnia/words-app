@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom"
 export const StyledHeader = styled.header`
     position: sticky;
     top: 0;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
     padding: 30px 0;
     background: rgba(255, 255, 255, 0.12);
     border-radius: 0 0 16px 16px;
@@ -57,7 +57,7 @@ export const HeaderButton = styled.button`
     font-family: "Wix Madefor Display", sans-serif;
     color: white;
     border-radius: 50px;
-    background: linear-gradient(90deg, rgba(224, 117, 175, 1) 0%, rgba(187, 128, 185, 1) 21%, rgba(158, 136, 193, 1) 48%, rgba(116, 148, 204, 1) 81%, rgba(63, 163, 218, 1) 100%);
+    background: linear-gradient(90deg, #e075af 0%, #bb80b9 21%, #9e88c1 48%, #7494cc 81%, #3fa3da 100%);
     border: none;
     outline: none;
     display: block;

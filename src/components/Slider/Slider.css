@@ -8,18 +8,17 @@
 
 .slider__button {
     margin: auto;
-    padding: 10px 12px;
     text-align: center;
-    color: white;
-    background: linear-gradient(90deg, #e075af 0%, #bb80b9 21%, #9e88c1 48%, #7494cc 81%, #3fa3da 100%);
-    border-radius: 50%;
+    color: #E55D87;
+    font-size: 40px;
+    background: transparent;
     border: none;
     display: block;
     cursor: pointer;
 }
 
 .slider__button:hover {
-    box-shadow: 0 0 20px #eee;
+    transform: scale(1.1);
 }
 
 .slider__button:active {

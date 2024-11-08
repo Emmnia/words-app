@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const CardBody = styled.div`
     margin: 0 auto;
     padding: 20px;
-    width: 400px;
-    height: 300px;
+    width: 450px;
+    height: 400px;
     text-align: center;
     background-color: #ffffff;
     border-radius: 10px;
@@ -13,10 +13,13 @@ export const CardBody = styled.div`
 export const CardHeader = styled.header`
     margin-bottom: 30px;
 `
-export const CardWord = styled.h2``
+export const CardWord = styled.h2`
+    font-size: 40px;
+`
 
 export const CardTranscription = styled.p`
     margin-bottom: 50px;
+    font-size: 25px;
 `
 
 export const CardButton = styled.button`
@@ -28,7 +31,8 @@ export const CardButton = styled.button`
     justify-content: space-between;
     font-family: "Wix Madefor Display", sans-serif;
     transition: 0.5s;
-    box-shadow: 0 0 20px #eee;
+    background-color: #ffffff;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.19);
     border-radius: 50px;
     border: none;
     cursor: pointer;
@@ -47,8 +51,10 @@ export const CardButton = styled.button`
 `
 
 export const CardButtonImage = styled.img`
-    width: 30px;
+    width: 50px;
     height: 100%
 `
 
-export const CardButtonText = styled.span``
+export const CardButtonText = styled.span`
+    font-size: 20px;
+`
