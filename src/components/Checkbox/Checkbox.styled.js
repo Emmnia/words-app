@@ -24,7 +24,9 @@ export const CheckboxLabel = styled.label`
     justify-content: flex-start;
 `
 
-export const CheckboxText = styled.span``
+export const CheckboxText = styled.span`
+    font-size: 15px;
+`
 
 export const CheckboxSymbol = styled.span`
     display: inline-block;

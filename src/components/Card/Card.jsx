@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { Checkbox } from "../Checkbox/Checkbox";
-import { CardBody, CardHeader, CardWord, CardTranscription, CardTranslationContent, CardTranslation, CardButton } from "./Card.styled";
+import { CardBody, CardHeader, CardWord, CardTranscription, CardButton, CardButtonImage, CardButtonText } from "./Card.styled";
+import owlClosedIcon from '/assets/images/owl_eyesclosed.png'
+import owlOpenIcon from '/assets/images/owl_eyesopen.png'
 import { v4 as uuidv4 } from 'uuid';
 
 export const Card = ({ id, english, transcription, russian, tags, boolean, visible, show, onClick }) => {
@@ -9,13 +11,9 @@ export const Card = ({ id, english, transcription, russian, tags, boolean, visib
   const buttonRef = useRef(null);
   const [isClicked, setClicked] = useState(false);
 
-  const handleButtonClick = () => {
-    setClicked(true);
+  const toggleTranslation = () => {
+    setClicked(!isClicked);
   };
-
-  const handleTranslationClick = () => {
-    setClicked(false);
-  }
 
   useEffect(() => {
     setClicked(false);
@@ -26,21 +24,6 @@ export const Card = ({ id, english, transcription, russian, tags, boolean, visib
       buttonRef.current.focus();
     }
   }, [isClicked, visible])
-
-  let translationContent;
-
-  if (isClicked) {
-    translationContent = <CardTranslation onClick={handleTranslationClick}>{russian}</CardTranslation>;
-  } else {
-    translationContent = <CardButton
-      type="button"
-      onClick={() => {
-        handleButtonClick();
-        onClick()
-      }}
-      ref={buttonRef}
-    >Показать перевод</CardButton>;
-  }
 
   return (
     <>
@@ -54,9 +37,10 @@ export const Card = ({ id, english, transcription, russian, tags, boolean, visib
         </CardHeader>
         <CardWord>{english}</CardWord>
         <CardTranscription>{transcription}</CardTranscription>
-        <CardTranslationContent>
-          {translationContent}
-        </CardTranslationContent>
+        <CardButton type="button" onClick={() => { toggleTranslation(); onClick() }} ref={buttonRef}>
+          <CardButtonImage src={isClicked ? owlOpenIcon : owlClosedIcon} alt="" />
+          <CardButtonText>{isClicked ? russian : 'Показать перевод'}</CardButtonText>
+        </CardButton>
       </CardBody>
     </>
   );
