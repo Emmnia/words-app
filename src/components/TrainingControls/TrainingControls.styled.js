@@ -17,6 +17,7 @@ export const ControlsButton = styled.button.attrs({
     transition: 0.5s;
     background-image: linear-gradient(90deg, #e075af 0%, #bb80b9 21%, #9e88c1 48%, #7494cc 81%, #3fa3da 100%);
     background-size: 200% auto;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.19);
     border-radius: 50px;
     border: none;
     display: block;
@@ -29,7 +30,7 @@ export const ControlsButton = styled.button.attrs({
     }
 
     &:active {
-        transform: scale(0.9);
+        transform: scale(0.95);
     }
 
     &:focus {

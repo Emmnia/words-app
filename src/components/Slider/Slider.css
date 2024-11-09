@@ -9,16 +9,17 @@
 .slider__button {
     margin: auto;
     text-align: center;
-    color: #E55D87;
     font-size: 40px;
+    color: grey;
     background: transparent;
     border: none;
     display: block;
     cursor: pointer;
+    filter: drop-shadow(3px 3px 5px #707070);
 }
 
 .slider__button:hover {
-    transform: scale(1.1);
+    color: #171717;
 }
 
 .slider__button:active {

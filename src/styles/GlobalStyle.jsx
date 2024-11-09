@@ -29,7 +29,6 @@ export const GlobalStyle = createGlobalStyle`
         background-blend-mode: screen;
         background-repeat: no-repeat;
         background-size: cover;
-        // scrollbar-gutter: stable;
     }
 
     body:has(dialog[open]) {

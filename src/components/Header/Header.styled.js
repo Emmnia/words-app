@@ -33,28 +33,29 @@ export const HeaderLogo = styled(NavLink)`
 export const HeaderLogoImage = styled.img`
     width: 50px;
     height: 100%;
+    filter: drop-shadow(3px 3px 5px #707070);
 
     @media (max-width: 370px) {
         width: 30px;
         height: 100%;
     }
 `
-
 export const HeaderLogoText = styled.span`
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
-    color: black;
+    color: #171717;
+    text-shadow: 3px 3px 5px #8c8c8c;
 
     @media (max-width: 370px) {
         font-size: 16px;
     }
 `
-
 export const HeaderButton = styled.button`
     position: relative;
     padding: 10px 15px;
     text-align: center;
     font-family: "Wix Madefor Display", sans-serif;
+    font-size: 18px;
     color: white;
     border-radius: 50px;
     background: linear-gradient(90deg, #e075af 0%, #bb80b9 21%, #9e88c1 48%, #7494cc 81%, #3fa3da 100%);
@@ -125,6 +126,7 @@ export const HeaderNavItem = styled.li``
 export const HeaderNavLink = styled(NavLink)`
     text-decoration: none;
     color: #737272;
+    font-size: 18px;
 
     &.active {
     color: black;
