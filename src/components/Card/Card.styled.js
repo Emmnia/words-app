@@ -44,10 +44,6 @@ export const CardButton = styled.button`
     &:active {
         transform: scale(0.95);
     }
-
-    &:focus {
-        border: 1px solid #E55D87;
-    }
 `
 
 export const CardButtonImage = styled.img`

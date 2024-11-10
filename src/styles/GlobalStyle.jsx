@@ -35,6 +35,10 @@ export const GlobalStyle = createGlobalStyle`
         overflow: hidden;
     }
 
+    :is(a, button, input, textarea):focus {
+        outline: 1px solid #E55D87;
+    }
+
     .container {
         margin: 0 auto;
         padding: 5px;

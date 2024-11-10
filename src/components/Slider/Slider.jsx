@@ -1,4 +1,4 @@
-import "./Slider.css";
+import { SliderContainer, SliderButton, SliderContent } from './Slider.styled'
 import { Card } from '../Card/Card'
 import words from '../../words.json'
 import { useState } from "react"
@@ -104,9 +104,9 @@ export const Slider = ({ initialSlideIndex = 0, wordsData = wordsBackUp }) => {
 
     return (
         <>
-            <div className="slider-container" >
-                <button className="slider__button" onClick={handlePrevClick}> <FontAwesomeIcon icon={faChevronLeft} /> </button>
-                <div className={`slider__content ${animation}`}
+            <SliderContainer>
+                <SliderButton onClick={handlePrevClick}> <FontAwesomeIcon icon={faChevronLeft} /> </SliderButton>
+                <SliderContent animation={animation}
                     onAnimationEnd={handleAnimationEnd}>
                     {wordsData.map((word, index) => (
                         <Card
@@ -123,9 +123,9 @@ export const Slider = ({ initialSlideIndex = 0, wordsData = wordsBackUp }) => {
                             onClick={() => handleCounter(word.id)}
                         />
                     ))}
-                </div>
-                <button className="slider__button" onClick={handleNextClick}> <FontAwesomeIcon icon={faChevronRight} /> </button>
-            </div>
+                </SliderContent>
+                <SliderButton onClick={handleNextClick}> <FontAwesomeIcon icon={faChevronRight} /> </SliderButton>
+            </SliderContainer>
             <TrainingControls
                 onClick={startTraining}
                 count={count}

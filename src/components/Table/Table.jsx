@@ -40,6 +40,7 @@ export const Table = () => {
         const hasEmptyFields = Array.from(inputs).some(input => {
             if (input.value.trim() === '') {
                 input.style.borderColor = '#E55D87';
+                input.title = 'Это поле нужно заполнить!';
                 return true;
             }
             return false;
@@ -55,7 +56,7 @@ export const Table = () => {
                 toast.success('Изменения сохранены');
                 console.log(updatedWord);
             } catch (error) {
-                toast.error('Ошибка при сохранении. Попробуйте еще раз.');
+                toast.error('Ошибка при сохранении. Попробуйте еще раз');
                 console.error(error);
             }
         }
