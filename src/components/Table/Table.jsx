@@ -1,10 +1,7 @@
 import "./Table.css";
 import { TableWrapper } from "./Table.styled";
 import words from '/src/words.json'
-import { FaPencilAlt } from "react-icons/fa";
-import { FaTrashAlt } from "react-icons/fa";
-import { FaCheck } from "react-icons/fa";
-import { FaUndoAlt } from "react-icons/fa";
+import { FaPencilAlt, FaTrashAlt, FaCheck, FaUndoAlt } from "react-icons/fa";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import useMediaQuery from '@mui/material/useMediaQuery';
