@@ -5,7 +5,9 @@ import { useState, useContext } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
-import { TrainingControls } from "../TrainingControls/TrainingControls";
+import { TrainingControls } from "../TrainingControls/TrainingControls"
+import { Loader } from '../Loader/Loader'
+import { ErrorMessage } from '../ErrorMessage/ErrorMessage'
 import { WordsContext } from '../../store/words-context'
 
 const wordsBackUp = wordsJSON;
@@ -17,14 +19,6 @@ export const Slider = ({ initialSlideIndex = 0, wordsData = wordsBackUp }) => {
     const [clickedWords, setClickedWords] = useState(new Set());
 
     const { words, loading, error } = useContext(WordsContext);
-
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
-    if (error) {
-        return <div>Error: {error.message}</div>;
-    }
 
     wordsData = words || wordsBackUp
 
@@ -68,6 +62,22 @@ export const Slider = ({ initialSlideIndex = 0, wordsData = wordsBackUp }) => {
         }
     }
 
+    if (loading) {
+        return (
+            <SliderContainer>
+                <Loader />
+            </SliderContainer>
+        )
+    }
+
+    if (error) {
+        return (
+            <SliderContainer>
+                <ErrorMessage />
+            </SliderContainer>
+        )
+    }
+
     return (
         <>
             <SliderContainer>
@@ -102,4 +112,4 @@ export const Slider = ({ initialSlideIndex = 0, wordsData = wordsBackUp }) => {
 }
 
 
-//   разобраться с анимацией колоды карт, сделать на карточках чекбокс "выучено", в галерее добавить вариант "не показывать выученные"
+//   сделать на карточках чекбокс "выучено", в галерее добавить вариант "не показывать выученные"
