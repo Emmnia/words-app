@@ -1,64 +1,30 @@
 import { SliderContainer, SliderButton, SliderContent } from './Slider.styled'
 import { Card } from '../Card/Card'
-import words from '../../words.json'
-import { useState } from "react"
+import wordsJSON from '../../words.json'
+import { useState, useContext } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { TrainingControls } from "../TrainingControls/TrainingControls";
+import { WordsContext } from '../../store/words-context'
 
-const wordsBackUp = [{
-    id: "16334",
-    english: "cat",
-    transcription: "[cat]",
-    russian: "кошка",
-    tags: "animal",
-    tags_json: "[animal]",
-    boolean: "false"
-},
-{
-    id: "16335",
-    english: "dad",
-    transcription: "[dæd]",
-    russian: "папа",
-    tags: "general",
-    tags_json: "[general]",
-    boolean: "false"
-},
-{
-    id: "16365",
-    english: "flower",
-    transcription: "[ˈflaʊər]",
-    russian: "цветок",
-    tags: "nature",
-    tags_json: "[nature]",
-    boolean: "false"
-},
-{
-    id: "16367",
-    english: "lamb",
-    transcription: "[læm]",
-    russian: "ягненок",
-    tags: "animal",
-    tags_json: "[animal]",
-    boolean: "false"
-},
-{
-    id: "16372",
-    english: "education",
-    transcription: "|edʒʊˈkeɪʃ(ə)n|",
-    russian: "образование",
-    tags: "education",
-    tags_json: "[education]",
-    boolean: "false"
-}
-]
+const wordsBackUp = wordsJSON;
 
 export const Slider = ({ initialSlideIndex = 0, wordsData = wordsBackUp }) => {
     const [slideIndex, setSlideIndex] = useState(initialSlideIndex);
     const [animation, setAnimation] = useState(" ");
     const [count, setCount] = useState(0);
     const [clickedWords, setClickedWords] = useState(new Set());
+
+    const { words, loading, error } = useContext(WordsContext);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    }
 
     wordsData = words || wordsBackUp
 

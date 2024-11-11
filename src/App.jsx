@@ -9,6 +9,7 @@ import { Card } from './components/Card/Card'
 import { Modal } from './components/Modal/Modal'
 import { useEffect, useState, useCallback, useRef } from 'react'
 import { useLocalStorage } from "@uidotdev/usehooks";
+import { WordsContextProvider } from './store/words-context'
 import words from './words.json'
 
 export const App = () => {
@@ -71,34 +72,36 @@ export const App = () => {
         <link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400..800&display=swap" rel="stylesheet" />
       </Helmet>
       <GlobalStyle />
-      <AppContent>
-        <Header showModal={showModal} />
-        <Modal
-          ref={modalRef}
-          onClose={closeModal}
-          onChange={handleModalCheck}
-          checked={!showModalToday}
-        >
-          {word && (
-            <Card
-              key={word.id}
-              id={word.id}
-              english={word.english}
-              transcription={word.transcription}
-              russian={word.russian}
-              tags={word.tags}
-              boolean={word.boolean}
-              visible={true}
-              show={false}
-            />
-          )}
-        </Modal>
-        <AppMain>
-          <Outlet />
-        </AppMain>
-        <Footer />
-        <StyledContainer />
-      </AppContent>
+      <WordsContextProvider>
+        <AppContent>
+          <Header showModal={showModal} />
+          <Modal
+            ref={modalRef}
+            onClose={closeModal}
+            onChange={handleModalCheck}
+            checked={!showModalToday}
+          >
+            {word && (
+              <Card
+                key={word.id}
+                id={word.id}
+                english={word.english}
+                transcription={word.transcription}
+                russian={word.russian}
+                tags={word.tags}
+                boolean={word.boolean}
+                visible={true}
+                show={false}
+              />
+            )}
+          </Modal>
+          <AppMain>
+            <Outlet />
+          </AppMain>
+          <Footer />
+          <StyledContainer />
+        </AppContent>
+      </WordsContextProvider>
     </HelmetProvider>
   );
 }
