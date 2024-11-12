@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from 'uuid';
 import { WordsContext } from "../../store/words-context";
 import { useContext } from "react";
+import { FormWrapper, StyledForm, FormInputsWrapper, FormInputWrapper, FormInput, FormError, FormSubmit, FormSubmitWrapper } from "./AddWordForm.styled";
 
 export const AddWordForm = () => {
     const {
@@ -35,66 +36,81 @@ export const AddWordForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <input
-                placeholder="english"
-                {...register("english", {
-                    required: "Заполните это поле",
-                    pattern: {
-                        value: /^[A-Za-z]+$/,
-                        message: "Введите только латиницу"
-                    },
-                    onBlur: () => trigger("english"),
-                })}
-                onChange={handleChange}
-            />
-            {errors.english && <span>{errors.english.message}</span>}
+        <FormWrapper>
+            <StyledForm onSubmit={handleSubmit(onSubmit)}>
+                <FormInputsWrapper>
+                    <FormInputWrapper>
+                        <FormInput
+                            placeholder="english"
+                            {...register("english", {
+                                required: "Заполните это поле",
+                                pattern: {
+                                    value: /^[A-Za-z]+$/,
+                                    message: "Введите только латиницу"
+                                },
+                                onBlur: () => trigger("english"),
+                            })}
+                            onChange={handleChange}
+                        />
+                        {errors.english && <FormError>{errors.english.message}</FormError>}
+                    </FormInputWrapper>
 
-            <input
-                placeholder="transcription"
-                {...register("transcription", {
-                    required: "Заполните это поле",
-                    onBlur: () => trigger("transcription"),
-                })}
-                onChange={handleChange}
-            />
-            {errors.transcription && <span>{errors.transcription.message}</span>}
+                    <FormInputWrapper>
+                        <FormInput
+                            placeholder="transcription"
+                            {...register("transcription", {
+                                required: "Заполните это поле",
+                                onBlur: () => trigger("transcription"),
+                            })}
+                            onChange={handleChange}
+                        />
+                        {errors.transcription && <FormError>{errors.transcription.message}</FormError>}
+                    </FormInputWrapper>
 
-            <input
-                placeholder="russian"
-                {...register("russian", {
-                    required: "Заполните это поле",
-                    pattern: {
-                        value: /^[А-Яа-яЁё]+$/,
-                        message: "Введите только кириллицу"
-                    },
-                    onBlur: () => trigger("russian"),
-                })}
-                onChange={handleChange}
-            />
-            {errors.russian && <span>{errors.russian.message}</span>}
+                    <FormInputWrapper>
+                        <FormInput
+                            placeholder="russian"
+                            {...register("russian", {
+                                required: "Заполните это поле",
+                                pattern: {
+                                    value: /^[А-Яа-яЁё]+$/,
+                                    message: "Введите только кириллицу"
+                                },
+                                onBlur: () => trigger("russian"),
+                            })}
+                            onChange={handleChange}
+                        />
+                        {errors.russian && <FormError>{errors.russian.message}</FormError>}
+                    </FormInputWrapper>
 
-            <input
-                placeholder="tags"
-                {...register("tags", {
-                    required: "Заполните это поле",
-                    onBlur: () => trigger("tags"),
-                })}
-                onChange={handleChange}
-            />
-            {errors.tags && <span>{errors.tags.message}</span>}
+                    <FormInputWrapper>
+                        <FormInput
+                            placeholder="tags"
+                            {...register("tags", {
+                                required: "Заполните это поле",
+                                onBlur: () => trigger("tags"),
+                            })}
+                            onChange={handleChange}
+                        />
+                        {errors.tags && <FormError>{errors.tags.message}</FormError>}
+                    </FormInputWrapper>
 
-            <input
-                placeholder="tags_json"
-                {...register("tags_json", {
-                    required: "Заполните это поле",
-                    onBlur: () => trigger("tags_json"),
-                })}
-                onChange={handleChange}
-            />
-            {errors.tags_json && <span>{errors.tags_json.message}</span>}
-
-            <input type="submit" />
-        </form>
+                    <FormInputWrapper>
+                        <FormInput
+                            placeholder="tags_json"
+                            {...register("tags_json", {
+                                required: "Заполните это поле",
+                                onBlur: () => trigger("tags_json"),
+                            })}
+                            onChange={handleChange}
+                        />
+                        {errors.tags_json && <FormError>{errors.tags_json.message}</FormError>}
+                    </FormInputWrapper>
+                </FormInputsWrapper>
+                <FormSubmitWrapper>
+                    <FormSubmit type="submit" />
+                </FormSubmitWrapper>
+            </StyledForm>
+        </FormWrapper>
     );
 }

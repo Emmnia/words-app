@@ -7,9 +7,9 @@ import { AppContent, AppMain, StyledContainer } from './App.styled'
 import { GlobalStyle } from "./styles/GlobalStyle"
 import { Card } from './components/Card/Card'
 import { Modal } from './components/Modal/Modal'
-import { useEffect, useState, useCallback, useRef } from 'react'
+import { useEffect, useState, useCallback, useRef, useContext } from 'react'
 import { useLocalStorage } from "@uidotdev/usehooks";
-import { WordsContextProvider } from './store/words-context'
+import { WordsContext, WordsContextProvider } from './store/words-context'
 import words from './words.json'
 
 export const App = () => {
@@ -31,6 +31,10 @@ export const App = () => {
   const [word, setWord] = useState(null);
   const [wordId, setWordId] = useLocalStorage('lastWordId', null);
   const [lastShownDate, setLastShownDate] = useLocalStorage('lastShownDate', null);
+  const wordsFromContext = useContext(WordsContext) || [];
+  const backupWords = words;
+
+  const wordsToUse = wordsFromContext.length > 0 ? wordsFromContext : backupWords;
 
   useEffect(() => {
 
@@ -38,18 +42,18 @@ export const App = () => {
     const currentDate = now.toISOString().split('T')[0];
 
     if (!lastShownDate || lastShownDate !== currentDate) {
-      const newWord = words.sort(() => Math.random() - Math.random()).find(() => true);
+      const newWord = wordsToUse.sort(() => Math.random() - Math.random()).find(() => true);
       setWord(newWord);
       console.log("New word selected:", newWord);
       setWordId(newWord.id);
       setLastShownDate(currentDate);
       setShowModalToday(true);
     } else {
-      const previousWord = words.find(word => word.id === wordId);
+      const previousWord = wordsToUse.find(word => word.id === wordId);
       setWord(previousWord);
       console.log("Previous word selected:", previousWord);
     }
-  }, [lastShownDate, setLastShownDate, setShowModalToday, setWordId, wordId]);
+  }, [lastShownDate, setLastShownDate, setShowModalToday, setWordId, wordId, wordsToUse]);
 
   useEffect(() => {
     if (word && showModalToday) {
