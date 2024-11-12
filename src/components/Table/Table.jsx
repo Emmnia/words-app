@@ -6,6 +6,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useLocalStorage } from "@uidotdev/usehooks";
+import { AddWordForm } from "../AddWordForm/AddWordForm";
 
 export const Table = () => {
 
@@ -69,6 +70,7 @@ export const Table = () => {
 
     return (
         <>
+            <AddWordForm />
             <h1>Список слов</h1>
             <TableWrapper>
                 <table className="table">

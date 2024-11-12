@@ -22,7 +22,7 @@ export const ErrorContent = styled.div`
 `
 
 export const ErrorAnimation = styled.span`
-width: 60px;
+  width: 60px;
   height: 40px;
   position: relative;
   display: inline-block;
