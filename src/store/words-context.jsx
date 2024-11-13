@@ -74,8 +74,38 @@ export const WordsContextProvider = ({ children }) => {
         }
     };
 
+    const editWordOnServer = async (word) => {
+        try {
+            const response = await fetch(`/api/words/${word.id}/update`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(word),
+            });
+
+            if (!response.ok) {
+                throw new Error('Ошибка при отправке данных');
+            }
+
+            const result = await response.json();
+
+            setWords(prevWords => {
+                const index = prevWords.findIndex(w => w.id === result.id);
+                if (index > -1) {
+                    const newWords = [...prevWords];
+                    newWords[index] = result;
+                    return newWords;
+                }
+                return [...prevWords, result];
+            });
+        } catch (error) {
+            setError(error);
+        }
+    };
+
     return (
-        <WordsContext.Provider value={{ words, loading, error, sendWordToServer, newWord, setNewWord }}>
+        <WordsContext.Provider value={{ words, loading, error, sendWordToServer, newWord, setNewWord, editWordOnServer }}>
             {children}
         </WordsContext.Provider>
     );

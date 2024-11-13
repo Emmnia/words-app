@@ -11,7 +11,8 @@ export const FormWrapper = styled.div`
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.19);
 `
 export const FormHeading = styled.h2`
-    margin: 0 auto 30px;
+    margin-bottom: 30px;
+    text-align: center;
 `
 export const StyledForm = styled.form`
     display: flex;
