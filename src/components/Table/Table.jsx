@@ -45,16 +45,16 @@ export const Table = () => {
         });
 
         if (hasEmptyFields) {
-            toast.error('Изменения не сохранены. Заполните все поля');
+            toast.error('Изменения не сохранены. Заполните все поля', { toastId: 'mistakes-toast' });
         } else {
             try {
                 wordsCopy[editing] = updatedWord;
                 setEditing(null);
                 setData(wordsCopy);
-                toast.success('Изменения сохранены');
+                toast.success('Изменения сохранены', { toastId: 'saved-toast' });
                 console.log(updatedWord);
             } catch (error) {
-                toast.error('Ошибка при сохранении. Попробуйте еще раз');
+                toast.error('Ошибка при сохранении. Попробуйте еще раз', { toastId: 'tryagain-toast' });
                 console.error(error);
             }
         }
