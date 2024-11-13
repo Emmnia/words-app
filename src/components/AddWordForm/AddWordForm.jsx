@@ -1,8 +1,9 @@
 import { useForm } from "react-hook-form";
+import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 import { WordsContext } from "../../store/words-context";
 import { useContext } from "react";
-import { FormWrapper, StyledForm, FormInputsWrapper, FormInputWrapper, FormInput, FormError, FormSubmit, FormSubmitWrapper } from "./AddWordForm.styled";
+import { FormWrapper, FormHeading, StyledForm, FormInputsWrapper, FormInputWrapper, FormInput, FormError, FormSubmit, FormSubmitWrapper } from "./AddWordForm.styled";
 
 export const AddWordForm = () => {
     const {
@@ -15,7 +16,8 @@ export const AddWordForm = () => {
 
     const { sendWordToServer, setNewWord } = useContext(WordsContext)
 
-    const onSubmit = async (data) => {
+    const onValid = async (data) => {
+
         const word = {
             id: uuidv4(),
             english: data.english,
@@ -26,7 +28,12 @@ export const AddWordForm = () => {
         }
         setNewWord(word);
         await sendWordToServer(word);
+        toast.success("Слово добавлено!");
         setNewWord({ id: "", english: "", transcription: "", russian: "", tags: "", tags_json: "" });
+    };
+
+    const onInvalid = async () => {
+        toast.error("Слово не добавлено. Корректно заполните все поля");
     };
 
     const handleChange = async (event) => {
@@ -37,7 +44,8 @@ export const AddWordForm = () => {
 
     return (
         <FormWrapper>
-            <StyledForm onSubmit={handleSubmit(onSubmit)}>
+            <FormHeading>Добавить слово</FormHeading>
+            <StyledForm onSubmit={handleSubmit(onValid, onInvalid)}>
                 <FormInputsWrapper>
                     <FormInputWrapper>
                         <FormInput

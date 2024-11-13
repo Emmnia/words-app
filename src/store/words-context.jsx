@@ -1,4 +1,6 @@
 import { createContext, useState, useEffect } from "react";
+import wordsJSON from '../words.json';
+import { toast } from "react-toastify";
 
 export const WordsContext = createContext({
     words: [],
@@ -30,15 +32,19 @@ export const WordsContextProvider = ({ children }) => {
 
     useEffect(() => {
         const fetchWords = async () => {
+            setLoading(true);
             try {
                 const response = await fetch('/api/words');
                 if (!response.ok) {
-                    throw new Error('Something went wrong ...');
+                    throw new Error('Не удалось загрузить слова с сервера');
                 }
                 const data = await response.json();
                 setWords(data);
             } catch (error) {
+                console.error(error);
                 setError(error);
+                toast.info('Ошибка при получении слов с сервера, загружается локальный файл', { toastId: 'backup-toast' });
+                setWords(wordsJSON)
             } finally {
                 setLoading(false);
             }

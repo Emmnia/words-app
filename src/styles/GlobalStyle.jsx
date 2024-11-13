@@ -10,7 +10,9 @@ export const GlobalStyle = createGlobalStyle`
         --toastify-color-success: #3fa3da;
         --toastify-color-progress-success: #3fa3da;
         --toastify-color-error: #E55D87;
-        --toastify-color-progress-error: #E55D87;    
+        --toastify-color-progress-error: #E55D87;
+        --toastify-color-info: #b18bb0 ;
+        --toastify-color-progress-info: #b18bb0 ;    
     }
 
     * {

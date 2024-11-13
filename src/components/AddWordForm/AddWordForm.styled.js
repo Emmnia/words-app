@@ -1,15 +1,18 @@
 import styled from "styled-components";
 
 export const FormWrapper = styled.div`
-    display: flex;  
+    display: flex;
+    flex-direction: column;  
     margin: 0 auto;
     padding: 20px;
-    width: min(100%, 1170px);
-    min-height: 200px;
+    width: min(95%, 1170px);
+    min-height: 240px;
     border-radius: 10px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.19);
 `
-
+export const FormHeading = styled.h2`
+    margin: 0 auto 30px;
+`
 export const StyledForm = styled.form`
     display: flex;
     flex-direction: column;
@@ -20,6 +23,7 @@ export const StyledForm = styled.form`
 export const FormInputsWrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
+    gap: 10px;
     justify-content: space-evenly;
     align-content: center;
 `
@@ -41,6 +45,7 @@ export const FormError = styled.p`
 `
 
 export const FormSubmitWrapper = styled.div`
+    margin-top: 20px;
     align-self: flex-end;
 `
 
