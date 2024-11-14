@@ -26,8 +26,15 @@ export const WordsContextProvider = ({ children }) => {
         english: "",
         transcription: "",
         russian: "",
+        tags: ""
+    });
+
+    const [editedWord, setEditedWord] = useState({
+        id: "",
+        english: "",
+        transcription: "",
+        russian: "",
         tags: "",
-        tags_json: ""
     });
 
     useEffect(() => {
@@ -43,7 +50,7 @@ export const WordsContextProvider = ({ children }) => {
             } catch (error) {
                 console.error(error);
                 setError(error);
-                toast.info('Ошибка при получении слов с сервера, загружается локальный файл', { toastId: 'backup-toast' });
+                toast.info('Ошибка при получении слов с сервера, загружается резервный файл', { toastId: 'backup-toast' });
                 setWords(wordsJSON)
             } finally {
                 setLoading(false);
@@ -74,14 +81,21 @@ export const WordsContextProvider = ({ children }) => {
         }
     };
 
-    const editWordOnServer = async (word) => {
+    const editWordOnServer = async () => {
+        console.log('Данные перед отправкой на сервер:', editedWord);
+
+        if (!editedWord.id) {
+            console.error('ID слова не найдено');
+            return;
+        }
+
         try {
-            const response = await fetch(`/api/words/${word.id}/update`, {
+            const response = await fetch(`/api/words/${editedWord.id}/update`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(word),
+                body: JSON.stringify(editedWord),
             });
 
             if (!response.ok) {
@@ -105,7 +119,7 @@ export const WordsContextProvider = ({ children }) => {
     };
 
     return (
-        <WordsContext.Provider value={{ words, loading, error, sendWordToServer, newWord, setNewWord, editWordOnServer }}>
+        <WordsContext.Provider value={{ words, loading, error, sendWordToServer, newWord, setNewWord, editedWord, setEditedWord, editWordOnServer }}>
             {children}
         </WordsContext.Provider>
     );

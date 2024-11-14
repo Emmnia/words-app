@@ -70,3 +70,65 @@ export const LoadMoreButton = styled.button`
     }
 }
 `
+export const StyledTableRow = styled.tr`
+    opacity: 0;
+    animation: fadeIn 0.5s;
+    animation-delay: calc(0.1s * var(--idx));
+    animation-fill-mode: forwards;
+
+    &:nth-child(even) {
+        background: rgba(137, 0, 168, 0.05);
+        background-blend-mode: darken;
+    }
+`
+
+export const TableData = styled.td``
+
+export const TableInput = styled.input`
+    margin: 0;
+    padding: 0;
+    width: min(100%, 180px);
+    font-family: "Wix Madefor Display", sans-serif;
+    font-size: 16px;
+    text-align: center;
+    border-style: none none solid;
+    border-width: 1px;
+    border-color: black;
+    outline: none;
+    background-color: transparent;
+`
+
+export const TableTextArea = styled.textarea`
+    margin: 0;
+    padding: 0;
+    width: min(100%, 180px);
+    font-family: "Wix Madefor Display", sans-serif;
+    font-size: 16px;
+    text-align: center;
+    border-style: none none solid;
+    border-width: 1px;
+    border-color: black;
+    outline: none;
+    background-color: transparent;
+`
+export const TableError = styled.p`
+    color: #E55D87;
+`
+
+export const TableDataWrapper = styled.p``
+
+export const TableControlsButton = styled.button`
+    padding: 10px;
+    border: none;
+    background-color: transparent;
+    font-size: 16px;
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.2);
+    }
+
+    &:active {
+        transform: scale(0.9);
+    }
+`

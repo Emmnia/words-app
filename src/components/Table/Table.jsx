@@ -1,26 +1,31 @@
 import { TableTitle, TableWrapper, StyledTable, TableHead, TableHeader, TableWordNumber, TableContent, TableActions, TableBody, LoadMoreButton } from "./Table.styled";
-import words from '/src/words.json'
-import { useState } from "react";
+import { useState, useContext } from "react";
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { useLocalStorage } from "@uidotdev/usehooks";
+// import { useLocalStorage } from "@uidotdev/usehooks";
 import { TableRow } from './TableRow';
+import { WordsContext } from '../../store/words-context'
 
 export const Table = () => {
 
     const [visibleCount, setVisibleCount] = useState(10);
     const [editingIndex, setEditingIndex] = useState(null);
-    const [data, setData] = useLocalStorage('words', words);
 
     const matches = useMediaQuery('(min-width:900px)');
 
-    const handleEditClick = (index) => setEditingIndex(index);
+    const { words, setEditedWord, editWordOnServer } = useContext(WordsContext);
 
-    const handleSaveClick = (updatedWord, index) => {
-        const updatedData = [...data];
-        updatedData[index] = updatedWord;
-        setData(updatedData);
-        setEditingIndex(null);
+    const handleInputChange = (newValues) => {
+        setEditedWord(prev => ({
+            ...prev,
+            ...newValues,
+        }));
     };
+
+    const handleSaveClick = () => {
+        editWordOnServer();
+    };
+
+    const handleEditClick = (index) => setEditingIndex(index);
 
     const handleCancelClick = () => setEditingIndex(null);
 
@@ -50,7 +55,7 @@ export const Table = () => {
                         </TableHeader>
                     </TableHead>
                     <TableBody>
-                        {data.slice(0, visibleCount).map((word, index) => (
+                        {words.slice(0, visibleCount).map((word, index) => (
                             <TableRow
                                 key={word.id}
                                 word={word}
@@ -60,11 +65,12 @@ export const Table = () => {
                                 onSaveClick={handleSaveClick}
                                 onCancelClick={handleCancelClick}
                                 matches={matches}
+                                onInputChange={handleInputChange}
                             />
                         ))}
                     </TableBody>
                 </StyledTable>
-                {visibleCount < data.length && (
+                {visibleCount < words.length && (
                     <LoadMoreButton type="button" onClick={loadMore}>
                         Загрузить еще
                     </LoadMoreButton>

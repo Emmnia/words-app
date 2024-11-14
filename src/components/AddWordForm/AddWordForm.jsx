@@ -24,12 +24,11 @@ export const AddWordForm = () => {
             transcription: data.transcription,
             russian: data.russian,
             tags: data.tags,
-            tags_json: data.tags_json,
         }
         setNewWord(word);
         await sendWordToServer(word);
         toast.success("Слово добавлено!");
-        setNewWord({ id: "", english: "", transcription: "", russian: "", tags: "", tags_json: "" });
+        setNewWord({ id: "", english: "", transcription: "", russian: "", tags: "" });
     };
 
     const onInvalid = async () => {
@@ -53,7 +52,7 @@ export const AddWordForm = () => {
                             {...register("english", {
                                 required: "Заполните это поле",
                                 pattern: {
-                                    value: /^[A-Za-z ]+$/,
+                                    value: /^[A-Za-z -]+$/,
                                     message: "Введите только латиницу"
                                 },
                                 onBlur: () => trigger("english"),
@@ -101,18 +100,6 @@ export const AddWordForm = () => {
                             onChange={handleChange}
                         />
                         {errors.tags && <FormError>{errors.tags.message}</FormError>}
-                    </FormInputWrapper>
-
-                    <FormInputWrapper>
-                        <FormInput
-                            placeholder="tags_json"
-                            {...register("tags_json", {
-                                required: "Заполните это поле",
-                                onBlur: () => trigger("tags_json"),
-                            })}
-                            onChange={handleChange}
-                        />
-                        {errors.tags_json && <FormError>{errors.tags_json.message}</FormError>}
                     </FormInputWrapper>
                 </FormInputsWrapper>
                 <FormSubmitWrapper>
