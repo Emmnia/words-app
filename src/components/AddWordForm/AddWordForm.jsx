@@ -53,7 +53,7 @@ export const AddWordForm = () => {
                             {...register("english", {
                                 required: "Заполните это поле",
                                 pattern: {
-                                    value: /^[A-Za-z]+$/,
+                                    value: /^[A-Za-z ]+$/,
                                     message: "Введите только латиницу"
                                 },
                                 onBlur: () => trigger("english"),
@@ -81,7 +81,7 @@ export const AddWordForm = () => {
                             {...register("russian", {
                                 required: "Заполните это поле",
                                 pattern: {
-                                    value: /^[А-Яа-яЁё]+$/,
+                                    value: /^[А-Яа-яЁё -]+$/,
                                     message: "Введите только кириллицу"
                                 },
                                 onBlur: () => trigger("russian"),
