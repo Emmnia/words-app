@@ -12,17 +12,11 @@ export const Table = () => {
 
     const matches = useMediaQuery('(min-width:900px)');
 
-    const { words, setEditedWord, editWordOnServer } = useContext(WordsContext);
-
-    const handleInputChange = (newValues) => {
-        setEditedWord(prev => ({
-            ...prev,
-            ...newValues,
-        }));
-    };
+    const { words, editedWord, editWordOnServer } = useContext(WordsContext);
 
     const handleSaveClick = () => {
-        editWordOnServer();
+        editWordOnServer(editedWord);
+        setEditingIndex(null);
     };
 
     const handleEditClick = (index) => setEditingIndex(index);
@@ -65,7 +59,6 @@ export const Table = () => {
                                 onSaveClick={handleSaveClick}
                                 onCancelClick={handleCancelClick}
                                 matches={matches}
-                                onInputChange={handleInputChange}
                             />
                         ))}
                     </TableBody>

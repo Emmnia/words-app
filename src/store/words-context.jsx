@@ -75,6 +75,7 @@ export const WordsContextProvider = ({ children }) => {
             }
 
             const result = await response.json();
+            console.log(result);
             setWords((prevWords) => [...prevWords, result]);
         } catch (error) {
             setError(error);
@@ -82,13 +83,6 @@ export const WordsContextProvider = ({ children }) => {
     };
 
     const editWordOnServer = async () => {
-        console.log('Данные перед отправкой на сервер:', editedWord);
-
-        if (!editedWord.id) {
-            console.error('ID слова не найдено');
-            return;
-        }
-
         try {
             const response = await fetch(`/api/words/${editedWord.id}/update`, {
                 method: 'POST',
@@ -98,21 +92,19 @@ export const WordsContextProvider = ({ children }) => {
                 body: JSON.stringify(editedWord),
             });
 
+            const responseData = await response.json();
+            console.log("Ответ от сервера:", responseData);
+
             if (!response.ok) {
-                throw new Error('Ошибка при отправке данных');
+                throw new Error('Ошибка при редактировании слова: ' + response.statusText);
             }
 
-            const result = await response.json();
-
             setWords(prevWords => {
-                const index = prevWords.findIndex(w => w.id === result.id);
-                if (index > -1) {
-                    const newWords = [...prevWords];
-                    newWords[index] = result;
-                    return newWords;
-                }
-                return [...prevWords, result];
+                return prevWords.map(word =>
+                    word.id === editedWord.id ? { ...word, ...editedWord } : word
+                );
             });
+
         } catch (error) {
             setError(error);
         }

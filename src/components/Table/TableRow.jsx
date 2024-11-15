@@ -1,12 +1,15 @@
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+import { useContext } from "react";
+import { WordsContext } from '../../store/words-context'
 import { toast } from 'react-toastify';
 import { FaCheck, FaUndoAlt, FaPencilAlt, FaTrashAlt } from 'react-icons/fa';
 import { TableInputField } from './TableInputField';
-import { StyledTableRow, TableData, TableTextArea, TableError, TableDataWrapper, TableControlsButton } from './Table.styled'
+import { StyledTableRow, TableData, TableDataWrapper, TableControlsButton } from './Table.styled'
 
-export const TableRow = ({ word, index, editingIndex, onEditClick, onSaveClick, onCancelClick, onDeleteClick, matches }) => {
+export const TableRow = ({ word, index, editingIndex, onEditClick, onSaveClick, onCancelClick, onDeleteClick, onChange, matches }) => {
     const { control, trigger, handleSubmit } = useForm({
         defaultValues: {
+            id: word.id,
             english: word.english,
             transcription: word.transcription,
             russian: word.russian,
@@ -15,9 +18,21 @@ export const TableRow = ({ word, index, editingIndex, onEditClick, onSaveClick, 
 
     const isEditing = editingIndex === index;
 
+    const { words, editedWord, setEditedWord } = useContext(WordsContext);
+
     const onValid = (data) => {
         try {
-            onSaveClick(data, index);
+            const wordToUpdate = words.find(word => word.id === data.id);
+            console.log(wordToUpdate);
+            setEditedWord({
+                id: wordToUpdate.id,
+                english: data.english,
+                transcription: data.transcription,
+                russian: data.russian,
+                tags: wordToUpdate.tags,
+            });
+            console.log(editedWord);
+            onSaveClick();
             toast.success('Изменения сохранены');
         } catch (error) {
             toast.error('Ошибка при сохранении. Попробуйте еще раз');
@@ -48,7 +63,7 @@ export const TableRow = ({ word, index, editingIndex, onEditClick, onSaveClick, 
                                         },
                                     }}
                                     trigger={trigger}
-                                    value={word.english}
+                                    onChange={onChange}
                                 />
                             </TableData>
                             <TableData>
@@ -57,7 +72,7 @@ export const TableRow = ({ word, index, editingIndex, onEditClick, onSaveClick, 
                                     name="transcription"
                                     rules={{ required: "Заполните это поле" }}
                                     trigger={trigger}
-                                    value={word.transcription}
+                                    onChange={onChange}
                                 />
                             </TableData>
                             <TableData>
@@ -72,7 +87,7 @@ export const TableRow = ({ word, index, editingIndex, onEditClick, onSaveClick, 
                                         },
                                     }}
                                     trigger={trigger}
-                                    value={word.russian}
+                                    onChange={onChange}
                                 />
                             </TableData>
                         </>
@@ -91,7 +106,7 @@ export const TableRow = ({ word, index, editingIndex, onEditClick, onSaveClick, 
                                             },
                                         }}
                                         trigger={trigger}
-                                        value={word.english}
+                                        onChange={onChange}
                                     />
                                 </TableDataWrapper>
                                 <TableDataWrapper>
@@ -100,14 +115,14 @@ export const TableRow = ({ word, index, editingIndex, onEditClick, onSaveClick, 
                                         name="transcription"
                                         rules={{ required: "Заполните это поле" }}
                                         trigger={trigger}
-                                        value={word.transcription}
+                                        onChange={onChange}
                                     />
                                 </TableDataWrapper>
                             </TableData>
                             <TableData>
-                                <Controller
-                                    name="russian"
+                                <TableInputField
                                     control={control}
+                                    name="russian"
                                     rules={{
                                         required: "Заполните это поле",
                                         pattern: {
@@ -115,19 +130,8 @@ export const TableRow = ({ word, index, editingIndex, onEditClick, onSaveClick, 
                                             message: "Введите только кириллицу"
                                         },
                                     }}
-                                    render={({ field, fieldState }) => (
-                                        <>
-                                            <TableTextArea
-                                                {...field}
-                                                onChange={(e) => {
-                                                    field.onChange(e);
-                                                    trigger("russian");
-                                                }}
-                                                value={word.russian}
-                                            />
-                                            {fieldState.error && <TableError>{fieldState.error.message}</TableError>}
-                                        </>
-                                    )}
+                                    trigger={trigger}
+                                    onChange={onChange}
                                 />
                             </TableData>
                         </>

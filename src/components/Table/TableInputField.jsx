@@ -1,7 +1,7 @@
 import { Controller } from 'react-hook-form';
 import { TableInput, TableError } from './Table.styled';
 
-export const TableInputField = ({ control, name, rules, trigger, value }) => {
+export const TableInputField = ({ control, name, rules, trigger }) => {
     return (
         <Controller
             name={name}
@@ -13,10 +13,9 @@ export const TableInputField = ({ control, name, rules, trigger, value }) => {
                         type="text"
                         {...field}
                         onChange={(e) => {
-                            field.onChange(e);
+                            field.onChange(e.target.value);
                             trigger(name);
                         }}
-                        value={value}
                     />
                     {fieldState.error && <TableError>{fieldState.error.message}</TableError>}
                 </>
