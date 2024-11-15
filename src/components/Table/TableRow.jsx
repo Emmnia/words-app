@@ -32,7 +32,6 @@ export const TableRow = ({ word, index, editingIndex, onEditClick, onSaveClick, 
                 tags: wordToUpdate.tags,
             });
             console.log(editedWord);
-            onSaveClick();
             toast.success('Изменения сохранены');
         } catch (error) {
             toast.error('Ошибка при сохранении. Попробуйте еще раз');
@@ -137,7 +136,7 @@ export const TableRow = ({ word, index, editingIndex, onEditClick, onSaveClick, 
                         </>
                     )}
                     <TableData>
-                        <TableControlsButton type="button" onClick={handleSubmit(onValid, onInvalid)}>
+                        <TableControlsButton type="button" onClick={() => { handleSubmit(onValid, onInvalid); onSaveClick() }}>
                             <FaCheck />
                         </TableControlsButton>
                         <TableControlsButton type="button" onClick={onCancelClick}>
