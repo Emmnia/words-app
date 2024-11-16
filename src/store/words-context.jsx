@@ -138,7 +138,12 @@ export const WordsContextProvider = ({ children }) => {
                 throw new Error('Ошибка при удалении слова: ' + response.statusText);
             }
 
-            setWords(prevWords => prevWords.filter(word => word.id !== wordToDelete.id));
+            console.log("Состояние до удаления:", words);
+            setWords(prevWords => {
+                const updatedWords = prevWords.filter(word => word.id !== wordToDelete.id);
+                console.log("Состояние после удаления:", updatedWords);
+                return updatedWords;
+            })
             toast.success('Слово удалено');
 
         } catch (error) {

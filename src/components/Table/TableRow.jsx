@@ -1,6 +1,7 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useRef } from 'react';
 import { FaPencilAlt, FaTrashAlt } from 'react-icons/fa';
 import { TableEditForm } from './TableEditForm';
+import { TableWarning } from './TableWarning';
 import { WordsContext } from '../../store/words-context';
 import { toast } from 'react-toastify';
 import { StyledTableRow, TableData, TableDataWrapper, TableControlsButton } from './Table.styled'
@@ -10,6 +11,8 @@ export const TableRow = ({ word, index, matches }) => {
     const { words, deleteWordFromServer } = useContext(WordsContext);
 
     const [editingIndex, setEditingIndex] = useState(null);
+
+    const WarningRef = useRef();
 
     const isEditing = editingIndex === index;
 
@@ -28,6 +31,18 @@ export const TableRow = ({ word, index, matches }) => {
         } catch (error) {
             toast.error('Ошибка при удалении. Попробуйте еще раз');
             console.error(error);
+        }
+    }
+
+    const showPopover = () => {
+        if (WarningRef.current) {
+            WarningRef.current.showPopover()
+        }
+    }
+
+    const hidePopover = () => {
+        if (WarningRef.current) {
+            WarningRef.current.hidePopover()
         }
     }
 
@@ -61,9 +76,18 @@ export const TableRow = ({ word, index, matches }) => {
                         <TableControlsButton type="button" onClick={() => handleEditClick(index)}>
                             <FaPencilAlt />
                         </TableControlsButton>
-                        <TableControlsButton type="button" onClick={handleDeleteClick}>
+                        <TableControlsButton
+                            type="button"
+                            onClick={showPopover}
+                        >
                             <FaTrashAlt />
                         </TableControlsButton>
+                        <TableWarning
+                            ref={WarningRef}
+                            onClick={() => {
+                                handleDeleteClick(word);
+                                hidePopover();
+                            }} />
                     </TableData>
                 </>
             )}

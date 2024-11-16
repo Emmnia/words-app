@@ -1,15 +1,17 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const open = keyframes`
+    from { opacity: 0 }
+    to   { opacity: 1 }
+`
 
 export const TableTitle = styled.h2`
     text-align: center;
 `
-
 export const TableWrapper = styled.div`
     margin: 0 auto;
-    padding: 5px;
-    width: min(100%, 1170px);
+    width: min(95%, 1170px);
 `
-
 export const StyledTable = styled.table`
     width: 100%;
     text-align: center;
@@ -105,7 +107,6 @@ export const TableInput = styled.input`
 export const TableError = styled.p`
     color: #E55D87;
 `
-
 export const TableDataWrapper = styled.p``
 
 export const TableInputWrapper = styled.div``
@@ -125,3 +126,54 @@ export const TableControlsButton = styled.button`
         transform: scale(0.9);
     }
 `
+
+export const TableWarningWrapper = styled.div`
+    padding: 20px;
+    min-height: 100px;
+    max-width: 90%;
+    border-radius: 10px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(9px);
+    -webkit-backdrop-filter: blur(9px);
+
+    &:popover-open {
+        animation: ${open} 0.7s forwards;
+    }
+
+    &::backdrop {
+        background: rgba(0, 0, 0, 0.1);
+        transition: 3s ease-in;
+    }
+`
+
+export const TableWarningText = styled.p`
+    font-weight: bolder;
+    color: #E55D87;
+`
+
+export const TableWarningButton = styled.button`
+    margin: 20px;
+    padding: 10px 15px;
+    text-align: center; 
+    font-family: "Wix Madefor Display", sans-serif;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.19);
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+        filter: brightness(0.95);
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+
+    &:focus {
+        border: 1px solid #E55D87;
+    }
+`
+
+export const TableWarningButtonText = styled.span``
