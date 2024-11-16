@@ -21,7 +21,7 @@ export const AddWordForm = () => {
         const word = {
             id: uuidv4(),
             english: data.english,
-            transcription: data.transcription,
+            transcription: `[${data.transcription}]`,
             russian: data.russian,
             tags: data.tags,
         }

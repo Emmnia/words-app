@@ -81,8 +81,13 @@ export const StyledTableRow = styled.tr`
         background-blend-mode: darken;
     }
 `
-
 export const TableData = styled.td``
+
+export const TableForm = styled.form`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+`
 
 export const TableInput = styled.input`
     margin: 0;

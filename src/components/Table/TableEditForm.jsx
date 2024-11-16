@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { WordsContext } from '../../store/words-context'
 import { toast } from 'react-toastify';
 import { FaCheck, FaUndoAlt } from 'react-icons/fa';
-import { TableData, TableInput, TableInputWrapper, TableError, TableControlsButton } from './Table.styled'
+import { TableData, TableForm, TableInput, TableInputWrapper, TableError, TableControlsButton } from './Table.styled'
 
 export const TableEditForm = ({ word, matches, onCancelClick, onSaveClick }) => {
 
@@ -55,7 +55,7 @@ export const TableEditForm = ({ word, matches, onCancelClick, onSaveClick }) => 
     return (
         <>
             <TableData colSpan={matches ? 3 : 2}>
-                <form>
+                <TableForm>
                     <TableInputWrapper>
                         <TableInput
                             {...register("english", {
@@ -94,7 +94,7 @@ export const TableEditForm = ({ word, matches, onCancelClick, onSaveClick }) => 
                         />
                         {errors.russian && <TableError>{errors.russian.message}</TableError>}
                     </TableInputWrapper>
-                </form>
+                </TableForm>
             </TableData>
             <TableData>
                 <TableControlsButton type="button" onClick={handleSubmit((data) => {
