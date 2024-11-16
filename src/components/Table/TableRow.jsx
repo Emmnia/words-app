@@ -1,149 +1,46 @@
-import { useForm } from 'react-hook-form';
-import { useContext } from "react";
-import { WordsContext } from '../../store/words-context'
+import { useState, useContext } from 'react';
+import { FaPencilAlt, FaTrashAlt } from 'react-icons/fa';
+import { TableEditForm } from './TableEditForm';
+import { WordsContext } from '../../store/words-context';
 import { toast } from 'react-toastify';
-import { FaCheck, FaUndoAlt, FaPencilAlt, FaTrashAlt } from 'react-icons/fa';
-import { TableInputField } from './TableInputField';
 import { StyledTableRow, TableData, TableDataWrapper, TableControlsButton } from './Table.styled'
 
-export const TableRow = ({ word, index, editingIndex, onEditClick, onSaveClick, onCancelClick, onDeleteClick, onChange, matches }) => {
-    const { control, trigger, handleSubmit } = useForm({
-        defaultValues: {
-            id: word.id,
-            english: word.english,
-            transcription: word.transcription,
-            russian: word.russian,
-        }
-    });
+export const TableRow = ({ word, index, matches }) => {
+
+    const { words, deleteWordFromServer } = useContext(WordsContext);
+
+    const [editingIndex, setEditingIndex] = useState(null);
 
     const isEditing = editingIndex === index;
 
-    const { words, editedWord, setEditedWord } = useContext(WordsContext);
+    const handleEditClick = (index) => setEditingIndex(index);
+    const handleCancelClick = () => setEditingIndex(null);
+    const handleSaveClick = () => setEditingIndex(null);
 
-    const onValid = (data) => {
+    const handleDeleteClick = async () => {
         try {
-            const wordToUpdate = words.find(word => word.id === data.id);
-            console.log(wordToUpdate);
-            setEditedWord({
-                id: wordToUpdate.id,
-                english: data.english,
-                transcription: data.transcription,
-                russian: data.russian,
-                tags: wordToUpdate.tags,
-            });
-            console.log(editedWord);
-            toast.success('Изменения сохранены');
+            const wordToDelete = words.find(w => w.id === word.id)
+            if (wordToDelete) {
+                await deleteWordFromServer(wordToDelete);
+            } else {
+                throw new Error('Слово не найдено для удаления');
+            }
         } catch (error) {
-            toast.error('Ошибка при сохранении. Попробуйте еще раз');
+            toast.error('Ошибка при удалении. Попробуйте еще раз');
             console.error(error);
         }
-    };
-
-    const onInvalid = () => {
-        toast.error('Изменения не сохранены. Корректно заполните все поля');
-    };
+    }
 
     return (
         <StyledTableRow>
             <TableData>{index + 1}</TableData>
             {isEditing ? (
-                <>
-                    {matches ? (
-                        <>
-                            <TableData>
-                                <TableInputField
-                                    control={control}
-                                    name="english"
-                                    rules={{
-                                        required: "Заполните это поле",
-                                        pattern: {
-                                            value: /^[A-Za-z -]+$/,
-                                            message: "Введите только латиницу"
-                                        },
-                                    }}
-                                    trigger={trigger}
-                                    onChange={onChange}
-                                />
-                            </TableData>
-                            <TableData>
-                                <TableInputField
-                                    control={control}
-                                    name="transcription"
-                                    rules={{ required: "Заполните это поле" }}
-                                    trigger={trigger}
-                                    onChange={onChange}
-                                />
-                            </TableData>
-                            <TableData>
-                                <TableInputField
-                                    control={control}
-                                    name="russian"
-                                    rules={{
-                                        required: "Заполните это поле",
-                                        pattern: {
-                                            value: /^[А-Яа-яЁё -]+$/,
-                                            message: "Введите только кириллицу"
-                                        },
-                                    }}
-                                    trigger={trigger}
-                                    onChange={onChange}
-                                />
-                            </TableData>
-                        </>
-                    ) : (
-                        <>
-                            <TableData>
-                                <TableDataWrapper>
-                                    <TableInputField
-                                        control={control}
-                                        name="english"
-                                        rules={{
-                                            required: "Заполните это поле",
-                                            pattern: {
-                                                value: /^[A-Za-z -]+$/,
-                                                message: "Введите только латиницу"
-                                            },
-                                        }}
-                                        trigger={trigger}
-                                        onChange={onChange}
-                                    />
-                                </TableDataWrapper>
-                                <TableDataWrapper>
-                                    <TableInputField
-                                        control={control}
-                                        name="transcription"
-                                        rules={{ required: "Заполните это поле" }}
-                                        trigger={trigger}
-                                        onChange={onChange}
-                                    />
-                                </TableDataWrapper>
-                            </TableData>
-                            <TableData>
-                                <TableInputField
-                                    control={control}
-                                    name="russian"
-                                    rules={{
-                                        required: "Заполните это поле",
-                                        pattern: {
-                                            value: /^[А-Яа-яЁё -]+$/,
-                                            message: "Введите только кириллицу"
-                                        },
-                                    }}
-                                    trigger={trigger}
-                                    onChange={onChange}
-                                />
-                            </TableData>
-                        </>
-                    )}
-                    <TableData>
-                        <TableControlsButton type="button" onClick={() => { handleSubmit(onValid, onInvalid); onSaveClick() }}>
-                            <FaCheck />
-                        </TableControlsButton>
-                        <TableControlsButton type="button" onClick={onCancelClick}>
-                            <FaUndoAlt />
-                        </TableControlsButton>
-                    </TableData>
-                </>
+                <TableEditForm
+                    word={word}
+                    onCancelClick={handleCancelClick}
+                    onSaveClick={handleSaveClick}
+                    matches={matches}
+                />
             ) : (
                 <>
                     {matches ? (
@@ -161,10 +58,10 @@ export const TableRow = ({ word, index, editingIndex, onEditClick, onSaveClick, 
                     )}
                     <TableData>{word.russian}</TableData>
                     <TableData>
-                        <TableControlsButton type="button" onClick={() => onEditClick(index)}>
+                        <TableControlsButton type="button" onClick={() => handleEditClick(index)}>
                             <FaPencilAlt />
                         </TableControlsButton>
-                        <TableControlsButton type="button" onClick={onDeleteClick}>
+                        <TableControlsButton type="button" onClick={handleDeleteClick}>
                             <FaTrashAlt />
                         </TableControlsButton>
                     </TableData>

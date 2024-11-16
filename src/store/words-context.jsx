@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import wordsJSON from '../words.json';
 import { toast } from "react-toastify";
+import { useLocalStorage } from "@uidotdev/usehooks";
 
 export const WordsContext = createContext({
     words: [],
@@ -29,13 +30,9 @@ export const WordsContextProvider = ({ children }) => {
         tags: ""
     });
 
-    const [editedWord, setEditedWord] = useState({
-        id: "",
-        english: "",
-        transcription: "",
-        russian: "",
-        tags: "",
-    });
+    const [word, setWord] = useState(null);
+    const [wordId, setWordId] = useLocalStorage('lastWordId', null);
+    const [lastShownDate, setLastShownDate] = useLocalStorage('lastShownDate', null);
 
     useEffect(() => {
         const fetchWords = async () => {
@@ -47,18 +44,31 @@ export const WordsContextProvider = ({ children }) => {
                 }
                 const data = await response.json();
                 setWords(data);
+                console.log("Загруженные слова:", data);
+
+                const now = new Date();
+                const currentDate = now.toISOString().split('T')[0];
+
+                if (!lastShownDate || lastShownDate !== currentDate) {
+                    const newWord = data[Math.floor(Math.random() * data.length)];
+                    setWord(newWord);
+                    setWordId(newWord ? newWord.id : null);
+                    setLastShownDate(currentDate);
+                } else if (wordId) {
+                    const previousWord = data.find(word => word.id === wordId);
+                    setWord(previousWord);
+                }
             } catch (error) {
                 console.error(error);
                 setError(error);
                 toast.info('Ошибка при получении слов с сервера, загружается резервный файл', { toastId: 'backup-toast' });
-                setWords(wordsJSON)
+                setWords(wordsJSON);
             } finally {
                 setLoading(false);
             }
         };
-
         fetchWords();
-    }, []);
+    }, [lastShownDate, setLastShownDate, setWordId, wordId]);
 
     const sendWordToServer = async (word) => {
         try {
@@ -82,14 +92,14 @@ export const WordsContextProvider = ({ children }) => {
         }
     };
 
-    const editWordOnServer = async () => {
+    const editWordOnServer = async (wordToUpdate) => {
         try {
-            const response = await fetch(`/api/words/${editedWord.id}/update`, {
+            const response = await fetch(`/api/words/${wordToUpdate.id}/update`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(editedWord),
+                body: JSON.stringify(wordToUpdate),
             });
 
             const responseData = await response.json();
@@ -101,9 +111,35 @@ export const WordsContextProvider = ({ children }) => {
 
             setWords(prevWords => {
                 return prevWords.map(word =>
-                    word.id === editedWord.id ? { ...word, ...editedWord } : word
+                    word.id === wordToUpdate.id ? { ...word, ...wordToUpdate } : word
                 );
             });
+            toast.success('Изменения сохранены');
+
+        } catch (error) {
+            setError(error);
+        }
+    };
+
+    const deleteWordFromServer = async (wordToDelete) => {
+        try {
+            const response = await fetch(`/api/words/${wordToDelete.id}/delete`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(wordToDelete),
+            });
+
+            const responseData = await response.json();
+            console.log("Ответ от сервера:", responseData);
+
+            if (!response.ok) {
+                throw new Error('Ошибка при удалении слова: ' + response.statusText);
+            }
+
+            setWords(prevWords => prevWords.filter(word => word.id !== wordToDelete.id));
+            toast.success('Слово удалено');
 
         } catch (error) {
             setError(error);
@@ -111,7 +147,7 @@ export const WordsContextProvider = ({ children }) => {
     };
 
     return (
-        <WordsContext.Provider value={{ words, loading, error, sendWordToServer, newWord, setNewWord, editedWord, setEditedWord, editWordOnServer }}>
+        <WordsContext.Provider value={{ words, word, loading, error, sendWordToServer, newWord, setNewWord, editWordOnServer, deleteWordFromServer }}>
             {children}
         </WordsContext.Provider>
     );

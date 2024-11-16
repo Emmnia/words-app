@@ -97,25 +97,13 @@ export const TableInput = styled.input`
     outline: none;
     background-color: transparent;
 `
-
-export const TableTextArea = styled.textarea`
-    margin: 0;
-    padding: 0;
-    width: min(100%, 180px);
-    font-family: "Wix Madefor Display", sans-serif;
-    font-size: 16px;
-    text-align: center;
-    border-style: none none solid;
-    border-width: 1px;
-    border-color: black;
-    outline: none;
-    background-color: transparent;
-`
 export const TableError = styled.p`
     color: #E55D87;
 `
 
 export const TableDataWrapper = styled.p``
+
+export const TableInputWrapper = styled.div``
 
 export const TableControlsButton = styled.button`
     padding: 10px;

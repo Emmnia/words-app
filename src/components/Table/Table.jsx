@@ -1,27 +1,16 @@
 import { TableTitle, TableWrapper, StyledTable, TableHead, TableHeader, TableWordNumber, TableContent, TableActions, TableBody, LoadMoreButton } from "./Table.styled";
 import { useState, useContext } from "react";
 import useMediaQuery from '@mui/material/useMediaQuery';
-// import { useLocalStorage } from "@uidotdev/usehooks";
 import { TableRow } from './TableRow';
 import { WordsContext } from '../../store/words-context'
 
 export const Table = () => {
 
     const [visibleCount, setVisibleCount] = useState(10);
-    const [editingIndex, setEditingIndex] = useState(null);
 
     const matches = useMediaQuery('(min-width:900px)');
 
-    const { words, editedWord, editWordOnServer } = useContext(WordsContext);
-
-    const handleSaveClick = () => {
-        editWordOnServer(editedWord);
-        setEditingIndex(null);
-    };
-
-    const handleEditClick = (index) => setEditingIndex(index);
-
-    const handleCancelClick = () => setEditingIndex(null);
+    const { words } = useContext(WordsContext);
 
     const loadMore = () => setVisibleCount(prevCount => prevCount + 10);
 
@@ -54,10 +43,6 @@ export const Table = () => {
                                 key={word.id}
                                 word={word}
                                 index={index}
-                                editingIndex={editingIndex}
-                                onEditClick={handleEditClick}
-                                onSaveClick={handleSaveClick}
-                                onCancelClick={handleCancelClick}
                                 matches={matches}
                             />
                         ))}

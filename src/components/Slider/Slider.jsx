@@ -94,8 +94,6 @@ export const Slider = ({ initialSlideIndex = 0 }) => {
                                     english={word.english}
                                     transcription={word.transcription}
                                     russian={word.russian}
-                                    tags={word.tags}
-                                    boolean={word.boolean}
                                     index={index}
                                     visible={index === slideIndex}
                                     show={true}

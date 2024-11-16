@@ -5,7 +5,7 @@ import owlClosedIcon from '/assets/images/owl_eyesclosed.png'
 import owlOpenIcon from '/assets/images/owl_eyesopen.png'
 import { v4 as uuidv4 } from 'uuid';
 
-export const Card = ({ id, english, transcription, russian, tags, boolean, visible, show, onClick }) => {
+export const Card = ({ word, id, english, transcription, russian, visible, show, onClick }) => {
 
   const checkboxId = uuidv4();
   const buttonRef = useRef(null);
@@ -27,7 +27,7 @@ export const Card = ({ id, english, transcription, russian, tags, boolean, visib
 
   return (
     <>
-      <CardBody id={id} data-tags={tags} data-boolean={boolean} style={{ display: visible ? 'block' : 'none' }}>
+      <CardBody id={id} word={word} style={{ display: visible ? 'block' : 'none' }}>
         <CardHeader>
           <Checkbox
             label={'Выучено'}
