@@ -78,3 +78,8 @@ export const FormSubmit = styled.input`
         border: 1px solid #E55D87;
     }
 `
+export const FormNote = styled.p`
+    margin-top: 5px; 
+    font-size: 12px;
+    color: #888; 
+`;

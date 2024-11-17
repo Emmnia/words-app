@@ -33,6 +33,7 @@ export const WordsContextProvider = ({ children }) => {
     const [word, setWord] = useState(null);
     const [wordId, setWordId] = useLocalStorage('lastWordId', null);
     const [lastShownDate, setLastShownDate] = useLocalStorage('lastShownDate', null);
+    const [wordUpdated, setWordUpdated] = useState(false);
 
     useEffect(() => {
         const fetchWords = async () => {
@@ -52,11 +53,15 @@ export const WordsContextProvider = ({ children }) => {
                 if (!lastShownDate || lastShownDate !== currentDate) {
                     const newWord = data[Math.floor(Math.random() * data.length)];
                     setWord(newWord);
+                    console.log('newWord: ', newWord);
                     setWordId(newWord ? newWord.id : null);
                     setLastShownDate(currentDate);
+                    setWordUpdated(true);
                 } else if (wordId) {
                     const previousWord = data.find(word => word.id === wordId);
                     setWord(previousWord);
+                    console.log('previousWord: ', previousWord);
+
                 }
             } catch (error) {
                 console.error(error);
@@ -152,7 +157,7 @@ export const WordsContextProvider = ({ children }) => {
     };
 
     return (
-        <WordsContext.Provider value={{ words, word, loading, error, sendWordToServer, newWord, setNewWord, editWordOnServer, deleteWordFromServer }}>
+        <WordsContext.Provider value={{ words, word, loading, error, wordUpdated, setWordUpdated, sendWordToServer, newWord, setNewWord, editWordOnServer, deleteWordFromServer }}>
             {children}
         </WordsContext.Provider>
     );

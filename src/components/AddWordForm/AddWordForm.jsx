@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 import { WordsContext } from "../../store/words-context";
 import { useContext } from "react";
-import { FormWrapper, FormHeading, StyledForm, FormInputsWrapper, FormInputWrapper, FormInput, FormError, FormSubmit, FormSubmitWrapper } from "./AddWordForm.styled";
+import { FormWrapper, FormHeading, StyledForm, FormInputsWrapper, FormInputWrapper, FormInput, FormError, FormNote, FormSubmit, FormSubmitWrapper } from "./AddWordForm.styled";
 
 export const AddWordForm = () => {
     const {
@@ -12,6 +12,7 @@ export const AddWordForm = () => {
         formState: { errors },
         setValue,
         trigger,
+        reset,
     } = useForm();
 
     const { sendWordToServer, setNewWord } = useContext(WordsContext)
@@ -28,6 +29,7 @@ export const AddWordForm = () => {
         setNewWord(word);
         await sendWordToServer(word);
         toast.success("Слово добавлено!");
+        reset();
         setNewWord({ id: "", english: "", transcription: "", russian: "", tags: "" });
     };
 
@@ -72,6 +74,7 @@ export const AddWordForm = () => {
                             onChange={handleChange}
                         />
                         {errors.transcription && <FormError>{errors.transcription.message}</FormError>}
+                        <FormNote>*Квадратные скобки [ ] добавятся при отправке автоматически</FormNote>
                     </FormInputWrapper>
 
                     <FormInputWrapper>

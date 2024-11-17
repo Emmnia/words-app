@@ -5,7 +5,6 @@ const open = keyframes`
     from { opacity: 0 }
     to   { opacity: 1 }
 `
-
 export const ModalWrapper = styled.dialog`
     padding: 30px 50px;
     text-align: center;
@@ -25,7 +24,6 @@ export const ModalHeader = styled.header`
     margin-bottom: 30px;
     display: flex;
 `
-
 export const ModalButton = styled.button.attrs({
     type: 'button'
 })`
@@ -47,7 +45,6 @@ export const ModalButton = styled.button.attrs({
 export const ModalButtonIcon = styled(FontAwesomeIcon)`
     color: #E55D87;
 `
-
 export const ModalFooter = styled.footer`
     margin-top: 50px;
     display: flex;

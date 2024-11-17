@@ -10,7 +10,7 @@ import { WordsContext } from '../../store/words-context'
 export const Modal = forwardRef(function Modal({ onClose }, ref) {
     const checkboxId = uuidv4();
 
-    const { word } = useContext(WordsContext);
+    const { word, wordUpdated, setWordUpdated } = useContext(WordsContext);
 
     const [showModalToday, setShowModalToday] = useLocalStorage('showModalToday', null);
 
@@ -24,6 +24,13 @@ export const Modal = forwardRef(function Modal({ onClose }, ref) {
             ref.current.showModal();
         }
     }, [ref, showModalToday]);
+
+    useEffect(() => {
+        if (wordUpdated) {
+            setShowModalToday(true);
+            setWordUpdated(false);
+        }
+    }, [setShowModalToday, setWordUpdated, wordUpdated]);
 
     return (
         <ModalWrapper ref={ref}>
