@@ -33,7 +33,7 @@ export const AddWordForm = () => {
         setNewWord({ id: "", english: "", transcription: "", russian: "", tags: "" });
     };
 
-    const onInvalid = async () => {
+    const onInvalid = () => {
         toast.error("Слово не добавлено. Корректно заполните все поля");
     };
 
