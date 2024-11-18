@@ -1,183 +1,96 @@
-import { useForm, Controller } from 'react-hook-form';
+import { useState, useContext, useRef } from 'react';
+import { FaPencilAlt, FaTrashAlt } from 'react-icons/fa';
+import { TableEditForm } from './TableEditForm';
+import { TableWarning } from './TableWarning';
+import { WordsContext } from '../../store/words-context';
 import { toast } from 'react-toastify';
-import { FaCheck, FaUndoAlt, FaPencilAlt, FaTrashAlt } from 'react-icons/fa';
-import "./Table.css";
+import { StyledTableRow, TableData, TableDataWrapper, TableControlsButton } from './Table.styled'
 
-export const TableRow = ({ word, index, editingIndex, onEditClick, onSaveClick, onCancelClick, matches }) => {
-    const { control, handleSubmit } = useForm({
-        defaultValues: {
-            english: word.english,
-            transcription: word.transcription,
-            russian: word.russian,
-        }
-    });
+export const TableRow = ({ word, index, matches }) => {
+
+    const { words, deleteWordFromServer } = useContext(WordsContext);
+
+    const [editingIndex, setEditingIndex] = useState(null);
+
+    const WarningRef = useRef();
 
     const isEditing = editingIndex === index;
 
-    const onValid = (data) => {
+    const handleEditClick = (index) => setEditingIndex(index);
+    const handleCancelClick = () => setEditingIndex(null);
+    const handleSaveClick = () => setEditingIndex(null);
+
+    const handleDeleteClick = async () => {
         try {
-            onSaveClick(data, index);
-            toast.success('Изменения сохранены');
+            const wordToDelete = words.find(w => w.id === word.id)
+            if (wordToDelete) {
+                await deleteWordFromServer(wordToDelete);
+            } else {
+                throw new Error('Слово не найдено для удаления');
+            }
         } catch (error) {
-            toast.error('Ошибка при сохранении. Попробуйте еще раз');
+            toast.error('Ошибка при удалении. Попробуйте еще раз');
             console.error(error);
         }
-    };
+    }
 
-    const onInvalid = () => {
-        toast.error('Изменения не сохранены. Заполните все поля');
-    };
+    const showPopover = () => {
+        if (WarningRef.current) {
+            WarningRef.current.showPopover()
+        }
+    }
+
+    const hidePopover = () => {
+        if (WarningRef.current) {
+            WarningRef.current.hidePopover()
+        }
+    }
 
     return (
-        <tr className="table__row">
-            <td>{index + 1}</td>
+        <StyledTableRow>
+            <TableData>{index + 1}</TableData>
             {isEditing ? (
-                <>
-                    {matches ? (
-                        <>
-                            <td>
-                                <Controller
-                                    name="english"
-                                    control={control}
-                                    rules={{ required: true }}
-                                    render={({ field, fieldState }) => (
-                                        <>
-                                            <input
-                                                className={`table__input ${fieldState.invalid ? 'input-error' : ''}`}
-                                                type="text"
-                                                {...field}
-                                            />
-                                            {fieldState.error && <span className="error-message">{fieldState.error.message}</span>}
-                                        </>
-                                    )}
-                                />
-                            </td>
-                            <td>
-                                <Controller
-                                    name="transcription"
-                                    control={control}
-                                    rules={{ required: true }}
-                                    render={({ field, fieldState }) => (
-                                        <>
-                                            <input
-                                                className={`table__input ${fieldState.invalid ? 'input-error' : ''}`}
-                                                type="text"
-                                                {...field}
-                                            />
-                                            {fieldState.error && <span className="error-message">{fieldState.error.message}</span>}
-                                        </>
-                                    )}
-                                />
-                            </td>
-                            <td>
-                                <Controller
-                                    name="russian"
-                                    control={control}
-                                    rules={{ required: true }}
-                                    render={({ field, fieldState }) => (
-                                        <>
-                                            <input
-                                                className={`table__input ${fieldState.invalid ? 'input-error' : ''}`}
-                                                type="text"
-                                                {...field}
-                                            />
-                                            {fieldState.error && <span className="error-message">{fieldState.error.message}</span>}
-                                        </>
-                                    )}
-                                />
-                            </td>
-                        </>
-                    ) : (
-                        <>
-                            <td>
-                                <p>
-                                    <Controller
-                                        name="english"
-                                        control={control}
-                                        rules={{ required: true }}
-                                        render={({ field, fieldState }) => (
-                                            <>
-                                                <input
-                                                    className={`table__input ${fieldState.invalid ? 'input-error' : ''}`}
-                                                    type="text"
-                                                    {...field}
-                                                />
-                                                {fieldState.error && <span className="error-message">{fieldState.error.message}</span>}
-                                            </>
-                                        )}
-                                    />
-                                </p>
-                                <p>
-                                    <Controller
-                                        name="transcription"
-                                        control={control}
-                                        rules={{ required: true }}
-                                        render={({ field, fieldState }) => (
-                                            <>
-                                                <input
-                                                    className={`table__input ${fieldState.invalid ? 'input-error' : ''}`}
-                                                    type="text"
-                                                    {...field}
-                                                />
-                                                {fieldState.error && <span className="error-message">{fieldState.error.message}</span>}
-                                            </>
-                                        )}
-                                    />
-                                </p>
-                            </td>
-                            <td>
-                                <Controller
-                                    name="russian"
-                                    control={control}
-                                    rules={{ required: true }}
-                                    render={({ field, fieldState }) => (
-                                        <>
-                                            <textarea
-                                                className={`table__input ${fieldState.invalid ? 'input-error' : ''}`}
-                                                {...field}
-                                            />
-                                            {fieldState.error && <span className="error-message">{fieldState.error.message}</span>}
-                                        </>
-                                    )}
-                                />
-                            </td>
-                        </>
-                    )}
-                    <td>
-                        <button className="button" type="button" onClick={handleSubmit(onValid, onInvalid)}>
-                            <FaCheck />
-                        </button>
-                        <button className="button" type="button" onClick={onCancelClick}>
-                            <FaUndoAlt />
-                        </button>
-                    </td>
-                </>
+                <TableEditForm
+                    word={word}
+                    onCancelClick={handleCancelClick}
+                    onSaveClick={handleSaveClick}
+                    matches={matches}
+                />
             ) : (
                 <>
                     {matches ? (
                         <>
-                            <td>{word.english}</td>
-                            <td>{word.transcription}</td>
+                            <TableData>{word.english}</TableData>
+                            <TableData>{word.transcription}</TableData>
                         </>
                     ) : (
                         <>
-                            <td>
-                                <p>{word.english}</p>
-                                <p>{word.transcription}</p>
-                            </td>
+                            <TableData>
+                                <TableDataWrapper>{word.english}</TableDataWrapper>
+                                <TableDataWrapper>{word.transcription}</TableDataWrapper>
+                            </TableData>
                         </>
                     )}
-                    <td>{word.russian}</td>
-                    <td>
-                        <button className="button" type="button" onClick={() => onEditClick(index)}>
+                    <TableData>{word.russian}</TableData>
+                    <TableData>
+                        <TableControlsButton type="button" onClick={() => handleEditClick(index)}>
                             <FaPencilAlt />
-                        </button>
-                        <button className="button" type="button">
+                        </TableControlsButton>
+                        <TableControlsButton
+                            type="button"
+                            onClick={showPopover}
+                        >
                             <FaTrashAlt />
-                        </button>
-                    </td>
+                        </TableControlsButton>
+                        <TableWarning
+                            ref={WarningRef}
+                            onClick={() => {
+                                handleDeleteClick(word);
+                                hidePopover();
+                            }} />
+                    </TableData>
                 </>
             )}
-        </tr>
+        </StyledTableRow>
     );
 };

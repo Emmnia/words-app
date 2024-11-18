@@ -1,79 +1,36 @@
 import { SliderContainer, SliderButton, SliderContent } from './Slider.styled'
 import { Card } from '../Card/Card'
-import words from '../../words.json'
-import { useState } from "react"
+import { useState, useContext, useEffect } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
-import { TrainingControls } from "../TrainingControls/TrainingControls";
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import { TrainingControls } from "../TrainingControls/TrainingControls"
+import { Loader } from '../Loader/Loader'
+import { ErrorMessage } from '../ErrorMessage/ErrorMessage'
+import { WordsContext } from '../../store/words-context'
 
-const wordsBackUp = [{
-    id: "16334",
-    english: "cat",
-    transcription: "[cat]",
-    russian: "кошка",
-    tags: "animal",
-    tags_json: "[animal]",
-    boolean: "false"
-},
-{
-    id: "16335",
-    english: "dad",
-    transcription: "[dæd]",
-    russian: "папа",
-    tags: "general",
-    tags_json: "[general]",
-    boolean: "false"
-},
-{
-    id: "16365",
-    english: "flower",
-    transcription: "[ˈflaʊər]",
-    russian: "цветок",
-    tags: "nature",
-    tags_json: "[nature]",
-    boolean: "false"
-},
-{
-    id: "16367",
-    english: "lamb",
-    transcription: "[læm]",
-    russian: "ягненок",
-    tags: "animal",
-    tags_json: "[animal]",
-    boolean: "false"
-},
-{
-    id: "16372",
-    english: "education",
-    transcription: "|edʒʊˈkeɪʃ(ə)n|",
-    russian: "образование",
-    tags: "education",
-    tags_json: "[education]",
-    boolean: "false"
-}
-]
-
-export const Slider = ({ initialSlideIndex = 0, wordsData = wordsBackUp }) => {
+export const Slider = ({ initialSlideIndex = 0 }) => {
     const [slideIndex, setSlideIndex] = useState(initialSlideIndex);
     const [animation, setAnimation] = useState(" ");
     const [count, setCount] = useState(0);
     const [clickedWords, setClickedWords] = useState(new Set());
+    const [showError, setShowError] = useState(false);
 
-    wordsData = words || wordsBackUp
+    const { words, loading, error } = useContext(WordsContext);
 
     const handlePrevClick = () => {
         setAnimation("previous");
-        setSlideIndex((slideIndex - 1 + wordsData.length) % wordsData.length);
+        setSlideIndex((slideIndex - 1 + words.length) % words.length);
     };
 
     const handleNextClick = () => {
         setAnimation("next");
-        setSlideIndex((slideIndex + 1) % wordsData.length);
+        setSlideIndex((slideIndex + 1) % words.length);
     };
 
     const handleAnimationEnd = () => {
-        setAnimation("");
+        if (animation === "previous" || animation === "next") {
+            setAnimation("");
+        }
     };
 
     const startTraining = () => {
@@ -102,30 +59,51 @@ export const Slider = ({ initialSlideIndex = 0, wordsData = wordsBackUp }) => {
         }
     }
 
+    useEffect(() => {
+        if (error) {
+            setShowError(true);
+            const timer = setTimeout(() => {
+                setShowError(false);
+                setAnimation("appear")
+            }, 3000);
+            return () => clearTimeout(timer);
+        }
+    }, [error]);
+
+    if (loading) {
+        return (
+            <SliderContainer>
+                <Loader />
+            </SliderContainer>
+        )
+    }
+
     return (
         <>
             <SliderContainer>
-                <SliderButton onClick={handlePrevClick}> <FontAwesomeIcon icon={faChevronLeft} /> </SliderButton>
-                <SliderContent animation={animation}
-                    onAnimationEnd={handleAnimationEnd}>
-                    {wordsData.map((word, index) => (
-                        <Card
-                            key={word.id}
-                            id={word.id}
-                            english={word.english}
-                            transcription={word.transcription}
-                            russian={word.russian}
-                            tags={word.tags}
-                            boolean={word.boolean}
-                            index={index}
-                            visible={index === slideIndex}
-                            show={true}
-                            onClick={() => handleCounter(word.id)}
-                        />
-                    ))}
-                </SliderContent>
-                <SliderButton onClick={handleNextClick}> <FontAwesomeIcon icon={faChevronRight} /> </SliderButton>
-            </SliderContainer>
+                {showError ? <ErrorMessage /> : (
+                    <>
+                        <SliderButton onClick={handlePrevClick}> <FontAwesomeIcon icon={faChevronLeft} /> </SliderButton>
+                        <SliderContent
+                            animation={animation}
+                            onAnimationEnd={handleAnimationEnd}>
+                            {words.map((word, index) => (
+                                <Card
+                                    key={word.id}
+                                    id={word.id}
+                                    english={word.english}
+                                    transcription={word.transcription}
+                                    russian={word.russian}
+                                    index={index}
+                                    visible={index === slideIndex}
+                                    show={true}
+                                    onClick={() => handleCounter(word.id)}
+                                />
+                            ))}
+                        </SliderContent>
+                        <SliderButton onClick={handleNextClick}> <FontAwesomeIcon icon={faChevronRight} /> </SliderButton>
+                    </>)}
+            </SliderContainer >
             <TrainingControls
                 onClick={startTraining}
                 count={count}
@@ -136,4 +114,4 @@ export const Slider = ({ initialSlideIndex = 0, wordsData = wordsBackUp }) => {
 }
 
 
-//   разобраться с анимацией колоды карт, сделать на карточках чекбокс "выучено", в галерее добавить вариант "не показывать выученные"
+//   сделать на карточках чекбокс "выучено", в галерее добавить вариант "не показывать выученные"

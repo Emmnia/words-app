@@ -10,7 +10,9 @@ export const GlobalStyle = createGlobalStyle`
         --toastify-color-success: #3fa3da;
         --toastify-color-progress-success: #3fa3da;
         --toastify-color-error: #E55D87;
-        --toastify-color-progress-error: #E55D87;    
+        --toastify-color-progress-error: #E55D87;
+        --toastify-color-info: #b18bb0 ;
+        --toastify-color-progress-info: #b18bb0 ;    
     }
 
     * {
@@ -45,19 +47,10 @@ export const GlobalStyle = createGlobalStyle`
         width: min(100%, 1170px);
     }
 
-    .button {
-        padding: 10px;
-        border: none;
-        background-color: transparent;
-        font-size: 16px;
-        cursor: pointer;
-    }
-
-    .button:hover {
-        transform: scale(1.2);
-    }
-
-    .button:active {
-        transform: scale(0.9);
+    table,
+    th,
+    td {
+        border: 1px dotted black;
+        border-collapse: collapse;
     }
 `
