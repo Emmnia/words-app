@@ -124,8 +124,6 @@ export const Slider = observer(({ initialSlideIndex = 0 }) => {
 //     setClicked(!isClicked);
 //     if (onClick) onClick();
 // };
-// 3. В поле transcription ты добавляешь квадратные скобки[] автоматически, но пользователь может их включить вручную.Это приведёт к дублированию.Нет проверки на это.Рекомендация: Убедись, что квадратные скобки добавляются только один раз:
-// transcription: data.transcription.startsWith('[') ? data.transcription : `[${data.transcription}]`,
 //     4. В некоторых компонентах ты используешь async - функции внутри обработчиков, например handleDeleteClick.Если функция выбросит ошибку, это не будет корректно обработано.Рекомендация: Добавь try...catch в обработчики:
 // const handleDeleteClick = async () => {
 //     try {
@@ -134,5 +132,4 @@ export const Slider = observer(({ initialSlideIndex = 0 }) => {
 //         toast.error('Ошибка при удалении');
 //     }
 // };
-// 5. В WordsContextProvider у тебя есть зависимость[lastShownDate, setLastShownDate, setWordId, wordId], но setLastShownDate и setWordId — это функции, и они не должны быть в массиве зависимостей.Решение: Оставь только lastShownDate и wordId.
-// 6. В Slider ты рендеришь все слова, а не только текущую карточку.Это увеличивает нагрузку при большом количестве слов.Решение: Рендери только текущую карточку.
+

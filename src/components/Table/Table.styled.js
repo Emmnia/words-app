@@ -58,6 +58,7 @@ export const LoadMoreButton = styled.button`
     color: white;
     transition: 0.5s;
     background-image: linear-gradient(90deg, #e075af 0%, #bb80b9 21%, #9e88c1 48%, #7494cc 81%, #3fa3da 100%);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.19);
     background-size: 200% auto;
     border-radius: 50px;
     border: none;

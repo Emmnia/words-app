@@ -157,8 +157,8 @@ export const HeaderNavLink = styled(NavLink)`
         line-height: 1.4;
         color: white;
         clip: rect(0, 0, 190px, 0);
-        -webkit-transition: clip cubic-bezier(0.25, 0.46, 0.45, 0.94) 500ms;
-        transition: clip cubic-bezier(0.25, 0.46, 0.45, 0.94) 500ms;
+        -webkit-transition: clip cubic-bezier(0.25, 0.46, 0.45, 0.94) 700ms;
+        transition: clip cubic-bezier(0.25, 0.46, 0.45, 0.94) 700ms;
     }
 }
 `
