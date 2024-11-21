@@ -1,16 +1,24 @@
 import { TableTitle, TableWrapper, StyledTable, TableHead, TableHeader, TableWordNumber, TableContent, TableActions, TableBody, LoadMoreButton } from "./Table.styled";
-import { useState, useContext } from "react";
+import { useState, useEffect } from "react";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { TableRow } from './TableRow';
-import { WordsContext } from '../../store/words-context'
+import { observer } from 'mobx-react-lite';
+import { wordsStore } from '../../store/words-store';
 
-export const Table = () => {
+export const Table = observer(() => {
+
+    useEffect(() => {
+        if (wordsStore.words.length === 0) {
+            const fetchData = async () => {
+                await wordsStore.fetchWords();
+            };
+            fetchData();
+        }
+    }, []);
 
     const [visibleCount, setVisibleCount] = useState(10);
 
     const matches = useMediaQuery('(min-width:900px)');
-
-    const { words } = useContext(WordsContext);
 
     const loadMore = () => setVisibleCount(prevCount => prevCount + 10);
 
@@ -38,7 +46,7 @@ export const Table = () => {
                         </TableHeader>
                     </TableHead>
                     <TableBody>
-                        {words.slice(0, visibleCount).map((word, index) => (
+                        {wordsStore.words.slice(0, visibleCount).map((word, index) => (
                             <TableRow
                                 key={word.id}
                                 word={word}
@@ -48,7 +56,7 @@ export const Table = () => {
                         ))}
                     </TableBody>
                 </StyledTable>
-                {visibleCount < words.length && (
+                {visibleCount < wordsStore.words.length && (
                     <LoadMoreButton type="button" onClick={loadMore}>
                         Загрузить еще
                     </LoadMoreButton>
@@ -56,4 +64,4 @@ export const Table = () => {
             </TableWrapper>
         </>
     );
-};
+});

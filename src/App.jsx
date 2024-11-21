@@ -7,7 +7,6 @@ import { AppContent, AppMain, StyledContainer } from './App.styled'
 import { GlobalStyle } from "./styles/GlobalStyle"
 import { Modal } from './components/Modal/Modal'
 import { useCallback, useRef } from 'react'
-import { WordsContextProvider } from './store/words-context'
 
 export const App = () => {
 
@@ -35,22 +34,20 @@ export const App = () => {
         <link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400..800&display=swap" rel="stylesheet" />
       </Helmet>
       <GlobalStyle />
-      <WordsContextProvider>
-        <AppContent>
-          <Header
-            showModal={showModal}
-          />
-          <Modal
-            ref={modalRef}
-            onClose={closeModal}
-          />
-          <AppMain>
-            <Outlet />
-          </AppMain>
-          <Footer />
-          <StyledContainer />
-        </AppContent>
-      </WordsContextProvider>
+      <AppContent>
+        <Header
+          showModal={showModal}
+        />
+        <Modal
+          ref={modalRef}
+          onClose={closeModal}
+        />
+        <AppMain>
+          <Outlet />
+        </AppMain>
+        <Footer />
+        <StyledContainer />
+      </AppContent>
     </HelmetProvider>
   );
 }

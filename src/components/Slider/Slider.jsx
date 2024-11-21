@@ -115,3 +115,33 @@ export const Slider = ({ initialSlideIndex = 0 }) => {
 
 
 //   сделать на карточках чекбокс "выучено", в галерее добавить вариант "не показывать выученные"
+
+
+// 1. Ты используешь forwardRef и ref в Modal, но нет проверки, существует ли ref.current при вызове методов showModal и close.Это может вызвать ошибку, если ref не инициализирован.Решение:
+// if (ref?.current) {
+//     ref.current.showModal();
+// }
+// fetchWords в WordsContextProvider
+// В функции fetchWords ты вызываешь setLoading(true) в начале и setLoading(false) в finally. Если words загружаются локально(wordsJSON), то статус загрузки всё равно будет false до конца функции.Это может вызывать визуальные баги.Рекомендация: Убедись, что loading корректно устанавливается при всех сценариях(особенно при ошибках).
+// 2. Например, в onClick внутри Card ты вызываешь toggleTranslation() и onClick(), но нет проверки, существует ли onClick.Решение:
+// const toggleTranslation = () => {
+//     setClicked(!isClicked);
+//     if (onClick) onClick();
+// };
+// 3. В поле transcription ты добавляешь квадратные скобки[] автоматически, но пользователь может их включить вручную.Это приведёт к дублированию.Нет проверки на это.Рекомендация: Убедись, что квадратные скобки добавляются только один раз:
+// transcription: data.transcription.startsWith('[') ? data.transcription : `[${data.transcription}]`,
+//     4. В некоторых компонентах ты используешь async - функции внутри обработчиков, например handleDeleteClick.Если функция выбросит ошибку, это не будет корректно обработано.Рекомендация: Добавь try...catch в обработчики:
+// const handleDeleteClick = async () => {
+//     try {
+//         await deleteWordFromServer(word);
+//     } catch (error) {
+//         toast.error('Ошибка при удалении');
+//     }
+// };
+// 5. В WordsContextProvider у тебя есть зависимость[lastShownDate, setLastShownDate, setWordId, wordId], но setLastShownDate и setWordId — это функции, и они не должны быть в массиве зависимостей.Решение: Оставь только lastShownDate и wordId.
+// 6. В Slider ты рендеришь все слова, а не только текущую карточку.Это увеличивает нагрузку при большом количестве слов.Решение: Рендери только текущую карточку.
+// {
+//     words[slideIndex] && (
+//         <Card {...words[slideIndex]} />
+//     )
+// }
