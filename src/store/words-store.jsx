@@ -20,10 +20,25 @@ class WordsStore {
 
     constructor() {
         makeAutoObservable(this);
+        //  this.setNewWord = this.setNewWord.bind(this);
+        this.initializeLastShownDate();
         this.fetchWords();
     }
 
-    async fetchWords() {
+    initializeLastShownDate() {
+        const storedDate = localStorage.getItem('lastShownDate');
+        if (storedDate) {
+            this.lastShownDate = new Date(storedDate).toISOString().split('T')[0];
+        } else {
+            this.lastShownDate = null;
+        }
+    }
+
+    getWords() {
+        return this.words;
+    }
+
+    fetchWords = async () => {
         if (this.words.length > 0) return;
         this.loading = true;
         try {
@@ -39,18 +54,27 @@ class WordsStore {
 
             runInAction(() => {
                 this.words = data;
+                const isDifferentDay = !this.lastShownDate || this.lastShownDate !== currentDate;
+                const storedWordId = localStorage.getItem('lastWordId');
+                this.wordId = storedWordId ? storedWordId : null;
+                const currentWord = this.words.find(word => word.id === this.wordId);
+                this.word = currentWord || null;
 
-                if (!this.lastShownDate || this.lastShownDate !== currentDate) {
+                if (isDifferentDay) {
+                    const newWord = data[Math.floor(Math.random() * data.length)];
+                    if (newWord) {
+                        this.word = newWord;
+                        this.wordId = newWord.id;
+                        this.lastShownDate = currentDate;
+                        localStorage.setItem('lastShownDate', currentDate);
+                        localStorage.setItem('lastWordId', this.wordId);
+                        this.wordUpdated = true;
+                    }
+                } else if (!this.wordId) {
                     const newWord = data[Math.floor(Math.random() * data.length)];
                     this.word = newWord;
-                    console.log('newWord: ', newWord);
-                    this.wordId = newWord ? newWord.id : null;
-                    this.lastShownDate = currentDate;
-                    this.wordUpdated = true;
-                } else if (this.wordId) {
-                    const previousWord = data.find(word => word.id === this.wordId);
-                    this.word = previousWord;
-                    console.log('previousWord: ', previousWord);
+                    this.wordId = newWord.id;
+                    localStorage.setItem('lastWordId', this.wordId);
                 }
             });
         } catch (error) {
@@ -67,7 +91,7 @@ class WordsStore {
         }
     }
 
-    async sendWordToServer(word) {
+    sendWordToServer = async (word) => {
         try {
             const response = await fetch('/api/words/add', {
                 method: 'POST',
@@ -93,7 +117,7 @@ class WordsStore {
         }
     }
 
-    async editWordOnServer(wordToUpdate) {
+    editWordOnServer = async (wordToUpdate) => {
         try {
             const response = await fetch(`/api/words/${wordToUpdate.id}/update`, {
                 method: 'POST',
@@ -123,7 +147,7 @@ class WordsStore {
         }
     }
 
-    async deleteWordFromServer(wordToDelete) {
+    deleteWordFromServer = async (wordToDelete) => {
         try {
             const response = await fetch(`/api/words/${wordToDelete.id}/delete`, {
                 method: 'POST',

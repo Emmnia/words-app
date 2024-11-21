@@ -14,8 +14,8 @@ export const Header = ({ showModal }) => {
             <HeaderButton type="button" onClick={showModal}>Слово дня</HeaderButton>
             <HeaderNav>
               <HeaderNavList>
-                <HeaderNavItem><HeaderNavLink to="/">Список слов</HeaderNavLink></HeaderNavItem>
-                <HeaderNavItem><HeaderNavLink to="game">Тренажер</HeaderNavLink></HeaderNavItem>
+                <HeaderNavItem><HeaderNavLink to="/" data-content="Слова">Слова</HeaderNavLink></HeaderNavItem>
+                <HeaderNavItem><HeaderNavLink to="game" data-content="Тренажер">Тренажер</HeaderNavLink></HeaderNavItem>
               </HeaderNavList>
             </HeaderNav>
           </HeaderBox>

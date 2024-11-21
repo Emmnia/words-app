@@ -1,21 +1,22 @@
 import { SliderContainer, SliderButton, SliderContent } from './Slider.styled'
 import { Card } from '../Card/Card'
-import { useState, useContext, useEffect } from "react"
+import { useState, useEffect } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { TrainingControls } from "../TrainingControls/TrainingControls"
 import { Loader } from '../Loader/Loader'
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage'
-import { WordsContext } from '../../store/words-context'
+import { observer } from 'mobx-react-lite';
+import { wordsStore } from '../../store/words-store';
 
-export const Slider = ({ initialSlideIndex = 0 }) => {
+export const Slider = observer(({ initialSlideIndex = 0 }) => {
     const [slideIndex, setSlideIndex] = useState(initialSlideIndex);
     const [animation, setAnimation] = useState(" ");
     const [count, setCount] = useState(0);
     const [clickedWords, setClickedWords] = useState(new Set());
     const [showError, setShowError] = useState(false);
 
-    const { words, loading, error } = useContext(WordsContext);
+    const { words, loading, error } = wordsStore;
 
     const handlePrevClick = () => {
         setAnimation("previous");
@@ -34,7 +35,8 @@ export const Slider = ({ initialSlideIndex = 0 }) => {
     };
 
     const startTraining = () => {
-        setCount(0)
+        setCount(0);
+        setClickedWords(new Set());
     }
 
     const handleCounter = (wordId) => {
@@ -78,6 +80,18 @@ export const Slider = ({ initialSlideIndex = 0 }) => {
         )
     }
 
+    const currentWord = wordsStore.words[slideIndex];
+
+    if (!currentWord) {
+        console.warn("Слово не найдено для индекс:", slideIndex);
+        return null;
+    }
+
+    if (words.length === 0) {
+        console.warn("Список слов пуст.");
+        return null;
+    }
+
     return (
         <>
             <SliderContainer>
@@ -87,19 +101,15 @@ export const Slider = ({ initialSlideIndex = 0 }) => {
                         <SliderContent
                             animation={animation}
                             onAnimationEnd={handleAnimationEnd}>
-                            {words.map((word, index) => (
-                                <Card
-                                    key={word.id}
-                                    id={word.id}
-                                    english={word.english}
-                                    transcription={word.transcription}
-                                    russian={word.russian}
-                                    index={index}
-                                    visible={index === slideIndex}
-                                    show={true}
-                                    onClick={() => handleCounter(word.id)}
-                                />
-                            ))}
+                            <Card
+                                key={currentWord.id}
+                                id={currentWord.id}
+                                english={currentWord.english}
+                                transcription={currentWord.transcription}
+                                russian={currentWord.russian}
+                                onClick={() => handleCounter(currentWord.id)}
+                                visible={true}
+                            />
                         </SliderContent>
                         <SliderButton onClick={handleNextClick}> <FontAwesomeIcon icon={faChevronRight} /> </SliderButton>
                     </>)}
@@ -111,7 +121,7 @@ export const Slider = ({ initialSlideIndex = 0 }) => {
             />
         </>
     )
-}
+})
 
 
 //   сделать на карточках чекбокс "выучено", в галерее добавить вариант "не показывать выученные"
@@ -140,8 +150,3 @@ export const Slider = ({ initialSlideIndex = 0 }) => {
 // };
 // 5. В WordsContextProvider у тебя есть зависимость[lastShownDate, setLastShownDate, setWordId, wordId], но setLastShownDate и setWordId — это функции, и они не должны быть в массиве зависимостей.Решение: Оставь только lastShownDate и wordId.
 // 6. В Slider ты рендеришь все слова, а не только текущую карточку.Это увеличивает нагрузку при большом количестве слов.Решение: Рендери только текущую карточку.
-// {
-//     words[slideIndex] && (
-//         <Card {...words[slideIndex]} />
-//     )
-// }

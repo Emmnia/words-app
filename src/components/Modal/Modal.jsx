@@ -1,16 +1,18 @@
 import { ModalWrapper, ModalHeader, ModalFooter, ModalButton, ModalButtonIcon } from './Modal.styled'
 import { Checkbox } from '../Checkbox/Checkbox';
-import { forwardRef, useContext, useEffect } from 'react';
+import { forwardRef, useEffect } from 'react';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { useLocalStorage } from "@uidotdev/usehooks";
 import { v4 as uuidv4 } from 'uuid';
 import { Card } from '../Card/Card';
-import { WordsContext } from '../../store/words-context'
+import { Loader } from '../Loader/Loader'
+import { observer } from 'mobx-react-lite';
+import { wordsStore } from '../../store/words-store';
 
-export const Modal = forwardRef(function Modal({ onClose }, ref) {
+export const Modal = observer(forwardRef(function Modal({ onClose }, ref) {
     const checkboxId = uuidv4();
 
-    const { word, wordUpdated, setWordUpdated } = useContext(WordsContext);
+    const { word, loading, wordUpdated } = wordsStore;
 
     const [showModalToday, setShowModalToday] = useLocalStorage('showModalToday', null);
 
@@ -26,18 +28,22 @@ export const Modal = forwardRef(function Modal({ onClose }, ref) {
     }, [ref, showModalToday]);
 
     useEffect(() => {
+        console.log('wordUpdated:', wordUpdated);
+        console.log('word:', word);
         if (wordUpdated) {
             setShowModalToday(true);
-            setWordUpdated(false);
+            wordsStore.setWordUpdated(false);
         }
-    }, [setShowModalToday, setWordUpdated, wordUpdated]);
+    }, [setShowModalToday, wordUpdated, word]);
 
     return (
         <ModalWrapper ref={ref}>
             <ModalHeader>
                 <ModalButton onClick={onClose}><ModalButtonIcon icon={faXmark} /></ModalButton>
             </ModalHeader>
-            {word && (
+            {loading ? (
+                <Loader />
+            ) : (word && (
                 <Card
                     key={word.id}
                     id={word.id}
@@ -47,7 +53,8 @@ export const Modal = forwardRef(function Modal({ onClose }, ref) {
                     visible={true}
                     show={false}
                 />
-            )}
+            ))
+            }
             <ModalFooter>
                 <Checkbox
                     label={'Больше не показывать сегодня'}
@@ -59,4 +66,4 @@ export const Modal = forwardRef(function Modal({ onClose }, ref) {
             </ModalFooter>
         </ModalWrapper>
     )
-})
+}))

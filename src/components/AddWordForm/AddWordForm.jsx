@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
 import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
-import { WordsContext } from "../../store/words-context";
-import { useContext } from "react";
+import { observer } from 'mobx-react-lite';
+import { wordsStore } from '../../store/words-store';
 import { FormWrapper, FormHeading, StyledForm, FormInputsWrapper, FormInputWrapper, FormInput, FormError, FormNote, FormSubmit, FormSubmitWrapper } from "./AddWordForm.styled";
 
-export const AddWordForm = () => {
+export const AddWordForm = observer(() => {
     const {
         register,
         handleSubmit,
@@ -15,10 +15,9 @@ export const AddWordForm = () => {
         reset,
     } = useForm();
 
-    const { sendWordToServer, setNewWord } = useContext(WordsContext)
+    const { sendWordToServer, setNewWord } = wordsStore;
 
     const onValid = async (data) => {
-
         const word = {
             id: uuidv4(),
             english: data.english,
@@ -111,4 +110,4 @@ export const AddWordForm = () => {
             </StyledForm>
         </FormWrapper>
     );
-}
+})

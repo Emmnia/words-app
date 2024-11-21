@@ -20,19 +20,16 @@ export const StyledForm = styled.form`
     justify-content: space-between;
     flex: 1;
 `
-
 export const FormInputsWrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 20px;
     justify-content: space-evenly;
     align-content: center;
 `
-
 export const FormInputWrapper = styled.div`
     text-align: center;
 `
-
 export const FormInput = styled.input`
     padding: 10px 15px;
     text-align: center; 
@@ -40,16 +37,13 @@ export const FormInput = styled.input`
     border: 1px solid gray;
     font-family: "Wix Madefor Display", sans-serif;
 `
-
 export const FormError = styled.p`
     color: #E55D87;
 `
-
 export const FormSubmitWrapper = styled.div`
     margin-top: 20px;
     align-self: flex-end;
 `
-
 export const FormSubmit = styled.input`
     padding: 10px 15px;
     text-align: center; 
