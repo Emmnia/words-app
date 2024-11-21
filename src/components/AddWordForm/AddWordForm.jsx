@@ -27,13 +27,13 @@ export const AddWordForm = observer(() => {
         }
         setNewWord(word);
         await sendWordToServer(word);
-        toast.success("Слово добавлено!");
+        toast.success("Word added!");
         reset();
         setNewWord({ id: "", english: "", transcription: "", russian: "", tags: "" });
     };
 
     const onInvalid = () => {
-        toast.error("Слово не добавлено. Корректно заполните все поля");
+        toast.error("Word not added. Fill out all the fields correctly");
     };
 
     const handleChange = async (event) => {
@@ -44,17 +44,17 @@ export const AddWordForm = observer(() => {
 
     return (
         <FormWrapper>
-            <FormHeading>Добавить слово</FormHeading>
+            <FormHeading>Add New Word</FormHeading>
             <StyledForm onSubmit={handleSubmit(onValid, onInvalid)}>
                 <FormInputsWrapper>
                     <FormInputWrapper>
                         <FormInput
                             placeholder="english"
                             {...register("english", {
-                                required: "Заполните это поле",
+                                required: "Field required",
                                 pattern: {
                                     value: /^[A-Za-z -]+$/,
-                                    message: "Введите только латиницу"
+                                    message: "Latin characters only"
                                 },
                                 onBlur: () => trigger("english"),
                             })}
@@ -67,23 +67,23 @@ export const AddWordForm = observer(() => {
                         <FormInput
                             placeholder="transcription"
                             {...register("transcription", {
-                                required: "Заполните это поле",
+                                required: "Field required",
                                 onBlur: () => trigger("transcription"),
                             })}
                             onChange={handleChange}
                         />
                         {errors.transcription && <FormError>{errors.transcription.message}</FormError>}
-                        <FormNote>*Квадратные скобки [ ] добавятся при отправке автоматически</FormNote>
+                        <FormNote>*Square brackets [ ] will be added automatically on submit</FormNote>
                     </FormInputWrapper>
 
                     <FormInputWrapper>
                         <FormInput
                             placeholder="russian"
                             {...register("russian", {
-                                required: "Заполните это поле",
+                                required: "Field required",
                                 pattern: {
                                     value: /^[А-Яа-яЁё -]+$/,
-                                    message: "Введите только кириллицу"
+                                    message: "Cyrillic characters only"
                                 },
                                 onBlur: () => trigger("russian"),
                             })}
@@ -96,7 +96,7 @@ export const AddWordForm = observer(() => {
                         <FormInput
                             placeholder="tags"
                             {...register("tags", {
-                                required: "Заполните это поле",
+                                required: "Field required",
                                 onBlur: () => trigger("tags"),
                             })}
                             onChange={handleChange}

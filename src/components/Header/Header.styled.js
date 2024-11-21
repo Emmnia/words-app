@@ -26,7 +26,7 @@ export const HeaderBox = styled.div`
 `
 export const HeaderLogo = styled(NavLink)`
     display: flex;
-    gap: 6px;
+    gap: 10px;
     align-items: center;
     text-decoration: none;
 `
@@ -155,7 +155,7 @@ export const HeaderNavLink = styled(NavLink)`
         width: 100%;
         content: attr(data-content);
         line-height: 1.4;
-        color: #45A1D8;
+        color: white;
         clip: rect(0, 0, 190px, 0);
         -webkit-transition: clip cubic-bezier(0.25, 0.46, 0.45, 0.94) 500ms;
         transition: clip cubic-bezier(0.25, 0.46, 0.45, 0.94) 500ms;

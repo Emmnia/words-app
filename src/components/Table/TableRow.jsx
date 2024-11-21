@@ -29,7 +29,7 @@ export const TableRow = ({ word, index, matches }) => {
                 throw new Error('Слово не найдено для удаления');
             }
         } catch (error) {
-            toast.error('Ошибка при удалении. Попробуйте еще раз');
+            toast.error('Error deleting word. Try again');
             console.error(error);
         }
     }

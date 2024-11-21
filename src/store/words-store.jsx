@@ -20,7 +20,6 @@ class WordsStore {
 
     constructor() {
         makeAutoObservable(this);
-        //  this.setNewWord = this.setNewWord.bind(this);
         this.initializeLastShownDate();
         this.fetchWords();
     }
@@ -44,7 +43,7 @@ class WordsStore {
         try {
             const response = await fetch('/api/words');
             if (!response.ok) {
-                throw new Error('Не удалось загрузить слова с сервера');
+                throw new Error(`Couldn't load words from server`);
             }
             const data = await response.json();
             console.log("Загруженные слова:", data);
@@ -81,7 +80,7 @@ class WordsStore {
             console.error(error);
             runInAction(() => {
                 this.error = error;
-                toast.info('Ошибка при получении слов с сервера, загружается резервный файл', { toastId: 'backup-toast' });
+                toast.info('Error fetching words, backup file loading', { toastId: 'backup-toast' });
                 this.words = wordsJSON;
             });
         } finally {
@@ -138,7 +137,7 @@ class WordsStore {
                 this.words = this.words.map(word =>
                     word.id === wordToUpdate.id ? { ...word, ...wordToUpdate } : word
                 );
-                toast.success('Изменения сохранены');
+                toast.success('Changes saved');
             });
         } catch (error) {
             runInAction(() => {
@@ -163,7 +162,7 @@ class WordsStore {
 
             runInAction(() => {
                 this.words = this.words.filter(word => word.id !== wordToDelete.id);
-                toast.success('Слово удалено');
+                toast.success('Word deleted');
             });
         } catch (error) {
             runInAction(() => {

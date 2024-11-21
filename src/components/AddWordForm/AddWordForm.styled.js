@@ -44,7 +44,7 @@ export const FormSubmitWrapper = styled.div`
     margin-top: 20px;
     align-self: flex-end;
 `
-export const FormSubmit = styled.input`
+export const FormSubmit = styled.input.attrs({ type: 'submit', value: 'ADD WORD' })`
     padding: 10px 15px;
     text-align: center; 
     font-family: "Wix Madefor Display", sans-serif;

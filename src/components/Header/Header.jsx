@@ -9,13 +9,13 @@ export const Header = ({ showModal }) => {
           <HeaderBox>
             <HeaderLogo to='/'>
               <HeaderLogoImage src="assets/images/owl.png" />
-              <HeaderLogoText>Мирная сова</HeaderLogoText>
+              <HeaderLogoText>Peaceful Owl</HeaderLogoText>
             </HeaderLogo>
-            <HeaderButton type="button" onClick={showModal}>Слово дня</HeaderButton>
+            <HeaderButton type="button" onClick={showModal}>Word Of The Day</HeaderButton>
             <HeaderNav>
               <HeaderNavList>
-                <HeaderNavItem><HeaderNavLink to="/" data-content="Слова">Слова</HeaderNavLink></HeaderNavItem>
-                <HeaderNavItem><HeaderNavLink to="game" data-content="Тренажер">Тренажер</HeaderNavLink></HeaderNavItem>
+                <HeaderNavItem><HeaderNavLink to="/" data-content="Words">Words</HeaderNavLink></HeaderNavItem>
+                <HeaderNavItem><HeaderNavLink to="game" data-content="Cards">Cards</HeaderNavLink></HeaderNavItem>
               </HeaderNavList>
             </HeaderNav>
           </HeaderBox>

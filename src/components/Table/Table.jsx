@@ -1,5 +1,5 @@
 import { TableTitle, TableWrapper, StyledTable, TableData, TableHead, TableHeader, TableWordNumber, TableContent, TableActions, TableBody, LoadMoreButton } from "./Table.styled";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { TableRow } from './TableRow';
 import { Loader } from '../Loader/Loader'
@@ -18,7 +18,7 @@ export const Table = observer(() => {
 
     return (
         <>
-            <TableTitle>Список слов</TableTitle>
+            <TableTitle>Word List</TableTitle>
             <TableWrapper>
                 <StyledTable>
                     <TableHead>
@@ -58,7 +58,7 @@ export const Table = observer(() => {
                 </StyledTable>
                 {visibleCount < wordsStore.words.length && (
                     <LoadMoreButton type="button" onClick={loadMore}>
-                        Загрузить еще
+                        Load More
                     </LoadMoreButton>
                 )}
             </TableWrapper>

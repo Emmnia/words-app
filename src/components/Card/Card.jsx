@@ -30,7 +30,7 @@ export const Card = ({ word, id, english, transcription, russian, visible, show,
       <CardBody id={id} word={word} style={{ display: visible ? 'block' : 'none' }}>
         <CardHeader>
           <Checkbox
-            label={'Выучено'}
+            label={'Learned'}
             show={show}
             id={checkboxId}
           />
@@ -39,7 +39,7 @@ export const Card = ({ word, id, english, transcription, russian, visible, show,
         <CardTranscription>{transcription}</CardTranscription>
         <CardButton type="button" onClick={() => { toggleTranslation(); onClick() }} ref={buttonRef}>
           <CardButtonImage src={isClicked ? owlOpenIcon : owlClosedIcon} alt="" />
-          <CardButtonText>{isClicked ? russian : 'показать перевод'}</CardButtonText>
+          <CardButtonText>{isClicked ? russian : 'show translation'}</CardButtonText>
         </CardButton>
       </CardBody>
     </>

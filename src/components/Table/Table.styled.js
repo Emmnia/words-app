@@ -52,6 +52,9 @@ export const LoadMoreButton = styled.button`
     padding: 10px 15px;
     text-align: center;
     font-family: "Wix Madefor Display", sans-serif;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
     color: white;
     transition: 0.5s;
     background-image: linear-gradient(90deg, #e075af 0%, #bb80b9 21%, #9e88c1 48%, #7494cc 81%, #3fa3da 100%);

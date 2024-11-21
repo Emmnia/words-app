@@ -57,7 +57,7 @@ export const Modal = observer(forwardRef(function Modal({ onClose }, ref) {
             }
             <ModalFooter>
                 <Checkbox
-                    label={'Больше не показывать сегодня'}
+                    label={`Don't show this again today`}
                     show={true}
                     onChange={handleModalCheck}
                     id={checkboxId}
