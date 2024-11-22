@@ -1,4 +1,4 @@
-import { TableTitle, TableWrapper, StyledTable, TableData, TableHead, TableHeader, TableWordNumber, TableContent, TableActions, TableBody, LoadMoreButton } from "./Table.styled";
+import { TableTitle, TableWrapper, StyledTable, StyledTableRow, TableData, TableHead, TableHeader, TableWordNumber, TableContent, TableActions, TableBody, LoadMoreButton } from "./Table.styled";
 import { useState } from "react";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { TableRow } from './TableRow';
@@ -39,22 +39,22 @@ export const Table = observer(() => {
                             <TableActions></TableActions>
                         </TableHeader>
                     </TableHead>
-                    {loading ? (
-                        <TableData colSpan={matches ? 5 : 4}>
-                            <Loader />
-                        </TableData>
-                    ) : (
-                        <TableBody>
-                            {words.slice().reverse().slice(0, visibleCount).map((word, index) => (
-                                <TableRow
-                                    key={word.id}
-                                    word={word}
-                                    index={index}
-                                    matches={matches}
-                                />))
-                            }
-                        </TableBody>
-                    )}
+                    <TableBody>
+                        {loading ? (
+                            <StyledTableRow>
+                                <TableData colSpan={matches ? 5 : 4}>
+                                    <Loader />
+                                </TableData>
+                            </StyledTableRow>
+                        ) : (words.slice().reverse().slice(0, visibleCount).map((word, index) => (
+                            <TableRow
+                                key={word.id}
+                                word={word}
+                                index={index}
+                                matches={matches}
+                            />))
+                        )}
+                    </TableBody>
                 </StyledTable>
                 {visibleCount < wordsStore.words.length && (
                     <LoadMoreButton type="button" onClick={loadMore}>

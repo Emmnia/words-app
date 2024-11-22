@@ -171,11 +171,11 @@ class WordsStore {
         }
     }
 
-    setNewWord(newWord) {
-        this.newWord = newWord;
+    setNewWord = (newWordData) => {
+        this.newWord = { ...newWordData };
     }
 
-    setWordUpdated(updated) {
+    setWordUpdated = (updated) => {
         this.wordUpdated = updated;
     }
 }
