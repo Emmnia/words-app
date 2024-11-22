@@ -1,14 +1,15 @@
-import { useState, useContext, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { FaPencilAlt, FaTrashAlt } from 'react-icons/fa';
 import { TableEditForm } from './TableEditForm';
 import { TableWarning } from './TableWarning';
-import { WordsContext } from '../../store/words-context';
+import { observer } from 'mobx-react-lite';
+import { wordsStore } from '../../store/words-store';
 import { toast } from 'react-toastify';
 import { StyledTableRow, TableData, TableDataWrapper, TableControlsButton } from './Table.styled'
 
-export const TableRow = ({ word, index, matches }) => {
+export const TableRow = observer(({ word, index, matches }) => {
 
-    const { words, deleteWordFromServer } = useContext(WordsContext);
+    const { words, deleteWordFromServer } = wordsStore;
 
     const [editingIndex, setEditingIndex] = useState(null);
 
@@ -93,4 +94,4 @@ export const TableRow = ({ word, index, matches }) => {
             )}
         </StyledTableRow>
     );
-};
+});

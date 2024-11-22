@@ -1,11 +1,11 @@
 import { useForm } from 'react-hook-form';
-import { useContext } from "react";
-import { WordsContext } from '../../store/words-context'
+import { observer } from 'mobx-react-lite';
+import { wordsStore } from '../../store/words-store';
 import { toast } from 'react-toastify';
 import { FaCheck, FaUndoAlt } from 'react-icons/fa';
 import { TableData, TableForm, TableInput, TableInputWrapper, TableError, TableControlsButton } from './Table.styled'
 
-export const TableEditForm = ({ word, matches, onCancelClick, onSaveClick }) => {
+export const TableEditForm = observer(({ word, matches, onCancelClick, onSaveClick }) => {
 
     const {
         register,
@@ -22,7 +22,7 @@ export const TableEditForm = ({ word, matches, onCancelClick, onSaveClick }) => 
         }
     });
 
-    const { editWordOnServer } = useContext(WordsContext);
+    const { editWordOnServer } = wordsStore;
 
     const handleChange = async (event) => {
         const { name, value } = event.target;
@@ -109,4 +109,4 @@ export const TableEditForm = ({ word, matches, onCancelClick, onSaveClick }) => 
             </TableData>
         </>
     )
-}
+})
