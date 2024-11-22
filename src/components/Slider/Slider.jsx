@@ -6,6 +6,7 @@ import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons
 import { TrainingControls } from "../TrainingControls/TrainingControls"
 import { Loader } from '../Loader/Loader'
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage'
+import { SliderMessage } from './SliderMessage'
 import { observer } from 'mobx-react-lite';
 import { wordsStore } from '../../store/words-store';
 
@@ -15,17 +16,21 @@ export const Slider = observer(({ initialSlideIndex = 0 }) => {
     const [count, setCount] = useState(0);
     const [clickedWords, setClickedWords] = useState(new Set());
     const [showError, setShowError] = useState(false);
+    const [hideLearned, setHideLearned] = useState(false);
+    const [learnedWords, setLearnedWords] = useState(new Set());
 
     const { words, loading, error } = wordsStore;
 
+    const filteredWords = hideLearned ? words.filter(word => !learnedWords.has(word.id)) : words;
+
     const handlePrevClick = () => {
         setAnimation("previous");
-        setSlideIndex((slideIndex - 1 + words.length) % words.length);
+        setSlideIndex((slideIndex - 1 + filteredWords.length) % filteredWords.length);
     };
 
     const handleNextClick = () => {
         setAnimation("next");
-        setSlideIndex((slideIndex + 1) % words.length);
+        setSlideIndex((slideIndex + 1) % filteredWords.length);
     };
 
     const handleAnimationEnd = () => {
@@ -37,6 +42,8 @@ export const Slider = observer(({ initialSlideIndex = 0 }) => {
     const startTraining = () => {
         setCount(0);
         setClickedWords(new Set());
+        setLearnedWords(new Set());
+        setHideLearned(false);
     }
 
     const handleCounter = (wordId) => {
@@ -44,7 +51,14 @@ export const Slider = observer(({ initialSlideIndex = 0 }) => {
             setCount((count) => count + 1);
             setClickedWords((prevClicked) => new Set(prevClicked).add(wordId));
         }
-        getWordForm(count)
+    }
+
+    const markWordLearned = (wordId) => {
+        setLearnedWords(prevLearned => new Set(prevLearned).add(wordId));
+    }
+
+    const handleHideLearned = () => {
+        setHideLearned(!hideLearned);
     }
 
     useEffect(() => {
@@ -66,7 +80,13 @@ export const Slider = observer(({ initialSlideIndex = 0 }) => {
         )
     }
 
-    const currentWord = wordsStore.words[slideIndex];
+    if (filteredWords.length === 0) {
+        return (
+            <SliderMessage onClick={startTraining} />
+        );
+    }
+
+    const currentWord = filteredWords[slideIndex];
 
     if (!currentWord) {
         console.warn("Слово не найдено для индекс:", slideIndex);
@@ -94,8 +114,10 @@ export const Slider = observer(({ initialSlideIndex = 0 }) => {
                                 transcription={currentWord.transcription}
                                 russian={currentWord.russian}
                                 onClick={() => handleCounter(currentWord.id)}
+                                onChange={() => markWordLearned(currentWord.id)}
                                 visible={true}
                                 show={true}
+                                learned={learnedWords.has(currentWord.id)}
                             />
                         </SliderContent>
                         <SliderButton onClick={handleNextClick}> <FontAwesomeIcon icon={faChevronRight} /> </SliderButton>
@@ -104,21 +126,16 @@ export const Slider = observer(({ initialSlideIndex = 0 }) => {
             <TrainingControls
                 onClick={startTraining}
                 count={count}
+                onChange={handleHideLearned}
+                checked={hideLearned}
             />
         </>
     )
 })
 
 
-//   сделать на карточках чекбокс "выучено", в галерее добавить вариант "не показывать выученные"
 
 
-// 1. Ты используешь forwardRef и ref в Modal, но нет проверки, существует ли ref.current при вызове методов showModal и close.Это может вызвать ошибку, если ref не инициализирован.Решение:
-// if (ref?.current) {
-//     ref.current.showModal();
-// }
-// fetchWords в WordsContextProvider
-// В функции fetchWords ты вызываешь setLoading(true) в начале и setLoading(false) в finally. Если words загружаются локально(wordsJSON), то статус загрузки всё равно будет false до конца функции.Это может вызывать визуальные баги.Рекомендация: Убедись, что loading корректно устанавливается при всех сценариях(особенно при ошибках).
 // 2. Например, в onClick внутри Card ты вызываешь toggleTranslation() и onClick(), но нет проверки, существует ли onClick.Решение:
 // const toggleTranslation = () => {
 //     setClicked(!isClicked);
