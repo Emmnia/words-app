@@ -5,7 +5,7 @@ import owlClosedIcon from '/assets/images/owl_eyesclosed.png'
 import owlOpenIcon from '/assets/images/owl_eyesopen.png'
 import { v4 as uuidv4 } from 'uuid';
 
-export const Card = ({ word, id, english, transcription, russian, visible, show, onClick, onChange }) => {
+export const Card = ({ word, id, english, transcription, russian, visible, show, onMouseDown, onChange }) => {
 
   const checkboxId = uuidv4();
   const buttonRef = useRef(null);
@@ -13,7 +13,6 @@ export const Card = ({ word, id, english, transcription, russian, visible, show,
 
   const toggleTranslation = () => {
     setClicked(!isClicked);
-    if (onClick) onClick();
   };
 
   useEffect(() => {
@@ -39,7 +38,7 @@ export const Card = ({ word, id, english, transcription, russian, visible, show,
         </CardHeader>
         <CardWord>{english}</CardWord>
         <CardTranscription>{transcription}</CardTranscription>
-        <CardButton type="button" onClick={() => { toggleTranslation(); onClick() }} ref={buttonRef}>
+        <CardButton type="button" onMouseDown={() => { toggleTranslation(); onMouseDown() }} ref={buttonRef}>
           <CardButtonImage src={isClicked ? owlOpenIcon : owlClosedIcon} alt="" />
           <CardButtonText>{isClicked ? russian : 'show translation'}</CardButtonText>
         </CardButton>

@@ -9,6 +9,10 @@ export const CardBody = styled.div`
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.19);
+
+    @media (max-width: 599px) {
+        width: 100%;
+    }
 `
 export const CardHeader = styled.header`
     margin-bottom: 30px;

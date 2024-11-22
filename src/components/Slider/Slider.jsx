@@ -1,12 +1,14 @@
-import { SliderContainer, SliderButton, SliderContent } from './Slider.styled'
-import { Card } from '../Card/Card'
-import { useState, useEffect } from "react"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
-import { TrainingControls } from "../TrainingControls/TrainingControls"
-import { Loader } from '../Loader/Loader'
-import { ErrorMessage } from '../ErrorMessage/ErrorMessage'
-import { SliderMessage } from './SliderMessage'
+import { SliderContainer, SliderButton, SliderContent } from './Slider.styled';
+import { Card } from '../Card/Card';
+import { useState, useEffect } from "react";
+import { useSwipeable } from 'react-swipeable';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { TrainingControls } from "../TrainingControls/TrainingControls";
+import { Loader } from '../Loader/Loader';
+import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
+import { SliderMessage } from './SliderMessage';
 import { observer } from 'mobx-react-lite';
 import { wordsStore } from '../../store/words-store';
 
@@ -23,6 +25,8 @@ export const Slider = observer(({ initialSlideIndex = 0 }) => {
 
     const filteredWords = hideLearned ? words.filter(word => !learnedWords.has(word.id)) : words;
 
+    const matches = useMediaQuery('(min-width:600px)');
+
     const handlePrevClick = () => {
         setAnimation("previous");
         setSlideIndex((slideIndex - 1 + filteredWords.length) % filteredWords.length);
@@ -32,6 +36,13 @@ export const Slider = observer(({ initialSlideIndex = 0 }) => {
         setAnimation("next");
         setSlideIndex((slideIndex + 1) % filteredWords.length);
     };
+
+    const handlers = useSwipeable({
+        onSwipedLeft: handleNextClick,
+        onSwipedRight: handlePrevClick,
+        preventDefaultTouchmoveEvent: true,
+        trackMouse: false
+    });
 
     const handleAnimationEnd = () => {
         if (animation === "previous" || animation === "next") {
@@ -46,7 +57,8 @@ export const Slider = observer(({ initialSlideIndex = 0 }) => {
         setHideLearned(false);
     }
 
-    const handleCounter = (wordId) => {
+    const handleCounter = (event, wordId) => {
+        event.stopPropagation();
         if (!clickedWords.has(wordId)) {
             setCount((count) => count + 1);
             setClickedWords((prevClicked) => new Set(prevClicked).add(wordId));
@@ -100,10 +112,10 @@ export const Slider = observer(({ initialSlideIndex = 0 }) => {
 
     return (
         <>
-            <SliderContainer>
+            <SliderContainer {...handlers}>
                 {showError ? <ErrorMessage /> : (
                     <>
-                        <SliderButton onClick={handlePrevClick}> <FontAwesomeIcon icon={faChevronLeft} /> </SliderButton>
+                        <SliderButton onClick={handlePrevClick} style={{ display: matches ? 'block' : 'none' }}> <FontAwesomeIcon icon={faChevronLeft} /> </SliderButton>
                         <SliderContent
                             animation={animation}
                             onAnimationEnd={handleAnimationEnd}>
@@ -113,16 +125,16 @@ export const Slider = observer(({ initialSlideIndex = 0 }) => {
                                 english={currentWord.english}
                                 transcription={currentWord.transcription}
                                 russian={currentWord.russian}
-                                onClick={() => handleCounter(currentWord.id)}
+                                onMouseDown={() => handleCounter(event, currentWord.id)}
                                 onChange={() => markWordLearned(currentWord.id)}
                                 visible={true}
                                 show={true}
                                 learned={learnedWords.has(currentWord.id)}
                             />
                         </SliderContent>
-                        <SliderButton onClick={handleNextClick}> <FontAwesomeIcon icon={faChevronRight} /> </SliderButton>
+                        <SliderButton onClick={handleNextClick} style={{ display: matches ? 'block' : 'none' }}> <FontAwesomeIcon icon={faChevronRight} /> </SliderButton>
                     </>)}
-            </SliderContainer >
+            </SliderContainer>
             <TrainingControls
                 onClick={startTraining}
                 count={count}

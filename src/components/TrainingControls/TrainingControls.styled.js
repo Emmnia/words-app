@@ -5,6 +5,11 @@ export const ControlsWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-around;
+
+    @media (max-width: 599px) {
+        flex-direction: column;
+        gap: 20px;
+    }
 `
 
 export const ControlsButton = styled.button.attrs({
