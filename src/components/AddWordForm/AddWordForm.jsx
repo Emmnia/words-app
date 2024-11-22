@@ -23,7 +23,7 @@ export const AddWordForm = observer(() => {
             english: data.english,
             transcription: `[${data.transcription}]`,
             russian: data.russian,
-            tags: data.tags,
+            tags: ' ',
         }
         setNewWord(word);
         await sendWordToServer(word);
@@ -90,18 +90,6 @@ export const AddWordForm = observer(() => {
                             onChange={handleChange}
                         />
                         {errors.russian && <FormError>{errors.russian.message}</FormError>}
-                    </FormInputWrapper>
-
-                    <FormInputWrapper>
-                        <FormInput
-                            placeholder="tags"
-                            {...register("tags", {
-                                required: "Field required",
-                                onBlur: () => trigger("tags"),
-                            })}
-                            onChange={handleChange}
-                        />
-                        {errors.tags && <FormError>{errors.tags.message}</FormError>}
                     </FormInputWrapper>
                 </FormInputsWrapper>
                 <FormSubmitWrapper>
