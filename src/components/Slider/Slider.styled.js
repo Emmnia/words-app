@@ -126,10 +126,14 @@ export const SliderImageWrapper = styled.div`
     position: relative;
     width: fit-content;
 `
-export const SliderMessageImage = styled.img``
+export const SliderMessageImage = styled.img`
+    width: 400px;
+    height: 100%;
+`
 
 export const SliderMessageAnimation = styled.img`
     position: absolute;
-    top: 35%;
-    left: 41%;
+    top: 37%;
+    left: 44%;
+    width: 100px;
 `

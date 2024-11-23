@@ -1,9 +1,9 @@
 import { ErrorContainer, ErrorContent, ErrorAnimation, ErrorWord, ErrorText } from "./ErrorMessage.styled"
-import { WordsContext } from '../../store/words-context'
-import { useContext } from "react"
+import { observer } from 'mobx-react-lite';
+import { wordsStore } from '../../store/words-store';
 
-export const ErrorMessage = () => {
-    const { error } = useContext(WordsContext);
+export const ErrorMessage = observer(() => {
+    const { error } = wordsStore;
 
     return (
         <ErrorContainer>
@@ -14,4 +14,4 @@ export const ErrorMessage = () => {
             </ErrorContent>
         </ErrorContainer>
     )
-}
+})

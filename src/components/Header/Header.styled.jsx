@@ -15,11 +15,14 @@ export const StyledHeader = styled.header`
 `
 
 export const HeaderBox = styled.div`
+    margin: 0 auto;
+    padding: 5px;
+    width: min(100%, 1170px);
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    @media (max-width: 900px) {
+    @media (max-width: 1100px) {
         justify-content: space-around;
     }
 }
@@ -116,8 +119,12 @@ export const HeaderButton = styled.button`
         transform: scale(0.9);
         z-index: 2;
     }
-`
 
+    @media (max-width: 899px) {
+        margin-top: 20px;
+        font-size: 14px;
+    }
+`
 export const HeaderNav = styled.nav``
 
 export const HeaderNavList = styled.ul`
@@ -125,6 +132,10 @@ export const HeaderNavList = styled.ul`
     display: flex;
     gap: 20px;
     list-style-type: none;
+
+    @media (max-width: 899px) {
+        flex-direction: column;
+    }
 `
 export const HeaderNavItem = styled.li`
     font-size: 16px;
@@ -162,3 +173,49 @@ export const HeaderNavLink = styled(NavLink)`
     }
 }
 `
+export const styles = {
+    bmBurgerButton: {
+        position: 'fixed',
+        width: '36px',
+        height: '30px',
+        right: '36px',
+        top: '35%'
+    },
+    bmBurgerBars: {
+        color: '#171717'
+    },
+    bmBurgerBarsHover: {
+        background: '#a90000'
+    },
+    bmCrossButton: {
+        height: '30px',
+        width: '30px'
+    },
+    bmCross: {
+        color: '#E55D87'
+    },
+    bmMenuWrap: {
+        position: 'fixed',
+        top: 0,
+        height: '300px',
+    },
+    bmMenu: {
+        height: 'fit-content',
+        padding: '40px',
+        background: 'rgba(208, 208, 230, 0.95)',
+        borderRadius: '0 0 0 16px',
+        boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
+    },
+    bmMorphShape: {
+        fill: '#373a47'
+    },
+    bmItemList: {
+        padding: 0,
+    },
+    bmItem: {
+        display: 'inline-block',
+    },
+    bmOverlay: {
+        background: 'transparent'
+    }
+}
