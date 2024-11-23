@@ -43,13 +43,13 @@ export const TableEditForm = observer(({ word, matches, onCancelClick, onSaveCli
             await editWordOnServer(wordToUpdate);
 
         } catch (error) {
-            toast.error('Ошибка при сохранении. Попробуйте еще раз');
+            toast.error('Error saving changes. Please try again');
             console.error(error);
         }
     };
 
     const onInvalid = () => {
-        toast.error('Изменения не сохранены. Корректно заполните все поля');
+        toast.error('Changes not saved. Fill out all the fields correctly');
     };
 
     return (
@@ -59,10 +59,10 @@ export const TableEditForm = observer(({ word, matches, onCancelClick, onSaveCli
                     <TableInputWrapper>
                         <TableInput
                             {...register("english", {
-                                required: "Заполните это поле",
+                                required: "Field required",
                                 pattern: {
                                     value: /^[A-Za-z -]+$/,
-                                    message: "Введите только латиницу"
+                                    message: "Latin characters only"
                                 },
                                 onBlur: () => trigger("english"),
                             })}
@@ -73,7 +73,7 @@ export const TableEditForm = observer(({ word, matches, onCancelClick, onSaveCli
                     <TableInputWrapper>
                         <TableInput
                             {...register("transcription", {
-                                required: "Заполните это поле",
+                                required: "Field required",
                                 onBlur: () => trigger("english"),
                             })}
                             onChange={handleChange}
@@ -83,10 +83,10 @@ export const TableEditForm = observer(({ word, matches, onCancelClick, onSaveCli
                     <TableInputWrapper>
                         <TableInput
                             {...register("russian", {
-                                required: "Заполните это поле",
+                                required: "Field required",
                                 pattern: {
-                                    value: /^[А-Яа-яЁё -]+$/,
-                                    message: "Введите только кириллицу"
+                                    value: /^[А-Яа-яЁё -,]+$/,
+                                    message: "Cyrillic characters only"
                                 },
                                 onBlur: () => trigger("russian"),
                             })}

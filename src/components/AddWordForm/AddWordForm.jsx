@@ -82,7 +82,7 @@ export const AddWordForm = observer(() => {
                             {...register("russian", {
                                 required: "Field required",
                                 pattern: {
-                                    value: /^[А-Яа-яЁё -]+$/,
+                                    value: /^[А-Яа-яЁё -,]+$/,
                                     message: "Cyrillic characters only"
                                 },
                                 onBlur: () => trigger("russian"),
