@@ -43,6 +43,10 @@ export const SliderContainer = styled.div`
     display: flex;
     align-items: center;
     gap: 20px;
+
+    @media (max-width: 599px) {
+        width: 95%;
+    }
 `
 
 export const SliderButton = styled.button`
@@ -78,6 +82,10 @@ export const SliderContent = styled.div`
     ${props => props.animation === 'appear' && css`
         animation: ${fadeIn} 0.5s ease-in-out;
     `}
+
+    @media (max-width: 599px) {
+        width: 100%;
+    }
 `
 export const SliderMessageWrapper = styled.div`
     text-align: center;

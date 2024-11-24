@@ -5,7 +5,9 @@ export const CardBody = styled.div`
     padding: 20px;
     width: 450px;
     height: 400px;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.19);
@@ -16,6 +18,7 @@ export const CardBody = styled.div`
 `
 export const CardHeader = styled.header`
     margin-bottom: 30px;
+    justify-self: flex-start;
 `
 export const CardWord = styled.h2`
     font-size: 40px;
@@ -28,7 +31,6 @@ export const CardTranscription = styled.p`
 
 export const CardButton = styled.button`
     display: flex;
-    margin: auto;
     padding: 10px 20px;
     width: 300px;
     align-items: center;

@@ -19,6 +19,11 @@ export const ModalWrapper = styled.dialog`
         background: rgba(0, 0, 0, 0.5);
         transition: 3s ease-in;
     }
+
+    @media (max-width: 599px) {
+    padding: 20px 10px ;
+        width: 100%;
+    }
 `
 export const ModalHeader = styled.header`
     margin-bottom: 30px;

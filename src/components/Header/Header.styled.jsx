@@ -22,7 +22,7 @@ export const HeaderBox = styled.div`
     justify-content: space-between;
     align-items: center;
 
-    @media (max-width: 1100px) {
+    @media (max-width: 1190px) {
         justify-content: space-around;
     }
 }
@@ -122,7 +122,8 @@ export const HeaderButton = styled.button`
 
     @media (max-width: 899px) {
         margin-top: 20px;
-        font-size: 14px;
+        font-size: 15px;
+        letter-spacing: normal;
     }
 `
 export const HeaderNav = styled.nav``
@@ -179,13 +180,13 @@ export const styles = {
         width: '36px',
         height: '30px',
         right: '36px',
-        top: '35%'
+        top: '35%',
     },
-    bmBurgerBars: {
-        color: '#171717'
+    bmIcon: {
+        color: 'grey',
     },
-    bmBurgerBarsHover: {
-        background: '#a90000'
+    bmBurgerButtonHover: {
+        color: 'black',
     },
     bmCrossButton: {
         height: '30px',
@@ -211,6 +212,7 @@ export const styles = {
     },
     bmItemList: {
         padding: 0,
+        width: ['fit-content']
     },
     bmItem: {
         display: 'inline-block',

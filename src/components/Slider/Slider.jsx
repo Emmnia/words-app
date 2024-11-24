@@ -41,7 +41,7 @@ export const Slider = observer(({ initialSlideIndex = 0 }) => {
         onSwipedLeft: handleNextClick,
         onSwipedRight: handlePrevClick,
         preventDefaultTouchmoveEvent: true,
-        trackMouse: false
+        trackMouse: true
     });
 
     const handleAnimationEnd = () => {
