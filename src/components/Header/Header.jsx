@@ -1,4 +1,5 @@
-import { StyledHeader, HeaderBox, HeaderLogo, HeaderLogoImage, HeaderLogoText, HeaderButton, HeaderNav, HeaderNavList, HeaderNavItem, HeaderNavLink, styles } from './Header.styled'
+import { StyledHeader, HeaderBox, HeaderLogo, HeaderLogoImage, HeaderLogoText, HeaderButton, HeaderNav, HeaderNavList, HeaderNavItem, HeaderNavLink } from './Header.styled';
+import { styles } from './HeaderBurger';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
@@ -32,11 +33,12 @@ export const Header = ({ showModal }) => {
               right>
               <HeaderNav>
                 <HeaderNavList>
+                  <HeaderNavItem><HeaderNavLink to="/" data-content="Home">Home</HeaderNavLink></HeaderNavItem>
                   <HeaderNavItem><HeaderNavLink to="/" data-content="Words">Words</HeaderNavLink></HeaderNavItem>
                   <HeaderNavItem><HeaderNavLink to="game" data-content="Cards">Cards</HeaderNavLink></HeaderNavItem>
+                  <HeaderNavItem><HeaderButton type="button" onClick={showModal}>WOTD</HeaderButton></HeaderNavItem>
                 </HeaderNavList>
               </HeaderNav>
-              <HeaderButton type="button" onClick={showModal}>Word Of The Day</HeaderButton>
             </Menu>
           )}
         </HeaderBox>
