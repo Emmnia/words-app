@@ -50,7 +50,6 @@ export const Modal = observer(forwardRef(function Modal({ onClose }, ref) {
                     english={word.english}
                     transcription={word.transcription}
                     russian={word.russian}
-                    visible={true}
                     show={false}
                 />
             ))

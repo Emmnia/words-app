@@ -5,7 +5,7 @@ import owlClosedIcon from '/assets/images/owl_eyesclosed.png'
 import owlOpenIcon from '/assets/images/owl_eyesopen.png'
 import { v4 as uuidv4 } from 'uuid';
 
-export const Card = ({ word, id, english, transcription, russian, visible, show, onMouseDown, onChange }) => {
+export const Card = ({ word, id, english, transcription, russian, show, onMouseDown, onChange }) => {
 
   const checkboxId = uuidv4();
   const buttonRef = useRef(null);
@@ -17,17 +17,17 @@ export const Card = ({ word, id, english, transcription, russian, visible, show,
 
   useEffect(() => {
     setClicked(false);
-  }, [visible])
+  }, [])
 
   useEffect(() => {
-    if (!isClicked && visible) {
+    if (!isClicked) {
       buttonRef.current.focus();
     }
-  }, [isClicked, visible])
+  }, [isClicked])
 
   return (
     <>
-      <CardBody id={id} word={word} style={{ display: visible ? 'block' : 'none' }}>
+      <CardBody id={id} word={word}>
         <CardHeader>
           <Checkbox
             label={'Learned'}

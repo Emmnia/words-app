@@ -7,7 +7,8 @@ export const CardBody = styled.div`
     height: 400px;
     display: flex;
     flex-direction: column;
-    justify-items: center;
+    align-content: center;
+    text-align: center;
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.19);
@@ -35,6 +36,7 @@ export const CardButton = styled.button`
     width: 300px;
     align-items: center;
     justify-content: space-between;
+    align-self: center;
     font-family: "Wix Madefor Display", sans-serif;
     transition: 0.5s;
     background-color: #ffffff;

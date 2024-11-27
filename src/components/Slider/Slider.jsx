@@ -127,7 +127,6 @@ export const Slider = observer(({ initialSlideIndex = 0 }) => {
                                 russian={currentWord.russian}
                                 onMouseDown={() => handleCounter(event, currentWord.id)}
                                 onChange={() => markWordLearned(currentWord.id)}
-                                visible={true}
                                 show={true}
                                 learned={learnedWords.has(currentWord.id)}
                             />
