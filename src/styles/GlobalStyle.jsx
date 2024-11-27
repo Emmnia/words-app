@@ -26,9 +26,7 @@ export const GlobalStyle = createGlobalStyle`
         font-family: "Wix Madefor Display", sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        background-color: rgba(255, 255, 255, 0.3);
-        background-image: linear-gradient(54deg, #e8a2c8 0%, #cfa9ce 28%, #bdb0d3 48%, #a2b6da 68%, #7dbfe2 100%);
-        background-blend-mode: screen;
+        background-image: linear-gradient(54deg, #E5C1DB 0%, #DBC4DD 28%, #D5C6DF 48%, #C0CBE4 68%, #B0D0E8 100%);
         background-repeat: no-repeat;
         background-size: cover;
     }
