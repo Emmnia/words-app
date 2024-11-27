@@ -144,20 +144,3 @@ export const Slider = observer(({ initialSlideIndex = 0 }) => {
     )
 })
 
-
-
-
-// 2. Например, в onClick внутри Card ты вызываешь toggleTranslation() и onClick(), но нет проверки, существует ли onClick.Решение:
-// const toggleTranslation = () => {
-//     setClicked(!isClicked);
-//     if (onClick) onClick();
-// };
-//     4. В некоторых компонентах ты используешь async - функции внутри обработчиков, например handleDeleteClick.Если функция выбросит ошибку, это не будет корректно обработано.Рекомендация: Добавь try...catch в обработчики:
-// const handleDeleteClick = async () => {
-//     try {
-//         await deleteWordFromServer(word);
-//     } catch (error) {
-//         toast.error('Ошибка при удалении');
-//     }
-// };
-
