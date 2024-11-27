@@ -77,11 +77,6 @@ export const LoadMoreButton = styled.button`
 }
 `
 export const StyledTableRow = styled.tr`
-    opacity: 0;
-    animation: fadeIn 0.5s;
-    animation-delay: calc(0.1s * var(--idx));
-    animation-fill-mode: forwards;
-
     &:nth-child(even) {
         background: rgba(137, 0, 168, 0.05);
         background-blend-mode: darken;
