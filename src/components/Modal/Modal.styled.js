@@ -25,6 +25,7 @@ export const ModalWrapper = styled.dialog`
         position: fixed;
         left: 0;
         width: 100%;
+        max-width: 340px;
     }
 `
 export const ModalHeader = styled.header`
