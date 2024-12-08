@@ -2,12 +2,9 @@
     "rewrites": [
         {
             "source": "/api/:path*",
-            "destination": "http://itgirlschool.justmakeit.ru/api/:path*"
+            "destination": "/api/proxy"
         }
     ],
-    "env": {
-        "VITE_API_URL": "http://itgirlschool.justmakeit.ru"
-    },
     "headers": [
         {
             "source": "/api/(.*)",
