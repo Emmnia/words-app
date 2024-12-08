@@ -39,6 +39,7 @@ export const GlobalStyle = createGlobalStyle`
         background-size: cover;
         color: ${props => props.isDarkMode ? '#E0E0E0' : '#000000'};
         transition: background 0.3s ease, color 0.3s ease;
+        overflow-x: hidden;
     }
         background-repeat: no-repeat;
         background-size: cover;

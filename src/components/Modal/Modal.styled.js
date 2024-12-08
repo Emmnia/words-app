@@ -24,7 +24,7 @@ export const ModalWrapper = styled.dialog`
         padding: 20px 10px ;
         position: fixed;
         left: 0;
-        width: 100vw;
+        width: 100%;
     }
 `
 export const ModalHeader = styled.header`
