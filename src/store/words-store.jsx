@@ -41,7 +41,7 @@ class WordsStore {
         if (this.words.length > 0) return;
         this.loading = true;
         try {
-            const response = await fetch('/api/words');
+            const response = await fetch('${import.meta.env.VITE_API_URL}/api/words');
             if (!response.ok) {
                 throw new Error(`Couldn't load words from server`);
             }
@@ -92,7 +92,7 @@ class WordsStore {
 
     sendWordToServer = async (word) => {
         try {
-            const response = await fetch('/api/words/add', {
+            const response = await fetch('${import.meta.env.VITE_API_URL}/api/words/add', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -118,7 +118,7 @@ class WordsStore {
 
     editWordOnServer = async (wordToUpdate) => {
         try {
-            const response = await fetch(`/api/words/${wordToUpdate.id}/update`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/words/${wordToUpdate.id}/update`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -148,7 +148,7 @@ class WordsStore {
 
     deleteWordFromServer = async (wordToDelete) => {
         try {
-            const response = await fetch(`/api/words/${wordToDelete.id}/delete`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/words/${wordToDelete.id}/delete`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
