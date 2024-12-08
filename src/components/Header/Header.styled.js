@@ -15,6 +15,7 @@ export const StyledHeader = styled.header`
 `
 
 export const HeaderBox = styled.div`
+    position: relative;
     margin: 0 auto;
     padding: 5px;
     width: min(100%, 1170px);

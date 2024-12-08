@@ -12,21 +12,34 @@ export const GlobalStyle = createGlobalStyle`
         --toastify-color-error: #E55D87;
         --toastify-color-progress-error: #E55D87;
         --toastify-color-info: #b18bb0 ;
-        --toastify-color-progress-info: #b18bb0 ;    
+        --toastify-color-progress-info: #b18bb0 ;
+        --bg-light: linear-gradient(54deg, #E5C1DB 0%, #DBC4DD 28%, #D5C6DF 48%, #C0CBE4 68%, #B0D0E8 100%);
+        --bg-dark: #0F1B2E;  
     }
 
     * {
         box-sizing: border-box;
         scrollbar-gutter: stable;
         scrollbar-width: thin;
+        font-family: "Wix Madefor Display", sans-serif;
     }
 
     body {
         margin: 0;
-        font-family: "Wix Madefor Display", sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        background-image: linear-gradient(54deg, #E5C1DB 0%, #DBC4DD 28%, #D5C6DF 48%, #C0CBE4 68%, #B0D0E8 100%);
+        background:  body {
+        margin: 0;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background: ${props => props.isDarkMode ?
+        'var(--bg-dark)' :
+        'var(--bg-light)'};
+        background-repeat: no-repeat;
+        background-size: cover;
+        color: ${props => props.isDarkMode ? '#E0E0E0' : '#000000'};
+        transition: background 0.3s ease, color 0.3s ease;
+    }
         background-repeat: no-repeat;
         background-size: cover;
     }

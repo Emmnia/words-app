@@ -18,7 +18,6 @@ export const CardBody = styled.div`
     }
 `
 export const CardHeader = styled.header`
-    margin-bottom: 30px;
     justify-self: flex-start;
 `
 export const CardWord = styled.h2`
