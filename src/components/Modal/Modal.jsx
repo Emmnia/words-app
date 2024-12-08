@@ -1,73 +1,63 @@
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
-import DialogFooter from '@mui/material/DialogActions';
+import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { observer } from 'mobx-react-lite';
-import { forwardRef, useEffect } from 'react';
+import { forwardRef, useState, useEffect } from 'react';
 import { wordsStore } from '../../store/words-store';
 import { Checkbox } from '../Checkbox/Checkbox';
 import { Card } from '../Card/Card';
 import { Loader } from '../Loader/Loader';
 import { v4 as uuidv4 } from 'uuid';
-import { useLocalStorage } from "@uidotdev/usehooks";
 
 export const Modal = observer(forwardRef(function Modal({ onClose }, ref) {
     const checkboxId = uuidv4();
 
     const { word, loading, wordUpdated } = wordsStore;
 
-    const [showModalToday, setShowModalToday] = useLocalStorage('showModalToday', null);
+    const [showModalToday, setShowModalToday] = useState(() => {
+        const storedValue = localStorage.getItem('showModalToday');
+        return storedValue !== 'false';
+    });
 
     const handleModalCheck = (event) => {
         const isChecked = event.target.checked;
-        setShowModalToday(!isChecked);
+        const newValue = !isChecked;
+        setShowModalToday(newValue);
+        localStorage.setItem('showModalToday', String(newValue));
     };
 
     const handleClose = () => {
-        onClose();
-        ref.current?.close();
+        setShowModalToday(false);
+        localStorage.setItem('showModalToday', 'false');
+        onClose?.();
+    };
+
+    const handleOpen = () => {
+        setShowModalToday(true);
+        localStorage.setItem('showModalToday', 'true');
     };
 
     useEffect(() => {
-        if (showModalToday && ref.current) {
-            ref.current.showModal();
-        }
-    }, [ref, showModalToday]);
-
-    useEffect(() => {
         if (wordUpdated) {
-            setShowModalToday(true);
+            handleOpen();
             wordsStore.setWordUpdated(false);
         }
-    }, [setShowModalToday, wordUpdated, word]);
+    }, [wordUpdated]);
 
     return (
         <Dialog
-            open={!!showModalToday}
+            open={showModalToday}
             onClose={handleClose}
             fullWidth
             maxWidth="xs"
             PaperProps={{
                 sx: {
                     borderRadius: '10px',
-                    padding: '30px 50px',
+                    padding: '20px',
                     textAlign: 'center',
-                    backgroundColor: 'transparent',
-                    boxShadow: 'none',
-                    '@media (max-width: 599px)': {
-                        padding: '20px 10px',
-                        width: '90%',
-                        maxWidth: '340px'
-                    }
-                }
-            }}
-            slotProps={{
-                backdrop: {
-                    sx: {
-                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                        transition: '3s ease-in'
-                    }
+                    position: 'relative'
                 }
             }}
         >
@@ -99,7 +89,7 @@ export const Modal = observer(forwardRef(function Modal({ onClose }, ref) {
                 ))}
             </DialogContent>
 
-            <DialogFooter sx={{ justifyContent: 'center', paddingBottom: '20px' }}>
+            <DialogActions sx={{ justifyContent: 'center', paddingBottom: '20px' }}>
                 <Checkbox
                     label={`Don't show this again today`}
                     show={true}
@@ -107,7 +97,7 @@ export const Modal = observer(forwardRef(function Modal({ onClose }, ref) {
                     id={checkboxId}
                     checked={!showModalToday}
                 />
-            </DialogFooter>
+            </DialogActions>
         </Dialog>
     )
 }))
