@@ -1,25 +1,50 @@
-import { StyledHeader, HeaderBox, HeaderLogo, HeaderLogoImage, HeaderLogoText, HeaderButton, HeaderNav, HeaderNavList, HeaderNavItem, HeaderNavLink } from './Header.styled'
+import { StyledHeader, HeaderBox, HeaderLogo, HeaderLogoImage, HeaderLogoText, HeaderButton, HeaderNav, HeaderNavList, HeaderNavItem, HeaderNavLink } from './Header.styled';
+import { styles } from './HeaderBurger';
+import { ThemeToggle } from '../ThemeToggle/ThemeToggle';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { stack as Menu } from 'react-burger-menu';
 
-export const Header = ({ showModal }) => {
+export const Header = ({ showModal, isDarkMode, toggleTheme }) => {
+
+  const matches = useMediaQuery('(min-width:900px)');
 
   return (
     <>
-      <StyledHeader className="header">
-        <div className="container">
-          <HeaderBox>
-            <HeaderLogo to='/'>
-              <HeaderLogoImage src="assets/images/owl.png" />
-              <HeaderLogoText>Мирная сова</HeaderLogoText>
-            </HeaderLogo>
-            <HeaderButton type="button" onClick={showModal}>Слово дня</HeaderButton>
+      <StyledHeader>
+        <HeaderBox>
+          <HeaderLogo to='/'>
+            <HeaderLogoImage src="assets/images/owl.png" />
+            <HeaderLogoText>Peaceful Owl</HeaderLogoText>
+          </HeaderLogo>
+          {matches ? (<>
+            <HeaderButton type="button" onClick={showModal}>Word Of The Day</HeaderButton>
             <HeaderNav>
               <HeaderNavList>
-                <HeaderNavItem><HeaderNavLink to="/">Список слов</HeaderNavLink></HeaderNavItem>
-                <HeaderNavItem><HeaderNavLink to="game">Тренажер</HeaderNavLink></HeaderNavItem>
+                <HeaderNavItem><HeaderNavLink to="/" data-content="Words">Words</HeaderNavLink></HeaderNavItem>
+                <HeaderNavItem><HeaderNavLink to="game" data-content="Cards">Cards</HeaderNavLink></HeaderNavItem>
               </HeaderNavList>
             </HeaderNav>
-          </HeaderBox>
-        </div>
+            <ThemeToggle isDarkMode={isDarkMode} onToggle={toggleTheme} />
+          </>) : (
+            <Menu
+              styles={styles}
+              customCrossIcon={<FontAwesomeIcon icon={faXmark} />}
+              customBurgerIcon={<FontAwesomeIcon icon={faBars} />}
+              right>
+              <HeaderNav>
+                <HeaderNavList>
+                  <HeaderNavItem><HeaderNavLink to="/" data-content="Home">Home</HeaderNavLink></HeaderNavItem>
+                  <HeaderNavItem><HeaderNavLink to="/" data-content="Words">Words</HeaderNavLink></HeaderNavItem>
+                  <HeaderNavItem><HeaderNavLink to="game" data-content="Cards">Cards</HeaderNavLink></HeaderNavItem>
+                  <HeaderNavItem><HeaderButton type="button" onClick={showModal}>WOTD</HeaderButton></HeaderNavItem>
+                  <HeaderNavItem><ThemeToggle isDarkMode={isDarkMode} onToggle={toggleTheme} /></HeaderNavItem>
+                </HeaderNavList>
+              </HeaderNav>
+            </Menu>
+          )}
+        </HeaderBox>
       </StyledHeader>
     </>
   );

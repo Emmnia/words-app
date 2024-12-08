@@ -15,18 +15,22 @@ export const StyledHeader = styled.header`
 `
 
 export const HeaderBox = styled.div`
+    position: relative;
+    margin: 0 auto;
+    padding: 5px;
+    width: min(100%, 1170px);
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    @media (max-width: 900px) {
+    @media (max-width: 1190px) {
         justify-content: space-around;
     }
 }
 `
 export const HeaderLogo = styled(NavLink)`
     display: flex;
-    gap: 6px;
+    gap: 10px;
     align-items: center;
     text-decoration: none;
 `
@@ -41,8 +45,10 @@ export const HeaderLogoImage = styled.img`
     }
 `
 export const HeaderLogoText = styled.span`
-    font-size: 22px;
+    font-size: 20px;
     font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
     color: #171717;
     text-shadow: 3px 3px 5px #8c8c8c;
 
@@ -55,7 +61,9 @@ export const HeaderButton = styled.button`
     padding: 10px 15px;
     text-align: center;
     font-family: "Wix Madefor Display", sans-serif;
-    font-size: 18px;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
     color: white;
     border-radius: 50px;
     background: linear-gradient(90deg, #e075af 0%, #bb80b9 21%, #9e88c1 48%, #7494cc 81%, #3fa3da 100%);
@@ -112,27 +120,57 @@ export const HeaderButton = styled.button`
         transform: scale(0.9);
         z-index: 2;
     }
-`
 
+    @media (max-width: 899px) {
+        letter-spacing: normal;
+    }
+`
 export const HeaderNav = styled.nav``
 
 export const HeaderNavList = styled.ul`
+    width: 100%;
     display: flex;
     gap: 20px;
     list-style-type: none;
+
+    @media (max-width: 899px) {
+        flex-direction: column;
+        align-items: center;
+    }
 `
-export const HeaderNavItem = styled.li``
+export const HeaderNavItem = styled.li`
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+`
 
 export const HeaderNavLink = styled(NavLink)`
+    position: relative;
     text-decoration: none;
+    line-height: 1.4;
     color: #737272;
-    font-size: 18px;
 
     &.active {
-    color: black;
+        color: #171717;
     }
 
-    &:hover {
-    text-shadow: 3px 1px 2px #cfaefd;
+    &:hover:before {
+        clip: rect(0, 190px, 190px, 0);
+    }
+
+    &:before {
+        display: inline-block;
+        position: absolute;
+        left: 0;
+        top: -1px;
+        width: 100%;
+        content: attr(data-content);
+        line-height: 1.4;
+        color: white;
+        clip: rect(0, 0, 190px, 0);
+        -webkit-transition: clip cubic-bezier(0.25, 0.46, 0.45, 0.94) 700ms;
+        transition: clip cubic-bezier(0.25, 0.46, 0.45, 0.94) 700ms;
+    }
 }
 `

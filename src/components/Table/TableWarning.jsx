@@ -7,12 +7,12 @@ export const TableWarning = forwardRef(function TableWarning({ onClick }, ref) {
 
     return (
         <TableWarningWrapper id={PopoverId} popover="manual" ref={ref}>
-            <TableWarningText>Слово удалится безвозвратно. Продолжить?</TableWarningText>
+            <TableWarningText>Word will be deleted permanently. Continue?</TableWarningText>
             <TableWarningButton popovertarget={PopoverId} popovertargetaction="hide">
-                <TableWarningButtonText>Отмена</TableWarningButtonText>
+                <TableWarningButtonText>Cancel</TableWarningButtonText>
             </TableWarningButton>
             <TableWarningButton type="button" onClick={onClick}>
-                <TableWarningButtonText>Ок</TableWarningButtonText>
+                <TableWarningButtonText>Ok</TableWarningButtonText>
             </TableWarningButton>
         </TableWarningWrapper>
     )

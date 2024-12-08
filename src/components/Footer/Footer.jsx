@@ -4,8 +4,8 @@ export const Footer = () => {
   return (
     <StyledFooter>
       <FooterBox>
-        <FooterText>Мирная сова 2024</FooterText>
-        <FooterText>Учитесь спокойно, она за вами не придет</FooterText>
+        <FooterText>Peaceful Owl, 2024</FooterText>
+        <FooterText>Study at your own pace, she won't come after you</FooterText>
       </FooterBox>
     </StyledFooter>
   );

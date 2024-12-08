@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
 import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
-import { WordsContext } from "../../store/words-context";
-import { useContext } from "react";
+import { observer } from 'mobx-react-lite';
+import { wordsStore } from '../../store/words-store';
 import { FormWrapper, FormHeading, StyledForm, FormInputsWrapper, FormInputWrapper, FormInput, FormError, FormNote, FormSubmit, FormSubmitWrapper } from "./AddWordForm.styled";
 
-export const AddWordForm = () => {
+export const AddWordForm = observer(() => {
     const {
         register,
         handleSubmit,
@@ -15,26 +15,25 @@ export const AddWordForm = () => {
         reset,
     } = useForm();
 
-    const { sendWordToServer, setNewWord } = useContext(WordsContext)
+    const { sendWordToServer, setNewWord } = wordsStore;
 
     const onValid = async (data) => {
-
         const word = {
             id: uuidv4(),
             english: data.english,
             transcription: `[${data.transcription}]`,
             russian: data.russian,
-            tags: data.tags,
+            tags: ' ',
         }
         setNewWord(word);
         await sendWordToServer(word);
-        toast.success("Слово добавлено!");
+        toast.success("Word added!");
         reset();
         setNewWord({ id: "", english: "", transcription: "", russian: "", tags: "" });
     };
 
     const onInvalid = () => {
-        toast.error("Слово не добавлено. Корректно заполните все поля");
+        toast.error("Word not added. Fill out all the fields correctly");
     };
 
     const handleChange = async (event) => {
@@ -45,17 +44,17 @@ export const AddWordForm = () => {
 
     return (
         <FormWrapper>
-            <FormHeading>Добавить слово</FormHeading>
+            <FormHeading>Add New Word</FormHeading>
             <StyledForm onSubmit={handleSubmit(onValid, onInvalid)}>
                 <FormInputsWrapper>
                     <FormInputWrapper>
                         <FormInput
                             placeholder="english"
                             {...register("english", {
-                                required: "Заполните это поле",
+                                required: "Field required",
                                 pattern: {
                                     value: /^[A-Za-z -]+$/,
-                                    message: "Введите только латиницу"
+                                    message: "Latin characters only"
                                 },
                                 onBlur: () => trigger("english"),
                             })}
@@ -68,41 +67,29 @@ export const AddWordForm = () => {
                         <FormInput
                             placeholder="transcription"
                             {...register("transcription", {
-                                required: "Заполните это поле",
+                                required: "Field required",
                                 onBlur: () => trigger("transcription"),
                             })}
                             onChange={handleChange}
                         />
                         {errors.transcription && <FormError>{errors.transcription.message}</FormError>}
-                        <FormNote>*Квадратные скобки [ ] добавятся при отправке автоматически</FormNote>
+                        <FormNote>*Square brackets [ ] will be added automatically on submit</FormNote>
                     </FormInputWrapper>
 
                     <FormInputWrapper>
                         <FormInput
                             placeholder="russian"
                             {...register("russian", {
-                                required: "Заполните это поле",
+                                required: "Field required",
                                 pattern: {
-                                    value: /^[А-Яа-яЁё -]+$/,
-                                    message: "Введите только кириллицу"
+                                    value: /^[А-Яа-яЁё ,-]+$/,
+                                    message: "Cyrillic characters only"
                                 },
                                 onBlur: () => trigger("russian"),
                             })}
                             onChange={handleChange}
                         />
                         {errors.russian && <FormError>{errors.russian.message}</FormError>}
-                    </FormInputWrapper>
-
-                    <FormInputWrapper>
-                        <FormInput
-                            placeholder="tags"
-                            {...register("tags", {
-                                required: "Заполните это поле",
-                                onBlur: () => trigger("tags"),
-                            })}
-                            onChange={handleChange}
-                        />
-                        {errors.tags && <FormError>{errors.tags.message}</FormError>}
                     </FormInputWrapper>
                 </FormInputsWrapper>
                 <FormSubmitWrapper>
@@ -111,4 +98,4 @@ export const AddWordForm = () => {
             </StyledForm>
         </FormWrapper>
     );
-}
+})

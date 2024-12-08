@@ -2,15 +2,15 @@ import { Checkbox } from "../Checkbox/Checkbox"
 import { v4 as uuidv4 } from 'uuid'
 import { ControlsButton, ControlsText, ControlsWrapper } from "./TrainingControls.styled"
 
-export const TrainingControls = ({ onClick, onChange, checked, count, getWordForm }) => {
+export const TrainingControls = ({ onClick, onChange, checked, count }) => {
     const checkboxId = uuidv4();
 
     return (
         <ControlsWrapper>
-            <ControlsButton onClick={onClick}>Начать новую тренировку</ControlsButton>
-            <ControlsText>Вы повторили {count} {getWordForm(count)}</ControlsText>
+            <ControlsButton onClick={onClick}>Start new revision</ControlsButton>
+            <ControlsText>Words revised: {count}</ControlsText>
             <Checkbox
-                label={'Не показывать выученные'}
+                label={`Don't show learned words`}
                 show={true}
                 onChange={onChange}
                 checked={checked}

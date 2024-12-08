@@ -18,11 +18,11 @@ export const NotFound = () => {
             <div className={classes.notfound}>
                 <div className={classes.maincontent}>
                     <img className={classes.image} src="/assets/images/owl_green.png" />
-                    <h1 className={classes.heading}>Попался!</h1>
+                    <h1 className={classes.heading}>Got you!</h1>
                 </div>
                 <div className={classes.text}>
-                    <p>Шутка. Такой страницы здесь нет</p>
-                    <NavLink className={classes.link} to='/'>Домой, к Мирной сове</NavLink> <FontAwesomeIcon icon={faFaceGrinBeamSweat} />
+                    <p>Just kidding. There's no such page here</p>
+                    <NavLink className={classes.link} to='/'>Back home, to Peaceful Owl</NavLink> <FontAwesomeIcon icon={faFaceGrinBeamSweat} />
                 </div>
             </div >
         </HelmetProvider>
