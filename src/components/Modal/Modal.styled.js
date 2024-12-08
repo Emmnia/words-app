@@ -22,7 +22,7 @@ export const ModalWrapper = styled.dialog`
 
     @media (max-width: 599px) {
     padding: 20px 10px ;
-        width: 100%;
+        width: 100vw;
     }
 `
 export const ModalHeader = styled.header`
