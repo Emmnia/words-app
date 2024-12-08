@@ -9,10 +9,19 @@ export const ModalWrapper = styled.dialog`
     padding: 30px 50px;
     text-align: center;
     border: none;
-    scrollbar-gutter: auto;
+    scrollbar-gutter: stable;
+    overflow: hidden; // Добавлено
+    
+    // Принудительное скрытие скролла
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    -ms-overflow-style: none;  // IE и Edge
+    scrollbar-width: none;  // Firefox
 
     &[open] {
         animation: ${open} 1s forwards;
+        overflow: hidden;
     }
 
     &::backdrop {
@@ -24,9 +33,14 @@ export const ModalWrapper = styled.dialog`
         margin: 0;
         padding: 20px 10px;
         position: fixed;
-        left: 0;
-        width: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%; 
         max-width: 340px;
+        height: auto; 
+        max-height: 90vh; 
+        overflow: hidden; 
     }
 `
 export const ModalHeader = styled.header`
