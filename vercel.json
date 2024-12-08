@@ -5,6 +5,9 @@
             "destination": "http://itgirlschool.justmakeit.ru/api/:path*"
         }
     ],
+    "env": {
+        "VITE_API_URL": "http://itgirlschool.justmakeit.ru"
+    },
     "headers": [
         {
             "source": "/api/(.*)",

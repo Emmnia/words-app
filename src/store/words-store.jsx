@@ -43,7 +43,7 @@ class WordsStore {
         if (this.words.length > 0) return;
         this.loading = true;
         try {
-            const response = await fetch('${this.apiUrl}/api/words');
+            const response = await fetch(`${this.apiUrl}/api/words`);
             if (!response.ok) {
                 throw new Error(`Couldn't load words from server`);
             }
@@ -94,7 +94,7 @@ class WordsStore {
 
     sendWordToServer = async (word) => {
         try {
-            const response = await fetch('${this.apiUrl}/api/words/add', {
+            const response = await fetch(`${this.apiUrl}/api/words/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
