@@ -21,7 +21,7 @@ export const ModalWrapper = styled.dialog`
     }
 
     @media (max-width: 599px) {
-        margin: 0;
+        margin: auto;
         padding: 20px 10px;
         position: fixed;
         left: 0;

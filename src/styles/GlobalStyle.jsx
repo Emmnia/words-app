@@ -28,21 +28,14 @@ export const GlobalStyle = createGlobalStyle`
         margin: 0;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        background:  body {
-        margin: 0;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        background: ${props => props.isDarkMode ?
-        'var(--bg-dark)' :
-        'var(--bg-light)'};
+        background: ${props => props.isDarkMode ? 'var(--bg-dark)' : 'var(--bg-light)'};
         background-repeat: no-repeat;
         background-size: cover;
         color: ${props => props.isDarkMode ? '#E0E0E0' : '#000000'};
         transition: background 0.3s ease, color 0.3s ease;
         overflow-x: hidden;
-    }
-        background-repeat: no-repeat;
-        background-size: cover;
+        width: 100%;
+        max-width: 100%;
     }
 
     body:has(dialog[open]) {
