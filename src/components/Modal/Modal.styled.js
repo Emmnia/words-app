@@ -21,11 +21,10 @@ export const ModalWrapper = styled.dialog`
     }
 
     @media (max-width: 599px) {
-        margin: 0;
         padding: 20px 10px ;
         position: fixed;
         left: 0;
-        width: 100%;
+        width: 100vw;
     }
 `
 export const ModalHeader = styled.header`
