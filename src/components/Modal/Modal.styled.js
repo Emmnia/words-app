@@ -33,9 +33,8 @@ export const ModalWrapper = styled.dialog`
         margin: 0;
         padding: 20px 10px;
         position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        top: 5%;
+        left: 5%;
         width: 90%; 
         max-width: 340px;
         height: auto; 

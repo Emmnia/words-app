@@ -38,6 +38,7 @@ export const App = () => {
   const closeModal = () => {
     if (modalRef.current) {
       modalRef.current.close();
+      document.body.style.overflow = '';
     }
   }
 
