@@ -12,7 +12,6 @@ import { wordsStore } from './store/words-store'
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { getTheme } from './styles/themes'
-import { ModalMUI } from './components/Modal/ModalMUI'
 
 export const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
@@ -63,7 +62,7 @@ export const App = () => {
               isDarkMode={isDarkMode}
               toggleTheme={toggleTheme}
             />
-            <ModalMUI
+            <Modal
               ref={modalRef}
               onClose={closeModal}
             />

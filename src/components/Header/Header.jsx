@@ -1,10 +1,7 @@
 import { StyledHeader, HeaderBox, HeaderLogo, HeaderLogoImage, HeaderLogoText, HeaderButton, HeaderNav, HeaderNavList, HeaderNavItem, HeaderNavLink } from './Header.styled';
-import { styles } from './HeaderBurger';
 import { ThemeToggle } from '../ThemeToggle/ThemeToggle';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
-import { stack as Menu } from 'react-burger-menu';
+import { HeaderBurger } from './HeaderBurger.jsx';
 
 export const Header = ({ showModal, isDarkMode, toggleTheme }) => {
 
@@ -28,21 +25,7 @@ export const Header = ({ showModal, isDarkMode, toggleTheme }) => {
             </HeaderNav>
             <ThemeToggle isDarkMode={isDarkMode} onToggle={toggleTheme} />
           </>) : (
-            <Menu
-              styles={styles}
-              customCrossIcon={<FontAwesomeIcon icon={faXmark} />}
-              customBurgerIcon={<FontAwesomeIcon icon={faBars} />}
-              right>
-              <HeaderNav>
-                <HeaderNavList>
-                  <HeaderNavItem><HeaderNavLink to="/" data-content="Home">Home</HeaderNavLink></HeaderNavItem>
-                  <HeaderNavItem><HeaderNavLink to="/" data-content="Words">Words</HeaderNavLink></HeaderNavItem>
-                  <HeaderNavItem><HeaderNavLink to="game" data-content="Cards">Cards</HeaderNavLink></HeaderNavItem>
-                  <HeaderNavItem><HeaderButton type="button" onClick={showModal}>WOTD</HeaderButton></HeaderNavItem>
-                  <HeaderNavItem><ThemeToggle isDarkMode={isDarkMode} onToggle={toggleTheme} /></HeaderNavItem>
-                </HeaderNavList>
-              </HeaderNav>
-            </Menu>
+            <HeaderBurger onClick={showModal} isDarkMode={isDarkMode} onToggle={toggleTheme} />
           )}
         </HeaderBox>
       </StyledHeader>
