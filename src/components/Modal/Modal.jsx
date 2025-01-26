@@ -47,6 +47,7 @@ export const Modal = observer(forwardRef(function Modal({ onClose }, ref) {
         <StyledModal
             open={open}
             onClose={handleClose}
+            keepMounted
             aria-labelledby="modal-title"
             aria-describedby="modal-description"
         >
