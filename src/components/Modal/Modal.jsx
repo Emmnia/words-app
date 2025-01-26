@@ -37,6 +37,15 @@ export const Modal = observer(forwardRef(function Modal({ onClose }, ref) {
     }, [showModalToday]);
 
     useEffect(() => {
+        if (open) {
+            const timer = setTimeout(() => {
+                window.dispatchEvent(new Event('resize'));
+            }, 0);
+            return () => clearTimeout(timer);
+        }
+    }, [open]);
+
+    useEffect(() => {
         if (wordUpdated) {
             setShowModalToday(true);
             wordsStore.setWordUpdated(false);
