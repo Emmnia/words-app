@@ -94,11 +94,7 @@ export const TableForm = styled.form`
     justify-content: space-around;
 `
 
-export const TableInput = styled.input.attrs(props => ({
-    style: {
-        color: props.theme.mode === 'dark' ? '#E0E0E0' : '#000000',
-    },
-}))`
+export const TableInput = styled.input`
     margin: 0;
     padding: 0;
     width: min(100%, 180px);
@@ -159,8 +155,6 @@ export const TableWarningWrapper = styled.div`
 
 export const TableWarningText = styled.p`
     font-weight: bolder;
-    color: ${({ theme }) =>
-        theme.mode === 'dark' ? '#FF8BA7' : '#E55D87'};
 `
 
 export const TableWarningButton = styled.button`
