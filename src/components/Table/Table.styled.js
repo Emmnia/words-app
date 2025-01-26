@@ -94,16 +94,16 @@ export const TableForm = styled.form`
     justify-content: space-around;
 `
 
-export const TableInput = styled.input`
+export const TableInput = styled.input.attrs(props => ({
+    style: {
+        color: props.theme.mode === 'dark' ? '#E0E0E0' : '#000000',
+    },
+}))`
     margin: 0;
     padding: 0;
     width: min(100%, 180px);
     font-family: "Wix Madefor Display", sans-serif;
     font-size: 16px;
-    color: ${({ theme }) => {
-        console.log('theme for input', theme?.mode);
-        return theme?.mode === 'dark' ? '#E0E0E0' : '#000000';
-    }};
     text-align: center;
     border-style: none none solid;
     border-width: 1px;
