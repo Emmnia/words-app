@@ -22,6 +22,7 @@ export const ModalContent = styled(Box)(({ theme }) => ({
     maxWidth: '500px',
     maxHeight: '90vh',
     overflow: 'auto',
+    willChange: 'transform'
 }));
 
 export const ModalHeader = styled(Box)({
