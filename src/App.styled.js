@@ -11,13 +11,13 @@ export const AppMain = styled.main`
     flex-grow: 1;
 `
 
-export const StyledContainer = styled(ToastContainer).attrs({
+export const StyledContainer = styled(ToastContainer).attrs(props => ({
     position: 'bottom-right',
     closeOnClick: true,
     pauseOnHover: true,
     draggable: true,
-    theme: 'light',
-})`
+    theme: props.theme.mode === 'dark' ? 'dark' : 'light',
+}))`
 
     .Toastify__toast-theme--light {
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
