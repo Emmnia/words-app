@@ -6,7 +6,7 @@ export const GlobalStyle = createGlobalStyle`
 
     :root {
         --toastify-color-light: rgba(255, 255, 255, 0.12);
-        --toastify-color-dark: rgba(255, 255, 255, 0.12);
+        --toastify-color-dark: rgba(255, 255, 255, 0.2);
         --toastify-text-color-light: black;
         --toastify-text-color-dark: #E0E0E0;
         --toastify-color-success: #3fa3da;

@@ -18,7 +18,8 @@ export const StyledTable = styled.table`
     -webkit-box-shadow: 3px 5px 5px 0px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 3px 5px 5px 0px rgba(0, 0, 0, 0.75);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.19);
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: ${({ theme }) =>
+        theme.mode === 'dark' ? '#304152' : 'rgba(255, 255, 255, 0.7)'};
 `
 
 export const TableHead = styled.thead``
@@ -33,8 +34,8 @@ export const TableWordNumber = styled.th`
 export const TableContent = styled.th`
     padding: 10px;
     width: 300px;
-    background: rgba(137, 0, 168, 0.1);
-    background-blend-mode: darken;
+    background: ${({ theme }) =>
+        theme.mode === 'dark' ? '#475665' : 'rgba(137, 0, 168, 0.1)'};
 `
 export const TableActions = styled.th`
     width: 100px;
@@ -78,8 +79,8 @@ export const LoadMoreButton = styled.button`
 `
 export const StyledTableRow = styled.tr`
     &:nth-child(even) {
-        background: rgba(137, 0, 168, 0.05);
-        background-blend-mode: darken;
+        background: ${({ theme }) =>
+        theme.mode === 'dark' ? '#475665' : 'rgba(137, 0, 168, 0.05)'};
     }
 `
 export const TableData = styled.td``
@@ -132,7 +133,8 @@ export const TableWarningWrapper = styled.div`
     max-width: 90%;
     border-radius: 10px;
     border: none;
-    background-color: rgba(255, 255, 255, 0.12);
+    background-color: ${({ theme }) =>
+        theme.mode === 'dark' ? '#304152' : 'rgba(255, 255, 255, 0.12)'};
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(9px);
     -webkit-backdrop-filter: blur(9px);
@@ -149,7 +151,8 @@ export const TableWarningWrapper = styled.div`
 
 export const TableWarningText = styled.p`
     font-weight: bolder;
-    color: #E55D87;
+    color: ${({ theme }) =>
+        theme.mode === 'dark' ? '#FF8BA7' : '#E55D87'};
 `
 
 export const TableWarningButton = styled.button`
@@ -157,6 +160,10 @@ export const TableWarningButton = styled.button`
     padding: 10px 15px;
     text-align: center; 
     font-family: "Wix Madefor Display", sans-serif;
+    background-color: ${({ theme }) =>
+        theme.mode === 'dark' ? '#475665' : 'white'};
+    color: ${({ theme }) =>
+        theme.mode === 'dark' ? '#E0E0E0' : '#000000'};
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.19);
     border-radius: 50px;
     border: none;
