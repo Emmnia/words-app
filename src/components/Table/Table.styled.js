@@ -18,8 +18,12 @@ export const StyledTable = styled.table`
     -webkit-box-shadow: 3px 5px 5px 0px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 3px 5px 5px 0px rgba(0, 0, 0, 0.75);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.19);
-    background: ${({ theme }) =>
-        theme.mode === 'dark' ? '#304152' : 'rgba(255, 255, 255, 0.7)'};
+    background-color: ${({ theme }) => {
+        console.log('StyledTable theme:', theme);
+        theme.mode === 'dark' ? '#304152' : 'rgba(255, 255, 255, 0.7)'
+    }
+    }
+        ;
 `
 
 export const TableHead = styled.thead``
