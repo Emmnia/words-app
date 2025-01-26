@@ -95,20 +95,19 @@ export const TableForm = styled.form`
 `
 
 export const TableInput = styled.input`
-  ${({ theme }) => theme.applyStyles('tableInput', {
-    margin: 0,
-    padding: 0,
-    width: 'min(100%, 180px)',
-    fontFamily: '"Wix Madefor Display", sans-serif',
-    fontSize: '16px',
-    color: theme.mode === 'dark' ? '#E0E0E0' : '#000000',
-    textAlign: 'center',
-    borderStyle: 'none none solid',
-    borderWidth: '1px',
-    borderColor: 'black',
-    outline: 'none',
-    backgroundColor: 'transparent'
-})}
+    margin: 0;
+    padding: 0;
+    width: min(100%, 180px);
+    font-family: "Wix Madefor Display", sans-serif;
+    font-size: 16px;
+    text-align: center;
+    border-style: none none solid;
+    border-width: 1px;
+    border-color: black;
+    outline: none;
+    background-color: ${({ theme }) => {
+        theme.mode === 'dark' ? '#E0E0E0' : 'transparent'
+    }};
 `
 
 export const TableError = styled.p`
