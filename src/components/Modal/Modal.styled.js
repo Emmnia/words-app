@@ -10,6 +10,7 @@ export const StyledModal = styled(MuiModal)({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    textAlign: 'center',
     animation: `${open} 1s forwards`,
 });
 
