@@ -18,6 +18,8 @@ export const ModalContent = styled(Box)(({ theme }) => ({
     borderRadius: '8px',
     padding: '20px',
     position: 'relative',
+    display: 'flex',
+    justifyContent: 'center',
     width: '90%',
     maxWidth: '500px',
     maxHeight: '90vh',
