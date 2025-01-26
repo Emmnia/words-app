@@ -16,7 +16,6 @@ export const StyledModal = styled(MuiModal)({
 export const ModalContent = styled(Box)(({ theme }) => ({
     backgroundColor: theme.palette.background.paper,
     borderRadius: '8px',
-    margin: '0 auto',
     padding: '20px',
     position: 'relative',
     width: '90%',
