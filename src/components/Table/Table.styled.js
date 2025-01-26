@@ -19,7 +19,6 @@ export const StyledTable = styled.table`
     -moz-box-shadow: 3px 5px 5px 0px rgba(0, 0, 0, 0.75);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.19);
     background-color: ${({ theme }) => {
-        console.log('StyledTable theme:', theme);
         theme.mode === 'dark' ? '#304152' : 'rgba(255, 255, 255, 0.7)'
     }
     }
@@ -101,6 +100,8 @@ export const TableInput = styled.input`
     width: min(100%, 180px);
     font-family: "Wix Madefor Display", sans-serif;
     font-size: 16px;
+    color: : ${({ theme }) =>
+        theme.mode === 'dark' ? '#E0E0E0' : 'black'};
     text-align: center;
     border-style: none none solid;
     border-width: 1px;
@@ -135,6 +136,7 @@ export const TableWarningWrapper = styled.div`
     padding: 20px;
     min-height: 100px;
     max-width: 90%;
+    text-align: center;
     border-radius: 10px;
     border: none;
     background-color: ${({ theme }) =>
