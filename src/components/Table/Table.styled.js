@@ -100,8 +100,7 @@ export const TableInput = styled.input`
     width: min(100%, 180px);
     font-family: "Wix Madefor Display", sans-serif;
     font-size: 16px;
-    color: ${({ theme }) =>
-        theme.mode === 'dark' ? '#E0E0E0' : 'black'};
+    color: ${({ theme }) => theme.palette.text.primary};
     text-align: center;
     border-style: none none solid;
     border-width: 1px;
