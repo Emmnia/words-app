@@ -1,5 +1,5 @@
-import { TableTitle, TableWrapper, StyledTable, StyledTableRow, TableData, TableHead, TableHeader, TableWordNumber, TableContent, TableActions, TableBody, LoadMoreButton } from "./Table.styled";
-import { useState } from "react";
+import { TableTitle, TableWrapper, StyledTable, StyledTableRow, TableData, TableHead, TableHeader, TableWordNumber, TableContent, TableActions, TableBody, LoadMoreButton } from './Table.styled';
+import { useState } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { TableRow } from './TableRow';
 import { Loader } from '../Loader/Loader'

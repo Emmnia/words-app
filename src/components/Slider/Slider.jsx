@@ -1,11 +1,11 @@
 import { SliderContainer, SliderButton, SliderContent } from './Slider.styled';
 import { Card } from '../Card/Card';
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { TrainingControls } from "../TrainingControls/TrainingControls";
+import { TrainingControls } from '../TrainingControls/TrainingControls';
 import { Loader } from '../Loader/Loader';
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 import { SliderMessage } from './SliderMessage';
@@ -14,7 +14,7 @@ import { wordsStore } from '../../store/words-store';
 
 export const Slider = observer(({ initialSlideIndex = 0 }) => {
     const [slideIndex, setSlideIndex] = useState(initialSlideIndex);
-    const [animation, setAnimation] = useState(" ");
+    const [animation, setAnimation] = useState(' ');
     const [count, setCount] = useState(0);
     const [clickedWords, setClickedWords] = useState(new Set());
     const [showError, setShowError] = useState(false);
@@ -28,12 +28,12 @@ export const Slider = observer(({ initialSlideIndex = 0 }) => {
     const matches = useMediaQuery('(min-width:600px)');
 
     const handlePrevClick = () => {
-        setAnimation("previous");
+        setAnimation('previous');
         setSlideIndex((slideIndex - 1 + filteredWords.length) % filteredWords.length);
     };
 
     const handleNextClick = () => {
-        setAnimation("next");
+        setAnimation('next');
         setSlideIndex((slideIndex + 1) % filteredWords.length);
     };
 
@@ -45,8 +45,8 @@ export const Slider = observer(({ initialSlideIndex = 0 }) => {
     });
 
     const handleAnimationEnd = () => {
-        if (animation === "previous" || animation === "next") {
-            setAnimation("");
+        if (animation === 'previous' || animation === 'next') {
+            setAnimation('');
         }
     };
 
@@ -78,7 +78,7 @@ export const Slider = observer(({ initialSlideIndex = 0 }) => {
             setShowError(true);
             const timer = setTimeout(() => {
                 setShowError(false);
-                setAnimation("appear")
+                setAnimation('appear')
             }, 3000);
             return () => clearTimeout(timer);
         }
@@ -101,12 +101,12 @@ export const Slider = observer(({ initialSlideIndex = 0 }) => {
     const currentWord = filteredWords[slideIndex];
 
     if (!currentWord) {
-        console.warn("Слово не найдено для индекс:", slideIndex);
+        console.warn('Слово не найдено для индекс:', slideIndex);
         return null;
     }
 
     if (words.length === 0) {
-        console.warn("Список слов пуст.");
+        console.warn('Список слов пуст.');
         return null;
     }
 

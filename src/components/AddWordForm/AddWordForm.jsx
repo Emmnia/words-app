@@ -1,9 +1,9 @@
-import { useForm } from "react-hook-form";
+import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 import { observer } from 'mobx-react-lite';
 import { wordsStore } from '../../store/words-store';
-import { FormWrapper, FormHeading, StyledForm, FormInputsWrapper, FormInputWrapper, FormInput, FormError, FormNote, FormSubmit, FormSubmitWrapper } from "./AddWordForm.styled";
+import { FormWrapper, FormHeading, StyledForm, FormInputsWrapper, FormInputWrapper, FormInput, FormError, FormNote, FormSubmit, FormSubmitWrapper } from './AddWordForm.styled';
 
 export const AddWordForm = observer(() => {
     const {
@@ -27,13 +27,13 @@ export const AddWordForm = observer(() => {
         }
         setNewWord(word);
         await sendWordToServer(word);
-        toast.success("Word added!");
+        toast.success('Word added!');
         reset();
-        setNewWord({ id: "", english: "", transcription: "", russian: "", tags: "" });
+        setNewWord({ id: '', english: '', transcription: '', russian: '', tags: '' });
     };
 
     const onInvalid = () => {
-        toast.error("Word not added. Fill out all the fields correctly");
+        toast.error('Word not added. Fill out all the fields correctly');
     };
 
     const handleChange = async (event) => {
@@ -50,13 +50,13 @@ export const AddWordForm = observer(() => {
                     <FormInputWrapper>
                         <FormInput
                             placeholder="english"
-                            {...register("english", {
-                                required: "Field required",
+                            {...register('english', {
+                                required: 'Required field',
                                 pattern: {
                                     value: /^[A-Za-z -]+$/,
-                                    message: "Latin characters only"
+                                    message: 'Latin characters only'
                                 },
-                                onBlur: () => trigger("english"),
+                                onBlur: () => trigger('english'),
                             })}
                             onChange={handleChange}
                         />
@@ -66,9 +66,9 @@ export const AddWordForm = observer(() => {
                     <FormInputWrapper>
                         <FormInput
                             placeholder="transcription"
-                            {...register("transcription", {
-                                required: "Field required",
-                                onBlur: () => trigger("transcription"),
+                            {...register('transcription', {
+                                required: 'Required field',
+                                onBlur: () => trigger('transcription'),
                             })}
                             onChange={handleChange}
                         />
@@ -79,13 +79,13 @@ export const AddWordForm = observer(() => {
                     <FormInputWrapper>
                         <FormInput
                             placeholder="russian"
-                            {...register("russian", {
-                                required: "Field required",
+                            {...register('russian', {
+                                required: 'Required field',
                                 pattern: {
                                     value: /^[А-Яа-яЁё ,-]+$/,
-                                    message: "Cyrillic characters only"
+                                    message: 'Cyrillic characters only'
                                 },
-                                onBlur: () => trigger("russian"),
+                                onBlur: () => trigger('russian'),
                             })}
                             onChange={handleChange}
                         />

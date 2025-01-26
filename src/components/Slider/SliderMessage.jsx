@@ -5,7 +5,7 @@ import heart from '/assets/images/heart_animation.gif'
 export const SliderMessage = ({ onClick }) => {
     return (
         <SliderMessageWrapper>
-            <SliderMessageText>Bravo! You've learned all the words, and the Owl is very impressed. Start over?</SliderMessageText>
+            <SliderMessageText>Bravo! You&apos;ve learned all the words, and the Owl is very impressed. Start over?</SliderMessageText>
             <SliderImageWrapper>
                 <SliderMessageImage src={owlPicture} alt="Owl with beating heart" />
                 <SliderMessageAnimation src={heart}></SliderMessageAnimation>

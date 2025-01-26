@@ -2,7 +2,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { StyledModal, ModalContent, ModalHeader, ModalFooter, ModalButton } from './Modal.styled';
 import { Checkbox } from '../Checkbox/Checkbox';
 import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
-import { useLocalStorage } from "@uidotdev/usehooks";
+import { useLocalStorage } from '@uidotdev/usehooks';
 import { v4 as uuidv4 } from 'uuid';
 import { Card } from '../Card/Card';
 import { Loader } from '../Loader/Loader'

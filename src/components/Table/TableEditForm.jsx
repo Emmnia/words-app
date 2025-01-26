@@ -58,13 +58,13 @@ export const TableEditForm = observer(({ word, matches, onCancelClick, onSaveCli
                 <TableForm>
                     <TableInputWrapper>
                         <TableInput
-                            {...register("english", {
-                                required: "Field required",
+                            {...register('english', {
+                                required: 'Field required',
                                 pattern: {
                                     value: /^[A-Za-z -]+$/,
-                                    message: "Latin characters only"
+                                    message: 'Latin characters only'
                                 },
-                                onBlur: () => trigger("english"),
+                                onBlur: () => trigger('english'),
                             })}
                             onChange={handleChange}
                         />
@@ -72,9 +72,9 @@ export const TableEditForm = observer(({ word, matches, onCancelClick, onSaveCli
                     </TableInputWrapper>
                     <TableInputWrapper>
                         <TableInput
-                            {...register("transcription", {
-                                required: "Field required",
-                                onBlur: () => trigger("english"),
+                            {...register('transcription', {
+                                required: 'Field required',
+                                onBlur: () => trigger('english'),
                             })}
                             onChange={handleChange}
                         />
@@ -82,13 +82,13 @@ export const TableEditForm = observer(({ word, matches, onCancelClick, onSaveCli
                     </TableInputWrapper>
                     <TableInputWrapper>
                         <TableInput
-                            {...register("russian", {
-                                required: "Field required",
+                            {...register('russian', {
+                                required: 'Field required',
                                 pattern: {
                                     value: /^[А-Яа-яЁё -,]+$/,
-                                    message: "Cyrillic characters only"
+                                    message: 'Cyrillic characters only'
                                 },
-                                onBlur: () => trigger("russian"),
+                                onBlur: () => trigger('russian'),
                             })}
                             onChange={handleChange}
                         />

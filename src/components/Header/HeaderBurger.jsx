@@ -1,16 +1,18 @@
-import { useState } from "react";
-import IconButton from "@mui/material/IconButton";
+import { useState } from 'react';
+import IconButton from '@mui/material/IconButton';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
-import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
-import Divider from "@mui/material/Divider";
+import Divider from '@mui/material/Divider';
 import { HeaderNav, HeaderNavList, HeaderNavItem, HeaderNavLink, HeaderButton } from './Header.styled';
 import { ThemeToggle } from '../ThemeToggle/ThemeToggle';
-import useScrollTrigger from '@mui/material/useScrollTrigger';
+import { useTheme } from '@mui/material/styles';
 
 export const HeaderBurger = ({ onClick, isDarkMode, onToggle }) => {
     const [open, setOpen] = useState(false);
+    const theme = useTheme();
+
     const toggleDrawer = (open) => (event) => {
         if (event.type === 'keydown'
             && (event.key === 'Tab' || event.key === 'Shift')
@@ -44,7 +46,7 @@ export const HeaderBurger = ({ onClick, isDarkMode, onToggle }) => {
                 <Box sx={{
                     p: 2,
                     height: 1,
-                    backgroundColor: "rgba(208, 208, 230, 0.95)",
+                    backgroundColor: isDarkMode ? theme.palette.background.default : 'rgba(208, 208, 230, 0.95)'
                 }}>
 
                     <IconButton sx={{ mb: 2 }}>

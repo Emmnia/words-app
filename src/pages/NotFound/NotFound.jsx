@@ -1,7 +1,7 @@
-import { NavLink } from "react-router-dom"
+import { NavLink } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFaceGrinBeamSweat } from '@fortawesome/free-regular-svg-icons'
-import { HelmetProvider, Helmet } from "react-helmet-async"
+import { HelmetProvider, Helmet } from 'react-helmet-async'
 import classes from './NotFound.module.css'
 
 export const NotFound = () => {
@@ -21,7 +21,7 @@ export const NotFound = () => {
                     <h1 className={classes.heading}>Got you!</h1>
                 </div>
                 <div className={classes.text}>
-                    <p>Just kidding. There's no such page here</p>
+                    <p>Just kidding. There&apos;s no such page here</p>
                     <NavLink className={classes.link} to='/'>Back home, to Peaceful Owl</NavLink> <FontAwesomeIcon icon={faFaceGrinBeamSweat} />
                 </div>
             </div >

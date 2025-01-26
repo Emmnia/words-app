@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { ToastContainer } from "react-toastify";
+import styled from 'styled-components';
+import { ToastContainer } from 'react-toastify';
 
 export const AppContent = styled.div`
     display: flex;
@@ -12,11 +12,11 @@ export const AppMain = styled.main`
 `
 
 export const StyledContainer = styled(ToastContainer).attrs({
-    position: "bottom-right",
+    position: 'bottom-right',
     closeOnClick: true,
     pauseOnHover: true,
     draggable: true,
-    theme: "light",
+    theme: 'light',
 })`
 
     .Toastify__toast-theme--light {

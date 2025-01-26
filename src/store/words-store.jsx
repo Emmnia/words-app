@@ -1,17 +1,17 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import wordsJSON from '../words.json';
-import { toast } from "react-toastify";
+import { toast } from 'react-toastify';
 
 class WordsStore {
     words = [];
     loading = true;
     error = null;
     newWord = {
-        id: "",
-        english: "",
-        transcription: "",
-        russian: "",
-        tags: ""
+        id: '',
+        english: '',
+        transcription: '',
+        russian: '',
+        tags: ''
     };
     word = null;
     wordId = null;
@@ -46,7 +46,7 @@ class WordsStore {
                 throw new Error(`Couldn't load words from server`);
             }
             const data = await response.json();
-            console.log("Загруженные слова:", data);
+            console.log('Загруженные слова:', data);
 
             const now = new Date();
             const currentDate = now.toISOString().split('T')[0];
@@ -131,7 +131,7 @@ class WordsStore {
             }
 
             const responseData = await response.json();
-            console.log("Ответ от сервера:", responseData);
+            console.log('Ответ от сервера:', responseData);
 
             runInAction(() => {
                 this.words = this.words.map(word =>

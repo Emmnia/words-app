@@ -1,4 +1,4 @@
-import { ErrorContainer, ErrorContent, ErrorAnimation, ErrorWord, ErrorText } from "./ErrorMessage.styled"
+import { ErrorContainer, ErrorContent, ErrorAnimation, ErrorWord, ErrorText } from './ErrorMessage.styled'
 import { observer } from 'mobx-react-lite';
 import { wordsStore } from '../../store/words-store';
 

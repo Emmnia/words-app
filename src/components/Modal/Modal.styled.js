@@ -1,21 +1,22 @@
 import { Modal as MuiModal, Box, IconButton } from '@mui/material';
-import { styled } from "@mui/material/styles";
-import { keyframes } from "@emotion/react";
+import { styled } from '@mui/material/styles';
+import { keyframes } from '@emotion/react';
 
 const open = keyframes`
     from { opacity: 0 }
     to   { opacity: 1 }
 `
-export const StyledModal = styled(MuiModal)(({ theme }) => ({
+export const StyledModal = styled(MuiModal)({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     animation: `${open} 1s forwards`,
-}));
+});
 
 export const ModalContent = styled(Box)(({ theme }) => ({
     backgroundColor: theme.palette.background.paper,
     borderRadius: '8px',
+    margin: '0 auto',
     padding: '20px',
     position: 'relative',
     width: '90%',

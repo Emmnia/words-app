@@ -1,7 +1,7 @@
 import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 
-const DayNightSwitch = styled(Switch)(({ theme }) => ({
+const DayNightSwitch = styled(Switch)({
     width: 71,
     height: 34,
     padding: 0,
@@ -54,7 +54,7 @@ const DayNightSwitch = styled(Switch)(({ theme }) => ({
         opacity: 1,
         transition: 'background-color 500ms',
     },
-}));
+});
 
 export const ThemeToggle = ({ isDarkMode, onToggle }) => {
     return (

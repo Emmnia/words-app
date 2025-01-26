@@ -2,9 +2,9 @@ import { Header } from './components/Header/Header'
 import { Footer } from './components/Footer/Footer'
 import { Outlet } from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css'
-import { HelmetProvider, Helmet } from "react-helmet-async"
+import { HelmetProvider, Helmet } from 'react-helmet-async'
 import { AppContent, AppMain, StyledContainer } from './App.styled'
-import { GlobalStyle } from "./styles/GlobalStyle"
+import { GlobalStyle } from './styles/GlobalStyle'
 import { Modal } from './components/Modal/Modal'
 import { useCallback, useRef, useState, useEffect } from 'react'
 import { Provider } from 'mobx-react';

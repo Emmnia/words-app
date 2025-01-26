@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from "react";
-import { Checkbox } from "../Checkbox/Checkbox";
-import { CardBody, CardHeader, CardWord, CardTranscription, CardButton, CardButtonImage, CardButtonText } from "./Card.styled";
+import { useState, useEffect, useRef } from 'react';
+import { Checkbox } from '../Checkbox/Checkbox';
+import { CardBody, CardHeader, CardWord, CardTranscription, CardButton, CardButtonImage, CardButtonText } from './Card.styled';
 import owlClosedIcon from '/assets/images/owl_eyesclosed.png'
 import owlOpenIcon from '/assets/images/owl_eyesopen.png'
 import { v4 as uuidv4 } from 'uuid';

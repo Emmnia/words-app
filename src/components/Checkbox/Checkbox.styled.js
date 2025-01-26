@@ -1,7 +1,7 @@
-import styled from "styled-components"
+import styled from 'styled-components'
 
 export const CheckboxInput = styled.input.attrs({
-    type: "checkbox"
+    type: 'checkbox'
 })`
     border: 0;
     clip: rect(0 0 0 0);
@@ -55,12 +55,12 @@ export const CheckboxSymbol = styled.span`
     }
 `
 export const CheckboxIcon = styled.svg.attrs({
-    "aria-hidden": "true",
-    width: "28px",
-    height: "28px",
-    viewBox: "0 0 28 28",
-    version: "1",
-    xmlns: "http://www.w3.org/2000/svg"
+    'aria-hidden': 'true',
+    width: '28px',
+    height: '28px',
+    viewBox: '0 0 28 28',
+    version: '1',
+    xmlns: 'http://www.w3.org/2000/svg'
 })`
     width: 1em;
     height: 1em;
