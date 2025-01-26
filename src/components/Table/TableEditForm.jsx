@@ -59,7 +59,7 @@ export const TableEditForm = observer(({ word, matches, onCancelClick, onSaveCli
                     <TableInputWrapper>
                         <TableInput
                             {...register('english', {
-                                required: 'Field required',
+                                required: 'Required field',
                                 pattern: {
                                     value: /^[A-Za-z -]+$/,
                                     message: 'Latin characters only'
@@ -73,7 +73,7 @@ export const TableEditForm = observer(({ word, matches, onCancelClick, onSaveCli
                     <TableInputWrapper>
                         <TableInput
                             {...register('transcription', {
-                                required: 'Field required',
+                                required: 'Required field',
                                 onBlur: () => trigger('english'),
                             })}
                             onChange={handleChange}
@@ -83,7 +83,7 @@ export const TableEditForm = observer(({ word, matches, onCancelClick, onSaveCli
                     <TableInputWrapper>
                         <TableInput
                             {...register('russian', {
-                                required: 'Field required',
+                                required: 'Required field',
                                 pattern: {
                                     value: /^[А-Яа-яЁё -,]+$/,
                                     message: 'Cyrillic characters only'
