@@ -16,7 +16,7 @@ export const StyledContainer = styled(ToastContainer).attrs(props => ({
     closeOnClick: true,
     pauseOnHover: true,
     draggable: true,
-    theme: props.theme.mode === 'dark' ? 'dark' : 'light',
+    theme: props.isDarkMode ? 'dark' : 'light',
 }))`
 
     .Toastify__toast-theme--light {

@@ -70,7 +70,7 @@ export const App = () => {
               <Outlet />
             </AppMain>
             <Footer />
-            <StyledContainer />
+            <StyledContainer isDarkMode={isDarkMode} />
           </AppContent>
         </Provider>
       </ThemeProvider>
