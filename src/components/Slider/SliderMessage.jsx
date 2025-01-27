@@ -1,7 +1,7 @@
 import { SliderImageWrapper, SliderMessageAnimation, SliderMessageButton, SliderMessageImage, SliderMessageText, SliderMessageWrapper } from './Slider.styled'
 
-import owlPicture from 'assets/images/owl_big.png'
-import heart from 'assets/images/heart_animation.gif'
+import owlPicture from '/assets/images/owl_big.png'
+import heart from '/assets/images/heart_animation.gif'
 
 export const SliderMessage = ({ onClick }) => {
     return (
