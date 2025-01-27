@@ -1,9 +1,10 @@
+import { observer } from 'mobx-react-lite';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
-import { observer } from 'mobx-react-lite';
+
+import { FormError, FormHeading, FormInput, FormInputsWrapper, FormInputWrapper, FormNote, FormSubmit, FormSubmitWrapper, FormWrapper, StyledForm } from './AddWordForm.styled';
 import { wordsStore } from '../../store/words-store';
-import { FormWrapper, FormHeading, StyledForm, FormInputsWrapper, FormInputWrapper, FormInput, FormError, FormNote, FormSubmit, FormSubmitWrapper } from './AddWordForm.styled';
 
 export const AddWordForm = observer(() => {
     const {

@@ -1,6 +1,7 @@
 import { forwardRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { TableWarningWrapper, TableWarningText, TableWarningButton, TableWarningButtonText } from './Table.styled'
+
+import { TableWarningButton, TableWarningButtonText, TableWarningText, TableWarningWrapper } from './Table.styled'
 
 export const TableWarning = forwardRef(function TableWarning({ onClick }, ref) {
     const PopoverId = uuidv4();

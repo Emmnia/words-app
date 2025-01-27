@@ -1,9 +1,12 @@
-import { useState, useEffect, useRef } from 'react';
-import { Checkbox } from '../Checkbox/Checkbox';
-import { CardBody, CardHeader, CardWord, CardTranscription, CardButton, CardButtonImage, CardButtonText } from './Card.styled';
+import { useEffect, useRef, useState } from 'react';
+
 import owlClosedIcon from '/assets/images/owl_eyesclosed.png'
 import owlOpenIcon from '/assets/images/owl_eyesopen.png'
+
 import { v4 as uuidv4 } from 'uuid';
+
+import { CardBody, CardButton, CardButtonImage, CardButtonText, CardHeader, CardTranscription, CardWord } from './Card.styled';
+import { Checkbox } from '../Checkbox/Checkbox';
 
 export const Card = ({ word, id, english, transcription, russian, show, onMouseDown, onChange }) => {
 

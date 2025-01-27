@@ -1,11 +1,12 @@
-import { useState, useRef } from 'react';
+import { observer } from 'mobx-react-lite';
+import { useRef, useState } from 'react';
 import { FaPencilAlt, FaTrashAlt } from 'react-icons/fa';
+import { toast } from 'react-toastify';
+
+import { StyledTableRow, TableControlsButton, TableData, TableDataWrapper } from './Table.styled'
 import { TableEditForm } from './TableEditForm';
 import { TableWarning } from './TableWarning';
-import { observer } from 'mobx-react-lite';
 import { wordsStore } from '../../store/words-store';
-import { toast } from 'react-toastify';
-import { StyledTableRow, TableData, TableDataWrapper, TableControlsButton } from './Table.styled'
 
 export const TableRow = observer(({ word, index, matches }) => {
 

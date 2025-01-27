@@ -1,5 +1,6 @@
-import { ErrorContainer, ErrorContent, ErrorAnimation, ErrorWord, ErrorText } from './ErrorMessage.styled'
 import { observer } from 'mobx-react-lite';
+
+import { ErrorAnimation, ErrorContainer, ErrorContent, ErrorText, ErrorWord } from './ErrorMessage.styled'
 import { wordsStore } from '../../store/words-store';
 
 export const ErrorMessage = observer(() => {

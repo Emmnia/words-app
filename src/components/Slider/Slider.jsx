@@ -1,16 +1,17 @@
-import { SliderContainer, SliderButton, SliderContent } from './Slider.styled';
-import { Card } from '../Card/Card';
-import { useState, useEffect } from 'react';
-import { useSwipeable } from 'react-swipeable';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { TrainingControls } from '../TrainingControls/TrainingControls';
-import { Loader } from '../Loader/Loader';
-import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
-import { SliderMessage } from './SliderMessage';
 import { observer } from 'mobx-react-lite';
+import { useEffect, useState } from 'react';
+import { useSwipeable } from 'react-swipeable';
+
+import { SliderButton, SliderContainer, SliderContent } from './Slider.styled';
+import { SliderMessage } from './SliderMessage';
 import { wordsStore } from '../../store/words-store';
+import { Card } from '../Card/Card';
+import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
+import { Loader } from '../Loader/Loader';
+import { TrainingControls } from '../TrainingControls/TrainingControls';
 
 export const Slider = observer(({ initialSlideIndex = 0 }) => {
     const [slideIndex, setSlideIndex] = useState(initialSlideIndex);

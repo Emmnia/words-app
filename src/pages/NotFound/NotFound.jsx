@@ -1,7 +1,8 @@
-import { NavLink } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFaceGrinBeamSweat } from '@fortawesome/free-regular-svg-icons'
-import { HelmetProvider, Helmet } from 'react-helmet-async'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { NavLink } from 'react-router-dom'
+
 import classes from './NotFound.module.css'
 
 export const NotFound = () => {

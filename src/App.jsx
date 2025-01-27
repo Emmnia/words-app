@@ -1,17 +1,21 @@
-import { Header } from './components/Header/Header'
-import { Footer } from './components/Footer/Footer'
 import { Outlet } from 'react-router-dom'
+
+import { Footer } from './components/Footer/Footer'
+import { Header } from './components/Header/Header'
+import { wordsStore } from './store/words-store'
+import { getTheme } from './styles/themes'
+
+
 import 'react-toastify/dist/ReactToastify.css'
-import { HelmetProvider, Helmet } from 'react-helmet-async'
 import { AppContent, AppMain, StyledContainer } from './App.styled'
 import { GlobalStyle } from './styles/GlobalStyle'
 import { Modal } from './components/Modal/Modal'
-import { useCallback, useRef, useState, useEffect } from 'react'
+
+import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Provider } from 'mobx-react';
-import { wordsStore } from './store/words-store'
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { getTheme } from './styles/themes'
 
 export const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(() => {

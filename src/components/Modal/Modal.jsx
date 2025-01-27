@@ -1,13 +1,14 @@
 import CloseIcon from '@mui/icons-material/Close';
-import { StyledModal, ModalContent, ModalHeader, ModalFooter, ModalButton } from './Modal.styled';
-import { Checkbox } from '../Checkbox/Checkbox';
-import { forwardRef, useEffect, useLayoutEffect, useImperativeHandle, useState } from 'react';
 import { useLocalStorage } from '@uidotdev/usehooks';
-import { v4 as uuidv4 } from 'uuid';
-import { Card } from '../Card/Card';
-import { Loader } from '../Loader/Loader'
 import { observer } from 'mobx-react-lite';
+import { forwardRef, useEffect, useImperativeHandle, useLayoutEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+
+import { ModalButton, ModalContent, ModalFooter, ModalHeader, StyledModal } from './Modal.styled';
 import { wordsStore } from '../../store/words-store';
+import { Card } from '../Card/Card'
+import { Checkbox } from '../Checkbox/Checkbox';
+import { Loader } from '../Loader/Loader'
 
 export const Modal = observer(forwardRef(function Modal({ onClose }, ref) {
     const checkboxId = uuidv4();

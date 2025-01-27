@@ -1,10 +1,11 @@
-import { TableTitle, TableWrapper, StyledTable, StyledTableRow, TableData, TableHead, TableHeader, TableWordNumber, TableContent, TableActions, TableBody, LoadMoreButton } from './Table.styled';
-import { useState } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { TableRow } from './TableRow';
-import { Loader } from '../Loader/Loader'
 import { observer } from 'mobx-react-lite';
+import { useState } from 'react';
+
+import { LoadMoreButton, StyledTable, StyledTableRow, TableActions, TableBody, TableContent, TableData, TableHead, TableHeader, TableTitle, TableWordNumber, TableWrapper } from './Table.styled';
+import { TableRow } from './TableRow';
 import { wordsStore } from '../../store/words-store';
+import { Loader } from '../Loader/Loader'
 
 export const Table = observer(() => {
 

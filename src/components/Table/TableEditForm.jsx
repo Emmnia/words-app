@@ -1,9 +1,10 @@
-import { useForm } from 'react-hook-form';
 import { observer } from 'mobx-react-lite';
-import { wordsStore } from '../../store/words-store';
-import { toast } from 'react-toastify';
+import { useForm } from 'react-hook-form';
 import { FaCheck, FaUndoAlt } from 'react-icons/fa';
-import { TableData, TableForm, TableInput, TableInputWrapper, TableError, TableControlsButton } from './Table.styled'
+import { toast } from 'react-toastify';
+
+import { TableControlsButton, TableData, TableError, TableForm, TableInput, TableInputWrapper } from './Table.styled'
+import { wordsStore } from '../../store/words-store';
 
 export const TableEditForm = observer(({ word, matches, onCancelClick, onSaveClick }) => {
 

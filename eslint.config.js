@@ -1,10 +1,13 @@
 import js from '@eslint/js'
-import globals from 'globals'
+import importPlugin from 'eslint-plugin-import';
 import react from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
+import globals from 'globals'
 
 export default [
+  js.configs.recommended,
+  importPlugin.flatConfigs.recommended,
   { ignores: ['dist'] },
   {
     files: ['**/*.{js,jsx}'],
@@ -17,7 +20,32 @@ export default [
         sourceType: 'module',
       },
     },
-    settings: { react: { version: '18.3' } },
+    settings: {
+      react: { version: '18.3' },
+      'import/resolver': {
+        alias: {
+          map: [
+            ['babel-polyfill', 'babel-polyfill/dist/polyfill.min.js'],
+            ['helper', './utils/helper'],
+            ['material-ui/DatePicker', '../custom/DatePicker'],
+            ['material-ui', 'material-ui-ie10']
+          ],
+          extensions: ['.ts', '.js', '.jsx', '.json']
+        }
+      },
+      'import/extensions': ['.js', '.jsx'],
+      'import/order': [
+        'error',
+        {
+          groups: ['builtin', 'external', 'internal', ['sibling', 'parent'], 'index', 'object'],
+          'newlines-between': 'always',
+          alphabetize: {
+            order: 'asc',
+            caseInsensitive: true
+          }
+        }
+      ]
+    },
     plugins: {
       react,
       'react-hooks': reactHooks,
@@ -34,10 +62,12 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
+      'import/no-unresolved': ['error', { 'commonjs': true, 'amd': true }],
       'quotes': ['error', 'single', {
         'avoidEscape': true,
         'allowTemplateLiterals': true
-      }]
+      }],
+      'sort-imports': ['error', { 'ignoreCase': true, 'ignoreDeclarationSort': true }],
     },
   },
 ]

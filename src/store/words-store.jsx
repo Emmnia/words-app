@@ -1,6 +1,7 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import wordsJSON from '../words.json';
 import { toast } from 'react-toastify';
+
+import wordsJSON from '../words.json';
 
 class WordsStore {
     words = [];

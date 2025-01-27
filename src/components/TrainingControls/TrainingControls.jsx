@@ -1,6 +1,7 @@
-import { Checkbox } from '../Checkbox/Checkbox'
 import { v4 as uuidv4 } from 'uuid'
+
 import { ControlsButton, ControlsText, ControlsWrapper } from './TrainingControls.styled'
+import { Checkbox } from '../Checkbox/Checkbox'
 
 export const TrainingControls = ({ onClick, onChange, checked, count }) => {
     const checkboxId = uuidv4();

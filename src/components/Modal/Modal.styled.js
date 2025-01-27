@@ -1,6 +1,6 @@
-import { Modal as MuiModal, Box, IconButton } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import { keyframes } from '@emotion/react';
+import { Box, IconButton, Modal as MuiModal } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
 const open = keyframes`
     from { opacity: 0 }

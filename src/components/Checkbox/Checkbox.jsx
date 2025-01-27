@@ -1,4 +1,4 @@
-import { CheckboxLabel, CheckboxInput, CheckboxText, CheckboxSymbol, CheckboxIcon } from './Checkbox.styled'
+import { CheckboxIcon, CheckboxInput, CheckboxLabel, CheckboxSymbol, CheckboxText } from './Checkbox.styled'
 
 export const Checkbox = ({ onChange, label, show, checked, id }) => {
     if (!show) return null

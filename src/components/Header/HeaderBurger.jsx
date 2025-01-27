@@ -1,13 +1,14 @@
-import { useState } from 'react';
-import IconButton from '@mui/material/IconButton';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import Divider from '@mui/material/Divider';
-import { HeaderNav, HeaderNavList, HeaderNavItem, HeaderNavLink, HeaderButton } from './Header.styled';
-import { ThemeToggle } from '../ThemeToggle/ThemeToggle';
+import Drawer from '@mui/material/Drawer';
+import IconButton from '@mui/material/IconButton';
 import { useTheme } from '@mui/material/styles';
+import { useState } from 'react';
+
+import { HeaderButton, HeaderNav, HeaderNavItem, HeaderNavLink, HeaderNavList } from './Header.styled';
+import { ThemeToggle } from '../ThemeToggle/ThemeToggle';
 
 export const HeaderBurger = ({ onClick, isDarkMode, onToggle }) => {
     const [open, setOpen] = useState(false);

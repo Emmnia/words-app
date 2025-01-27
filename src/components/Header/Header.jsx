@@ -1,7 +1,8 @@
-import { StyledHeader, HeaderBox, HeaderLogo, HeaderLogoImage, HeaderLogoText, HeaderButton, HeaderNav, HeaderNavList, HeaderNavItem, HeaderNavLink } from './Header.styled';
-import { ThemeToggle } from '../ThemeToggle/ThemeToggle';
 import useMediaQuery from '@mui/material/useMediaQuery';
+
+import { HeaderBox, HeaderButton, HeaderLogo, HeaderLogoImage, HeaderLogoText, HeaderNav, HeaderNavItem, HeaderNavLink, HeaderNavList, StyledHeader } from './Header.styled';
 import { HeaderBurger } from './HeaderBurger.jsx';
+import { ThemeToggle } from '../ThemeToggle/ThemeToggle';
 
 export const Header = ({ showModal, isDarkMode, toggleTheme }) => {
 
