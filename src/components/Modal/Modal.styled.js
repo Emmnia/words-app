@@ -12,6 +12,7 @@ export const StyledModal = styled(MuiModal)({
     justifyContent: 'center',
     textAlign: 'center',
     animation: `${open} 1s forwards`,
+    scrollbarGutter: 'stable'
 });
 
 export const ModalContent = styled(Box)(({ theme }) => ({

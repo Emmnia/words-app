@@ -9,7 +9,9 @@ export const CardBody = styled.div`
     flex-direction: column;
     align-content: center;
     text-align: center;
-    background-color: #ffffff;
+    background-color: ${({ theme }) => {
+        theme.mode === 'dark' ? '#475665' : 'white'
+    }};
     border-radius: 10px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.19);
 
@@ -33,12 +35,15 @@ export const CardButton = styled.button`
     display: flex;
     padding: 10px 20px;
     width: 300px;
+    max-width: 90%;
     align-items: center;
     justify-content: space-between;
     align-self: center;
     font-family: "Wix Madefor Display", sans-serif;
     transition: 0.5s;
-    background-color: #ffffff;
+    background-color: ${({ theme }) => {
+        theme.mode === 'dark' ? '#a3aab2' : 'white'
+    }};
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.19);
     border-radius: 50px;
     border: none;
