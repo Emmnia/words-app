@@ -14,7 +14,7 @@ const DayNightSwitch = styled(Switch)({
             transform: 'translateX(26px)',
             color: '#fff',
             '& + .MuiSwitch-track': {
-                backgroundColor: '#749DD6',
+                backgroundColor: '#183158',
                 opacity: 1,
                 border: 0,
             },

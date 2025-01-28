@@ -66,7 +66,10 @@ export const HeaderButton = styled.button`
     letter-spacing: 2px;
     color: white;
     border-radius: 50px;
-    background: linear-gradient(90deg, #e075af 0%, #bb80b9 21%, #9e88c1 48%, #7494cc 81%, #3fa3da 100%);
+    background-image: ${(props) =>
+        props.isDarkMode
+            ? 'linear-gradient(to right, #1D2B64 0%, #F8CDDA  51%, #1D2B64  100%)'
+            : 'linear-gradient(to right, #e075af 0%, #5FC3E4 51%, #e075af 100%)'};
     border: none;
     outline: none;
     display: block;
@@ -79,17 +82,10 @@ export const HeaderButton = styled.button`
         height: calc(100% + 4px);
         left: -2px;
         top: -2px;
-        background: linear-gradient(
-            124deg,
-            #e075af,
-            #bb80b9,
-            #9e88c1,
-            #7494cc,
-            #3fa3da,
-            #E55D87,
-            #5FC3E4,
-            #E55D87
-        );
+        background: ${(props) =>
+        props.isDarkMode
+            ? 'linear-gradient(124deg, #1D2B64, #F8CDDA, #1D2B64, #5FC3E4, #1D2B64)'
+            : 'linear-gradient(124deg, #e075af, #bb80b9, #E55D87, #5FC3E4, #E55D87)'};
         background-size: 400%;
         z-index: -1;
         filter: blur(5px);
@@ -115,7 +111,7 @@ export const HeaderButton = styled.button`
         50% {background-position: 400% 0;}
         100% {background-position: 0 0;}
     }
-    
+
     &:active {
         transform: scale(0.9);
         z-index: 2;

@@ -1,6 +1,7 @@
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
+import { useTheme } from '@mui/material/styles';
 
 import { LoadMoreButton, StyledTable, StyledTableRow, TableActions, TableBody, TableContent, TableData, TableHead, TableHeader, TableTitle, TableWordNumber, TableWrapper } from './Table.styled';
 import { TableRow } from './TableRow';
@@ -14,6 +15,8 @@ export const Table = observer(() => {
     const [visibleCount, setVisibleCount] = useState(10);
 
     const matches = useMediaQuery('(min-width:900px)');
+
+    const theme = useTheme();
 
     const loadMore = () => setVisibleCount(prevCount => prevCount + 10);
 
@@ -58,7 +61,7 @@ export const Table = observer(() => {
                     </TableBody>
                 </StyledTable>
                 {visibleCount < wordsStore.words.length && (
-                    <LoadMoreButton type="button" onClick={loadMore}>
+                    <LoadMoreButton type="button" onClick={loadMore} theme={theme}>
                         Load More
                     </LoadMoreButton>
                 )}

@@ -51,9 +51,15 @@ export const FormSubmit = styled.input.attrs({ type: 'submit', value: 'ADD WORD'
     letter-spacing: 2px;
     color: white;
     transition: 0.5s;
-    background-image: linear-gradient(90deg, #e075af 0%, #bb80b9 21%, #9e88c1 48%, #7494cc 81%, #3fa3da 100%);
+    background-image: ${(props) =>
+        props.theme.palette.mode === 'dark'
+            ? 'linear-gradient(to right, #1D2B64 0%, #F8CDDA  51%, #1D2B64  100%)'
+            : 'linear-gradient(to right, #e075af 0%, #5FC3E4 51%, #e075af 100%)'};
     background-size: 200% auto;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.19);
+    box-shadow: ${(props) =>
+        props.theme.palette.mode === 'dark'
+            ? '0 15px 35px rgba(255, 255, 255, 0.1), 0 5px 15px rgba(255, 255, 255, 0.08)'
+            : '0 15px 35px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.19)'};
     border-radius: 50px;
     border: none;
     display: block;

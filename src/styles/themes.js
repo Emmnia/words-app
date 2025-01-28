@@ -7,11 +7,12 @@ export const lightTheme = createTheme({
         mode: 'light',
         background: {
             default: 'transparent',
-            paper: '#f4f4f4',
+            paper: '#ffff',
         },
         text: {
             primary: '#000000',
             secondary: '#606060',
+            error: '#E55D87'
         },
     },
     components: {
@@ -21,6 +22,7 @@ export const lightTheme = createTheme({
                     background: bgLight,
                     backgroundRepeat: 'no-repeat',
                     backgroundSize: 'cover',
+                    transition: 'background 0.5s ease, color 0.5s ease',
                 },
             },
         },
@@ -32,11 +34,22 @@ export const darkTheme = createTheme({
         mode: 'dark',
         background: {
             default: '#0F1B2E',
-            paper: '#1A2C3F',
+            paper: '#1A2C3F'
         },
         text: {
             primary: '#E0E0E0',
             secondary: '#B0B0B0',
+            error: '#E55D87'
+        },
+    },
+    components: {
+        MuiCssBaseline: {
+            styleOverrides: {
+                body: {
+                    background: '#0F1B2E',
+                    transition: 'background 0.5s ease, color 0.5s ease',
+                },
+            },
         },
     },
 });

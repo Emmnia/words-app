@@ -1,5 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { useForm } from 'react-hook-form';
+import { useTheme } from '@mui/material/styles';
 import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -15,6 +16,8 @@ export const AddWordForm = observer(() => {
         trigger,
         reset,
     } = useForm();
+
+    const theme = useTheme();
 
     const { sendWordToServer, setNewWord } = wordsStore;
 
@@ -94,7 +97,7 @@ export const AddWordForm = observer(() => {
                     </FormInputWrapper>
                 </FormInputsWrapper>
                 <FormSubmitWrapper>
-                    <FormSubmit type="submit" />
+                    <FormSubmit type="submit" theme={theme} />
                 </FormSubmitWrapper>
             </StyledForm>
         </FormWrapper>

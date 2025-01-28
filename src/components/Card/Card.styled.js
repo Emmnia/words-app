@@ -9,9 +9,7 @@ export const CardBody = styled.div`
     flex-direction: column;
     align-content: center;
     text-align: center;
-    background-color: ${({ theme }) => {
-        theme.mode === 'dark' ? '#475665' : 'white'
-    }};
+    background-color: ${(props) => props.theme.palette.background.paper};
     border-radius: 10px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.19);
 
@@ -41,10 +39,11 @@ export const CardButton = styled.button`
     align-self: center;
     font-family: "Wix Madefor Display", sans-serif;
     transition: 0.5s;
-    background-color: ${({ theme }) => {
-        theme.mode === 'dark' ? '#a3aab2' : 'white'
-    }};
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.19);
+    background-color:${(props) => props.theme.palette.background.paper};
+    box-shadow: ${(props) =>
+        props.theme.palette.mode === 'dark'
+            ? '0 15px 35px rgba(255, 255, 255, 0.1), 0 5px 15px rgba(255, 255, 255, 0.08)'
+            : '0 15px 35px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.19)'};
     border-radius: 50px;
     border: none;
     cursor: pointer;
@@ -65,4 +64,5 @@ export const CardButtonImage = styled.img`
 
 export const CardButtonText = styled.span`
     font-size: 20px;
+    color: ${(props) => props.theme.palette.text.primary};
 `

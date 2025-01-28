@@ -62,7 +62,7 @@ export const HeaderBurger = ({ onClick, isDarkMode, onToggle }) => {
                                 <HeaderNavItem><HeaderNavLink to="/" data-content="Home">Home</HeaderNavLink></HeaderNavItem>
                                 <HeaderNavItem><HeaderNavLink to="/" data-content="Words">Words</HeaderNavLink></HeaderNavItem>
                                 <HeaderNavItem><HeaderNavLink to="game" data-content="Cards">Cards</HeaderNavLink></HeaderNavItem>
-                                <HeaderNavItem><HeaderButton type="button" onClick={onClick}>WOTD</HeaderButton></HeaderNavItem>
+                                <HeaderNavItem><HeaderButton type="button" onClick={onClick} isDarkMode={isDarkMode}>WOTD</HeaderButton></HeaderNavItem>
                                 <HeaderNavItem><ThemeToggle isDarkMode={isDarkMode} onToggle={onToggle} /></HeaderNavItem>
                             </HeaderNavList>
                         </HeaderNav>

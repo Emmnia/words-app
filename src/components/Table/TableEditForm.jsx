@@ -1,5 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { useForm } from 'react-hook-form';
+import { useTheme } from '@mui/material/styles';
 import { FaCheck, FaUndoAlt } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
@@ -22,6 +23,8 @@ export const TableEditForm = observer(({ word, matches, onCancelClick, onSaveCli
             russian: word.russian,
         }
     });
+
+    const theme = useTheme();
 
     const { editWordOnServer } = wordsStore;
 
@@ -68,6 +71,7 @@ export const TableEditForm = observer(({ word, matches, onCancelClick, onSaveCli
                                 onBlur: () => trigger('english'),
                             })}
                             onChange={handleChange}
+                            theme={theme}
                         />
                         {errors.english && <TableError>{errors.english.message}</TableError>}
                     </TableInputWrapper>
@@ -78,6 +82,7 @@ export const TableEditForm = observer(({ word, matches, onCancelClick, onSaveCli
                                 onBlur: () => trigger('english'),
                             })}
                             onChange={handleChange}
+                            theme={theme}
                         />
                         {errors.transcription && <TableError>{errors.transcription.message}</TableError>}
                     </TableInputWrapper>
@@ -92,6 +97,7 @@ export const TableEditForm = observer(({ word, matches, onCancelClick, onSaveCli
                                 onBlur: () => trigger('russian'),
                             })}
                             onChange={handleChange}
+                            theme={theme}
                         />
                         {errors.russian && <TableError>{errors.russian.message}</TableError>}
                     </TableInputWrapper>

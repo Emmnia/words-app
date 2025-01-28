@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useTheme } from '@mui/material/styles';
 
 import owlClosedIcon from '/assets/images/owl_eyesclosed.png'
 import owlOpenIcon from '/assets/images/owl_eyesopen.png'
@@ -10,6 +11,7 @@ import { Checkbox } from '../Checkbox/Checkbox';
 
 export const Card = ({ word, id, english, transcription, russian, show, onMouseDown, onChange }) => {
 
+  const theme = useTheme();
   const checkboxId = uuidv4();
   const buttonRef = useRef(null);
   const [isClicked, setClicked] = useState(false);
@@ -30,7 +32,7 @@ export const Card = ({ word, id, english, transcription, russian, show, onMouseD
 
   return (
     <>
-      <CardBody id={id} word={word}>
+      <CardBody id={id} word={word} theme={theme}>
         <CardHeader>
           <Checkbox
             label={'Learned'}
@@ -41,9 +43,9 @@ export const Card = ({ word, id, english, transcription, russian, show, onMouseD
         </CardHeader>
         <CardWord>{english}</CardWord>
         <CardTranscription>{transcription}</CardTranscription>
-        <CardButton type="button" onMouseDown={() => { toggleTranslation(); onMouseDown() }} ref={buttonRef}>
+        <CardButton type="button" onMouseDown={() => { toggleTranslation(); onMouseDown() }} ref={buttonRef} theme={theme}>
           <CardButtonImage src={isClicked ? owlOpenIcon : owlClosedIcon} alt="" />
-          <CardButtonText>{isClicked ? russian : 'show translation'}</CardButtonText>
+          <CardButtonText theme={theme}>{isClicked ? russian : 'show translation'}</CardButtonText>
         </CardButton>
       </CardBody>
     </>
